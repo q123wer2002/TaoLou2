@@ -1,0 +1,55 @@
+<link rel="stylesheet" type="text/css" href="css/index.css">
+<script type="text/javascript" src='js/AN_index.js'></script>
+
+<div class='indexDiv' ng-controller="TaoLou_JobWish" ng-click="allCloseShow()">
+    <div class='banner'>
+        <div class='content'>
+            <div class='logo'></div>
+            <div class='typeDiv'>
+                <h2>您最好的求職平台</h2><br>
+                <h2 class='bannerSelect'>
+                    <span>我</span>
+                    <div class='dropDiv' >
+                        <a href="javascript:;" class='dropList' ng-focus='Statusjobstatus=true;' ng-blur='jobStatusClose()' id='statusDIv'><span>{{jobstatus}}<span><span class='icon dropListIcon'></span></a>
+
+                        <ul class='showListUl' id='jobStatusList' ng-show='Statusjobstatus' ng-style='{width:jobstatusWidth}' ng-mouseenter="surfList=true" ng-mouseleave="surfList=false">
+                            <a href="javascript:;" ng-repeat='status in jobStatuses'><li ng-click='jobStatusFun(status)'>{{status.name}}</li></a>
+                        </ul>
+                    </div>
+                    <span>，而工作性質是</span>
+                    <div class='dropDiv'>
+                        <a href="javascript:;" class='dropList' ng-focus='Statusjobnature=true;' ng-blur='jobNatureClose()'>{{jobNature}}<span class='icon dropListIcon'></span></a>
+
+                        <ul class='showListUl' id='jobNatureList' ng-show='Statusjobnature' ng-mouseenter="surfList=true" ng-mouseleave="surfList=false">
+                            <a href="javascript:;" ng-repeat='nature in jobNatures'><li ng-click='jobNatureFun(nature)'>{{nature.name}}</li></a>
+                        </ul>
+                    </div>
+                    <span><a href="javascript:;" class='button' id='contiBut'>繼續</a></span>
+                </h2>
+                <h2>顛覆您的求職印象，為您的工作配對吧！</h2>
+            </div>
+        </div>
+    </div>
+    <div class='featureDiv'>
+        <div class='feature'>
+            <img ng-src='https://lh6.googleusercontent.com/-jh-y6XCqmYm4vsuyvsViqRy8Laprp9Mn_7jbWU8VOED-d3NKK7pdTDTmLh4zmAR43mFcw=w1896-h859'>
+            <h3>填寫技能</h3>
+            <p>選填您最擅長的技能及相關學經歷</p>
+        </div>
+        <div class='feature'>
+            <img ng-src='https://lh5.googleusercontent.com/H9ZIkMp9J234NAoDyywlgwQd3Bh55N7clP7_rVISGl2_HtJ6lMEHMdQZwJ7pUbPv2gJYZw=w1896-h859'>
+            <h3>喝杯咖啡等配對</h3>
+            <p>頭路網將會針對您的資料幫您分析，找到屬於您的工作</p>
+        </div>
+        <div class='feature'>
+            <img ng-src='https://lh5.googleusercontent.com/lnt4W6S9t30GWb0njSNwcQDvC2CnqyiDj7ir_I5cBhObU4H3vNJzHTKPYzzV15q35RmJ7Q=w1896-h859'>
+            <h3>挑選配對工作</h3>
+            <p>從這些配對工作中，挑選一個您最喜歡的工作吧！</p>
+        </div>
+        <div class='feature'>
+            <img ng-src='https://lh5.googleusercontent.com/2-G8Bhi9u_ZH1nOU-rWsK8NRwW6sCZ2xua707djkKcA-eU_7f9HkEZueFqXmqLnvwNTqsg=w1896-h859'>
+            <h3>上班去！</h3>
+            <p>準備好了，與您心儀的工作相處吧！</p>
+        </div>
+    </div>
+</div>

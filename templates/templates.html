@@ -1,0 +1,50 @@
+<!DOCTYPE>
+<html ng-app='TaoLou'>
+<header>
+	<?php @include_once $this->top_html; ?>
+</header>
+<body>
+	<div id="fb-root"></div>
+  <script type="text/javascript">
+  //facebook api
+  window.fbAsyncInit = function() {
+
+    FB.init({
+      appId      : '513736755435708',
+      xfbml      : true,
+      version    : 'v2.2',
+    });
+  };
+
+  // Load the SDK asynchronously
+  (function(d, s, id){
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) {return;}
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_US/sdk.js";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+
+  </script>
+
+	<?php if($this->showad){@include_once $this->showad_html;}  ?>
+	<div class='header'>
+		<div class='headDiv'>
+			<div class='alert_login'>
+				<span>已經有帳號？</span>
+				<a href="javascript:;" class='button'>登入</a>
+			</div>
+		</div>
+	</div>
+    <div class='body'>
+    	<?php @include_once $this->content_html; ?>
+    	<?php if($this->javaData!=""){
+    		echo "<script type='text/javascript' src='".$this->javaData."'></script>";
+    	} ?>
+    	<?php @include_once @$this->subMenu; ?>
+	    <div class='footer'>
+	    	<?php @include_once $this->footer_html; ?>
+	    </div>
+	</div>
+</body>
+</html>

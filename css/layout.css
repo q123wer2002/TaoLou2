@@ -1,0 +1,66 @@
+body{margin: 0;padding: 0;width: 100%;height: auto;margin: auto;color: #6b7485;
+font-family: '文泉驛微米黑 Regular', '文泉驛微米黑','Arial Negreta cursiva', 'Arial','微軟正黑體';
+background:url(../images/layout/pattern.png);-webkit-font-smoothing:antialiased;}
+a, abbr, acronym, address, applet, article, aside, audio, b, big, blockquote, body, canvas, caption, center, cite, code, dd, del, details, dfn, div, dl, dt, em, embed, fieldset, figcaption, figure, footer, form, h1, h2, h3, h4, h5, h6, header, hgroup, html, i, iframe, img, ins, kbd, label, legend, li, mark, menu, nav, object, ol, output, p, pre, q, ruby, s, samp, section, small, span, strike, strong, sub, summary, sup, table, tbody, td, tfoot, th, thead, time, tr, tt, u, ul, var, video{margin: 0;padding: 0;border: 0;transition:opacity .2s ease,color .2s ease,background .2s ease,box-shadow .2s ease,border .2s ease;font-family: '微軟正黑體';font-weight: 400;}
+ *:focus { outline: none; }
+a{text-decoration: none;}
+
+.icon{background-image: url(../images/layout/sprite.png);background-repeat: no-repeat;display: inline-block;vertical-align: 0;margin-bottom: -1px;zoom:1;}
+.button{padding: 7px 10px;background: none;color:#ffffff;font-weight: 500;border:1px solid #ffffff;box-shadow: 2px 2px 2px #00A2E8;border-radius: 2px;}
+.button:hover{background-color: #93C7F9;color:#ffffff;}
+.dropList{padding: 17px 15px;border: none;color: #6b7485;background-color: #ffffff;font-size: 20px;border-radius: 2px;margin: 0px 10px;}
+
+.showListUl{position: absolute;width: 186px;text-align: center;z-index: 6;height:250px;overflow: auto;}
+.showListUl li{list-style: none;background: #707b91;font-weight: 500;font-size: 13px;color: #ffffff;height: 61px;line-height: 61px;}
+.showListUl li:hover{background-color: #d94600;}
+
+.locationicon{background-position: -68px -147px;width: 16px;height: 16px;}
+.jobtypeicon{background-position: -120px -59px;width: 16px;height: 17px;}
+.salaryicon{background-position: -156px -111px;width: 16px;height: 16px;}
+.stockicon{background-position: -153px -147px;width: 16px;height: 16px;}
+.people{background-position: -51px -147px;width: 17px;height: 17px;}
+.clock{background-position: -135px -76px;width: 16px;height: 16px;}
+.global{background-position: -136px -101px;width: 16px;height: 17px;}
+.newspaper{background-position: 0 -147px;width: 16px;height: 16px;}
+.addicon{background-position: -190px -85px;width: 13px;height: 13px;}
+.folder{background-position: -43px -164px;width: 14px;height: 11px;}
+.pencialicon{background-position: -173px -35px;width: 14px;height: 15px;}
+.alertIcon{background-position: -101px -76px;width: 16px;height: 17px;}
+.redCrossIcon{background-position: -171px -113px;width: 14px;height: 14px;}
+.blackCrossIcon{background-position: -20px -80px;width: 17px;height: 17px;}
+.checkIcon{background-position: -137px -59px;width: 16px;height: 16px;}
+.white_view{background-position: -190px -65px;width: 14px;height: 9px;}
+.view{background-position: -190px -30px;width: 14px;height: 9px;}
+.recommend{background-position: -190px -113px;width: 14px;height: 14px;}
+.love{background-position: -136px -118px;width: 16px;height: 16px;}
+.tagIcon{background-position: -92px -181px;width: 16px;height: 16px;}
+.dropListIcon{background-position: -136px -134px;width: 13px;height: 13px;}
+
+.showUs{width: 100%;position:relative;height: 700px;}
+	@media screen and (min-width: 1600px) {
+		.showImage{position:relative;height:100%;margin: auto;background: url("../images/layout/banner.jpg") no-repeat;-webkit-filter: saturate(0.5) hue-rotate(10deg) brightness(0.7);background-size: cover;background-position: 0px -300px;}
+	    // 如果使用者之視窗寬度 >= 1600px，將會再載入這裡的 CSS。
+	}
+	@media screen and (max-width: 1600px) {
+		.showImage{position:relative;height:100%;margin: auto;background: url("../images/layout/banner.jpg") no-repeat;-webkit-filter: saturate(0.5) hue-rotate(10deg) brightness(0.7);background-size: 100% auto;}
+	}
+		.slogn{font-weight: 700;color: #ffffff;font-family: "proxima-nova";padding-top: 15%;font-size: 4.2em;position: absolute;top:0px;left: 300px;}
+		.slogn span{font-size: 30px;font-family: "proxima-nova";}
+		.slogn a{font-size: 30px;font-family: "proxima-nova";color: #ffffff;font-size: 20px;border-bottom:1px solid #c4c663;}
+		.slogn a:hover{color: #c4c663;}
+.header{background-color: #54A7F7;width: 100%;height: 100px;}
+	.headDiv{width: 1024px;margin: auto;padding: 15px;}
+		.alert_login{float: right;margin-right: 50px;color: #ffffff;margin-top: 30px;}
+
+.body{position: relative;width: 100%;margin: auto;height: auto;}
+	.loadingBG{position: fixed;left: 0;top:0;width: 100%;height: 100%;z-index: 3;opacity:0.7;background-image: url(../images/layout/mailLoading.gif);background-color: #000000;background-repeat: no-repeat;background-position: center;text-align: center;color: #ffffff;font-weight:700;}
+	.loadingBG p{margin-top: 25%;}
+	.content{width: 1024px;margin: auto;padding: 50px;}
+
+.footer{width: 100%;position: absolute;background: none;bottom: 0px;display: block;}
+	.ourInfo{width: 1024px;height: 76px;margin: auto;color: #6b7485;position: relative;}
+	.socialActivity{float: left;}
+		.fbLIKE{margin-top: 0px;position: absolute;left: 100px;}
+	.AboutUs{margin-top:-5px;float: right;}
+	.AboutUs a{margin-left: 25px;color: #6b7485;padding: 10px;border-radius: 2px;}
+	.AboutUs a:hover{background-color: #707b91;color: #ffffff;text-decoration: underline;}
