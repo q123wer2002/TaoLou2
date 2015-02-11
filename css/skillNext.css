@@ -1,0 +1,70 @@
+.skillNextDiv{height: auto;padding-bottom: 170px;}
+	h2{color:#54A7F7;font-weight:700;}
+	#contiBut{padding:14px 30px;background:#f1c017;color:#ffffff;font-weight:700;border:none;box-shadow: 2px 2px 5px #aaa;float: right;margin-top: 70px;margin-right: 200px;}
+	#contiBut:hover{background-color: #F7D86C;}
+	
+	.processBarDiv{padding: 50px;position: relative;background-color: #ffffff;text-align: center;z-index: 5;}
+		h3{color:#54A7F7;font-weight:700;margin-bottom: 10px;}
+		.bar{border:2px solid;position: absolute;width: 90%;z-index: 1;width: 900px;bottom: 15px;margin: auto;}
+		#barProcess{z-index:2;border:2px solid #54A7F7;transition:all 1.0s linear;width: 0;}
+		.process{list-style: none;}
+		.process li{border:2px solid #54A7F7;display: inline-table;padding: 10px 15px;margin-left: 0px;margin-right: 100px;z-index: 3;font-weight: 500;position: relative;overflow: hidden;}
+			.loading{position: absolute;width: 0px;height: 100%;background: #54A7F7;left: 0;top: 0;transition:all 1.0s linear;z-index: -2;}
+	/* skill */
+	.processDiv{padding: 10px;text-align: center;background-color: #ffffff;margin-top: 10px;height: auto;padding-bottom: 150px;position: relative;transition:all .5s linear;right: 0;}
+		.myskillDiv{width: 800px;margin: auto;position: relative;}
+			.explanation{position: absolute;left: 420px;top:-50px;width: 350px;}
+			.explanation span{text-shadow:0px 0px 1px #BCC9DC;position: absolute;width: 50px;}
+				.hoz{width: 200px;height: 5px;position: absolute;left: 80px;top: 8px;
+					background: #e0d845; /* Old browsers */
+					background: -moz-linear-gradient(left, #e0d845 0%, #d82121 100%); /* FF3.6+ */
+					background: -webkit-gradient(linear, left top, right top, color-stop(0%,#e0d845), color-stop(100%,#d82121)); /* Chrome,Safari4+ */
+					background: -webkit-linear-gradient(left, #e0d845 0%,#d82121 100%); /* Chrome10+,Safari5.1+ */
+					background: -o-linear-gradient(left, #e0d845 0%,#d82121 100%); /* Opera 11.10+ */
+					background: -ms-linear-gradient(left, #e0d845 0%,#d82121 100%); /* IE10+ */
+					background: linear-gradient(to right, #e0d845 0%,#d82121 100%); /* W3C */
+					filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e0d845', endColorstr='#d82121',GradientType=1 ); /* IE6-9 */}
+			.myskill{list-style: none;margin-left: 150px;margin-top: 100px;width: 200px;height: auto;}
+			.myskill li{position: relative;}
+			.myskill li .skillShow{padding: 5px 20px;width: 30px;line-height: 30px;width: 200px;text-align: left;margin-top: 15px;background-color: #0E75A6;color: #ffffff;position: relative;transition:all .2s linear;border-radius: 2px;display: block;font-weight: 700;}
+			/*.myskill li .skillShow:hover{background-color: #4A92B4;}*/
+				.skillDegree,.inputDiv{position: absolute;left: 300px;top: 0px;background-color: #ECEEF1;padding: 0px 3px;height: 40px;width: 270px;}
+					.input{background-color: #ECEEF1;width: 260px;margin-top: 2px;opacity: 0.7;z-index: 3;}
+					.placeholder{position: absolute;text-align: left;left: 20px;width: auto;top:10px;transition:all .2s linear;z-index: 2;}
+				
+				.skillDegree{background: none;height: auto;}
+					.degree{list-style: none;margin-top: 5px;}
+					.degree div{margin-left: 18px;display: inline-block;border:1px solid #54A7F7;width:30px;height:30px;border-radius: 16px;transition:all .1s linear;}
+					.degree a{color: #6b7485;}
+					.degree li{margin-top: 4px;}
+					.degree div:hover a{color: #ffffff;}
+					.degree_1.degree_choose1{background-color: #E0D845;border-color: #E0D845;}
+					.degree_2.degree_choose2{background-color: #D89A21;border-color: #D89A21;}
+					.degree_3.degree_choose3{background-color: #D86A21;border-color: #D86A21;}
+					.degree_4.degree_choose4{background-color: #D85021;border-color: #D85021;}
+					.degree_5.degree_choose5{background-color: #D82121;border-color: #D82121;}
+					.degree_1:hover{background-color: #E0D845;border-color: #E0D845;}
+					.degree_2:hover{background-color: #D89A21;border-color: #D89A21;}
+					.degree_3:hover{background-color: #D86A21;border-color: #D86A21;}
+					.degree_4:hover{background-color: #D85021;border-color: #D85021;}
+					.degree_5:hover{background-color: #D82121;border-color: #D82121;}
+				.skill_rank{position: absolute;top:5px;left: -30px;color: blue;}
+				.tagcomment{position: absolute;right: -70px;top:10px;}
+				.tagcomment:hover{cursor: pointer;}
+	/* experience */
+	#experience{height: 700px;}
+		.vertical{border:2px solid #54A7F7;width: 0;height: 700px;position: absolute;left: 500px;}
+		.eduExperence{width: 365px;height: 200px;margin-left: 50px;float: left;margin-top: 50px;position: relative;}
+			.editListDiv{background-color: #ECEEF1;padding: 10px 10px 30px 10px;}	
+				.eduDiv{margin-top: 30px;text-align: left;position: relative;}
+				.eduDivItem{font-size: 15px;padding: 10px 15px;}
+					.placeholder{z-index: 5;top:0px;}
+					.placeholder:hover{cursor: pointer;}
+					#editEducaSelect,#educationStart,#educationEnd{width: 100px;left: 10px;overflow-x:hidden;top:30px;}
+					#educationStart{width: 120px;}
+					#educationEnd{left: 150px;width: 120px;}
+					#editEducaSelect li,#educationStart li,#educationEnd li{height: 35px;line-height: 35px;}
+					#schoolName{background-color: #ffffff;margin-left: 10px;opacity: 1;}
+					.textPlaceholder{top:8px;}
+					.textPlaceholder:hover{cursor: text;}
+		.jobExperience{border:1px solid #000000;width: 365px;height: 200px;margin-left: 565px;margin-top: 50px;}

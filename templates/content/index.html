@@ -2,15 +2,15 @@
 <script type="text/javascript" src='js/AN_index.js'></script>
 
 <div class='indexDiv' ng-controller="TaoLou_JobWish" ng-click="allCloseShow()">
-    <div class='banner'>
-        <div class='content'>
+    <div class='banner antimate' ng-hide='selectSkill'>
+        <div class='content' style='padding: 50px;'>
             <div class='logo'></div>
             <div class='typeDiv'>
                 <h2>您最好的求職平台</h2><br>
                 <h2 class='bannerSelect'>
                     <span>我</span>
                     <div class='dropDiv' >
-                        <a href="javascript:;" class='dropList' ng-focus='Statusjobstatus=true;' ng-blur='jobStatusClose()' id='statusDIv'><span>{{jobstatus}}<span><span class='icon dropListIcon'></span></a>
+                        <a href="javascript:;" class='dropList' ng-click='jobStatusShowFun()' ng-blur='jobStatusClose()' id='statusDIv'><span>{{jobstatus}}<span><span class='icon dropListIcon'></span></a>
 
                         <ul class='showListUl' id='jobStatusList' ng-show='Statusjobstatus' ng-style='{width:jobstatusWidth}' ng-mouseenter="surfList=true" ng-mouseleave="surfList=false">
                             <a href="javascript:;" ng-repeat='status in jobStatuses'><li ng-click='jobStatusFun(status)'>{{status.name}}</li></a>
@@ -18,38 +18,74 @@
                     </div>
                     <span>，而工作性質是</span>
                     <div class='dropDiv'>
-                        <a href="javascript:;" class='dropList' ng-focus='Statusjobnature=true;' ng-blur='jobNatureClose()'>{{jobNature}}<span class='icon dropListIcon'></span></a>
+                        <a href="javascript:;" class='dropList' ng-click='jobNatureShowFun()' ng-blur='jobNatureClose()'>{{jobNature}}<span class='icon dropListIcon'></span></a>
 
                         <ul class='showListUl' id='jobNatureList' ng-show='Statusjobnature' ng-mouseenter="surfList=true" ng-mouseleave="surfList=false">
                             <a href="javascript:;" ng-repeat='nature in jobNatures'><li ng-click='jobNatureFun(nature)'>{{nature.name}}</li></a>
                         </ul>
                     </div>
-                    <span><a href="javascript:;" class='button' id='contiBut'>繼續</a></span>
+                    <span><a href="javascript:;" class='button' id='contiBut' ng-click='selectSkill=true;'>繼續</a></span>
                 </h2>
-                <h2>顛覆您的求職印象，為您的工作配對吧！</h2>
+                <h2>顛覆求職印象，只配對屬於您的工作</h2>
             </div>
         </div>
     </div>
-    <div class='featureDiv'>
+    <div class='featureDiv antimate' ng-hide='selectSkill'>
         <div class='feature'>
-            <img ng-src='https://lh6.googleusercontent.com/-jh-y6XCqmYm4vsuyvsViqRy8Laprp9Mn_7jbWU8VOED-d3NKK7pdTDTmLh4zmAR43mFcw=w1896-h859'>
+            <img ng-src='https://lh6.googleusercontent.com/gJy7fjgFZvwuBPgaN88kG3m0n4QmyYSIK4s69h9F19s=w193-h207-p-no'>
             <h3>填寫技能</h3>
             <p>選填您最擅長的技能及相關學經歷</p>
         </div>
         <div class='feature'>
-            <img ng-src='https://lh5.googleusercontent.com/H9ZIkMp9J234NAoDyywlgwQd3Bh55N7clP7_rVISGl2_HtJ6lMEHMdQZwJ7pUbPv2gJYZw=w1896-h859'>
+            <img ng-src='https://lh3.googleusercontent.com/ctbluCUBvvQETju8bk7e6csUsQlIB08lB1HyGzCn4qk=w193-h207-p-no'>
             <h3>喝杯咖啡等配對</h3>
             <p>頭路網將會針對您的資料幫您分析，找到屬於您的工作</p>
         </div>
         <div class='feature'>
-            <img ng-src='https://lh5.googleusercontent.com/lnt4W6S9t30GWb0njSNwcQDvC2CnqyiDj7ir_I5cBhObU4H3vNJzHTKPYzzV15q35RmJ7Q=w1896-h859'>
+            <img ng-src='https://lh5.googleusercontent.com/zDwS9GjPhAM5TJBE4vXyFkG4Xy4PAEMtAB9Kzyt3ayI=w193-h207-p-no'>
             <h3>挑選配對工作</h3>
             <p>從這些配對工作中，挑選一個您最喜歡的工作吧！</p>
         </div>
         <div class='feature'>
-            <img ng-src='https://lh5.googleusercontent.com/2-G8Bhi9u_ZH1nOU-rWsK8NRwW6sCZ2xua707djkKcA-eU_7f9HkEZueFqXmqLnvwNTqsg=w1896-h859'>
+            <img ng-src='https://lh3.googleusercontent.com/kNzlC8yABUZ3HVyNj7YvRc_M6olWiWEXeam4I-INbL0=w193-h207-p-no'>
             <h3>上班去！</h3>
             <p>準備好了，與您心儀的工作相處吧！</p>
+        </div>
+    </div>
+    <!-- 2. step2 -->
+    <div class='SkillDiv antimate' ng-show='selectSkill'>
+    <script type="text/javascript" src='js/LinkedIn_user.js'></script>
+        <div class='content'>
+            <h1 style='color:#ffffff;'>選擇您的技能</h1>
+            <hr class='vertical'>
+            
+            <div class='LinkedInDiv'>
+                <h2 class='fontWhite'>匯入技能</h2>
+                <h4 class='fontWhite' style='margin-top:10px;'>您所有的資料都會保密</h4>
+                <h4 class='fontWhite' style='margin-bottom:50px;'>不會使用您的帳號刊登任何訊息</h4>
+                <div id='LinkedInLogin' style='display:none;'>
+                    <script type="IN/Login" data-onAuth="onLinkedInAuth"></script>
+                </div>
+            </div>
+            
+            <div class='selectSkillDiv'>
+                <h2 class='fontWhite'>輸入技能(最少五項)</h2>
+                <div class='inputDiv'>
+                    <input type='text' class='input' placeholder="請輸入技能" ng-model='keyword' ng-change='surfList=true;' ng-enter="insertMySkill()">
+                    <a href="javascript:;" class='button' id='inputtype' ng-click='insertMySkill()'>輸入</a>
+
+                    <ul class='showListUl' id='inputhit' ng-show="keyword!='' && surfList">
+                        <a href="javascript:;" ng-repeat="skill in skillList | filter:keyword"><li ng-click='skillFun(skill)'>{{skill.des}}</li></a>
+                    </ul>
+                </div>
+                <div class='mySkillDiv'>
+                    <ul id='myskill' ng-show="myskills!=''">
+                        <li ng-repeat='myskill in myskills'>{{myskill}}<a href="javascript:;" style='float:right;' ng-click='removeSkill(myskill)'><span class='icon redCrossIcon' style='margin-top:6px;'></span></a></li>
+                    </ul>
+                </div>
+                <a href="javascript:;" class='button' id='contiBut' ng-if="myskills.length>4">繼續</a>
+
+            </div>
         </div>
     </div>
 </div>

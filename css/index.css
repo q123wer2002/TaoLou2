@@ -14,3 +14,22 @@
 		.feature img{height: 180px;border-bottom: 2px dashed #54A7F7;}
 		.feature h3{color:#54A7F7;font-size: 20px;font-weight: 700;margin-top: 15px;}
 		.feature p{margin-top: 15px;}
+
+
+	.SkillDiv{width:100%;height: 900px;text-align: center;background-color:#54A7F7;}
+		.fontWhite{color: #ffffff;}
+		.vertical{border:1px solid #B8DAFB;width: 0px;height:680px;position: absolute;left: 512px;}
+		.LinkedInDiv{float: left;width: 400px;height: 200px;margin-top: 100px;margin-left: 50px;}
+			.linkInBtn{color: #ffffff;font-size: 20px;padding: 25px 20px;font-weight: 500;background:#007AB5;}
+			#LinkedInLogin:hover .linkInBtn{background: #4090B6;}
+		.selectSkillDiv{float: right;width: 400px;height: 200px;margin-top: 50px;margin-right: 50px;}
+			.inputDiv{background:#ffffff;width: 350px;position: relative;height: 36px;padding:5px 0px;margin: auto;margin-top: 30px;}
+				#inputtype{background: #54A7F7;box-shadow: none;padding: 12px 10px;border: none;border-radius: 0px;margin-right: 2px;margin-top: -4px;float: right;font-size: 15px;width: 50px;}
+				#inputtype:hover{background-color: #93C7F9;}
+				#inputhit{width: 279px;left: -9px;top:34px;}
+				#inputhit li{height: 40px;line-height: 40px;text-align: left;padding: 0px 35px;background-color: #ffffff;color: #6b7485;border-top: 1px solid #6b7485;}
+				#inputhit li:hover{background-color: #93C7F9;}
+			.mySkillDiv{margin-top: 25px;height: 400px;overflow: auto;margin-bottom: 38px;}
+				#myskill{list-style: none;margin-left: 25px;}
+				#myskill li{border: 1px solid #ffffff;padding: 5px 20px;width: 30px;line-height: 30px;width: 300px;text-align: left;margin-top: 10px;background-color: #0E75A6;color: #ffffff;}
+

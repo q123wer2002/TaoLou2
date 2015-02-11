@@ -1,0 +1,131 @@
+<link rel="stylesheet" type="text/css" href="css/skillNext.css">
+<script type="text/javascript" src='js/AN_skillNext.js'></script>
+
+<div class='skillNextDiv' ng-controller="TaoLou_skillNext">
+	<div class='content'>
+		<div class='processBarDiv'>
+			<h3>完成以下步驟，就能找到屬於您的工作</h3>
+			<div style='width:1024px;height:5px;position:relative;margin:auto;margin-top:0px;'>
+				<ul class='process'>
+					<li>
+						<span ng-if="skillLoading<50">技能</span>
+						<span class='loading' ng-style="{width:skillLoading}"></span>
+						<span ng-style="{color:'#ffffff'}" style='z-index:5;' ng-if="skillLoading>50">技能</span>
+					</li>
+					<li>學,經歷</li>
+					<li>職位名稱</li>
+					<li>薪水與地點</li>
+				</ul>
+			</div>
+			<div style='width:1024px;height:5px;position:relative;margin:auto;margin-top:65px;'>
+				<div class='bar' id='barProcess' ng-style="{width:hrLoading}" ng-init="loadingBar(120)"></div>
+				<div class='bar'></div>
+			</div>
+		</div>
+
+		<div class='processDiv' id='skill'>
+			<h2>請將您的技能選填熟悉度</h2>
+			<p style='margin-top:20px;'>1=>較生疏 , 5=>精熟</p>
+			<div class='myskillDiv'>
+				<div class='explanation'>
+					<span style='left:0;top:0;'>生疏</span>
+					<div class='hoz'></div>
+					<span style='right:0;top:0;'>熟練</span>
+				</div>
+				<ul class='myskill'>
+					<li ng-repeat="myskill in myskills | orderBy:'rank':false">
+						<a href='javascript:;' class='skillShow' ng-style="hoverAlert">
+							<span ng-if="!myskill.change"><span class='skill_rank'>{{myskill.rank}}</span>{{myskill.name}}</span>
+
+							<span ng-if="myskill.change" ng-style="{color:'#D0A203'}"><span class='skill_rank' ng-style="{color:'#D0A203'}">{{myskill.rank}}</span>{{myskill.name}}</span>
+						</a>
+						<!-- <span class='icon paperclip tagcomment'></span>
+						<div class='inputDiv'>
+							<input type='text' class='input' ng-focus="placeholder={'color':'#0E75A6','font-size':'9px','top':'-5px','left':'5px'}" ng-blur="placeholder={}"  ng-model="myskill.comment">
+							<span class='placeholder' ng-style="placeholder" ng-show="!myskill.comment" ng-click="myskill.comment">為{{myskill.name}}備註</span>
+
+							<span class='placeholder' style='color: rgb(14, 117, 166); font-size: 9px; top: -5px; left: 5px;' ng-show="myskill.comment">為{{myskill.name}}備註</span>
+						</div> -->
+						<div class='skillDegree'>
+							<ul class='degree' ng-mouseover="hoverAlert={background:'#4A92B4'}" ng-mouseleave="hoverAlert={}">
+								<div ng-repeat="i in [1,2,3,4,5]" class='degree_{{i}}' ng-if="myskill.degree>i"><a href="javascript:;" ng-click="myskill.degree=i;"><li>{{i}}</li></a></div>
+								<div ng-repeat="i in [1,2,3,4,5]" class='degree_{{i}}' ng-class="'degree_choose{{i}}'" ng-if="myskill.degree==i"><a href="javascript:;" ng-click="myskill.degree=i;"  ng-style="{color:'#ffffff'}"><li>{{i}}</li></a></div>
+								<div ng-repeat="i in [1,2,3,4,5]" class='degree_{{i}}' ng-if="myskill.degree<i"><a href="javascript:;" ng-click="myskill.degree=i;overSkillDIV()"><li>{{i}}</li></a></div>
+							</ul>
+						</div>
+					</li>
+				</ul>
+			</div>
+			<a href="javascript:;" class='button' id='contiBut' ng-if="degreeOK" ng-click="loadingBar(297);">下一步</a>
+		</div>
+
+		<div class='processDiv' id='experience' ng-show="SkillToExperience">
+			<h2>學歷與經歷</h2>
+			<p style='margin-top:20px;'>填寫愈多,配對將會愈準確</p>
+			<hr class='vertical'>
+			<div class="eduExperence">
+				<img src="http://taoloutw.tk/taolou/images/userMe/online_resume_head.jpg" width="100%">
+				<h3 style='position:absolute;top:30px;left:150px;text-shadow:2px 2px 3px #000000;color:#ffffff;'>新增學歷</h3>
+				<div class='editListDiv'>
+					<div class='eduDiv'>
+						<a href="javascrit:;" class='dropList eduDivItem' style='width:100px;' ng-click="placeholderEduName={'color':'#0E75A6','font-size':'9px','top':'-15px','left':'10px'};educationFun();" ng-blur="educationClose();placeholderEduName={}">
+							<span ng-show="education!=''">{{education}}</span>
+							<span ng-show="education==''">　　　　</span>
+							<span class='placeholder' ng-style="placeholderEduName" ng-show="education==''">選擇學歷</span>
+							<span class='placeholder' style='color: rgb(14, 117, 166); font-size: 9px; top: -15px; left: 10px;' ng-show="education!=''">選擇學歷</span>
+							<span class='icon dropListIcon'></span>
+						</a>
+
+						<ul class='showListUl' id='editEducaSelect' ng-show="educationStatus" ng-mouseenter="surfUl=true" ng-mouseleave="surfUl=false">
+							<a href="javascript:;" ng-repeat='edu in educations'><li ng-click='settingEdu(edu)'>{{edu.name}}</li></a>
+						</ul>
+					</div>
+					<div class='eduDiv'>
+						<a href="javascrit:;" class='dropList eduDivItem' ng-click="educationStartFun();placeholderEduStart={'color':'#0E75A6','font-size':'9px','top':'-15px','left':'10px'};" ng-blur="educationStartClose();placeholderEduStart={}">
+							<span ng-show="startEdu!=''">{{startEdu}}</span>
+							<span ng-show="startEdu==''">　　　　</span>
+							<span class='placeholder' ng-style="placeholderEduStart" ng-show="startEdu==''">開始年份</span>
+							<span class='placeholder' style='color: rgb(14, 117, 166); font-size: 9px; top: -15px; left: 10px;' ng-show="startEdu!=''">開始年份</span>
+							<span class='icon dropListIcon'></span>
+						</a>
+						-
+						<a href="javascrit:;" class='dropList eduDivItem' ng-click="educationEndFun();placeholderEduEnd={'color':'#0E75A6','font-size':'9px','top':'-15px','left':'150px'}" ng-blur="educationEndClose();placeholderEduEnd={}">
+							<span ng-show="endEdu!=''">{{endEdu}}</span>
+							<span ng-show="endEdu==''">　　　　</span>
+							<span class='placeholder' ng-style="placeholderEduEnd" ng-show="endEdu==''" style='left:170px;'>結束年份</span>
+							<span class='placeholder' style='color: rgb(14, 117, 166); font-size: 9px; top: -15px; left: 150px;' ng-show="endEdu!=''">結束年份</span>
+							<span class='icon dropListIcon'></span>
+						</a>
+
+						<ul class='showListUl' id='educationStart' ng-show="eduStartStatus" ng-mouseenter="surfUl=true" ng-mouseleave="surfUl=false">
+							<a href="javascript:;" ng-repeat='n in []| range:50' ng-click='startEduFun(n)'><li>{{n}}</li></a>
+						</ul>
+						<ul class='showListUl' id='educationEnd' ng-show="eduEndStatus" ng-mouseenter="surfUl=true" ng-mouseleave="surfUl=false">
+							<a href="javascript:;" ng-repeat='n in []| range:50' ng-click='endEduFun(n)'><li>{{n}}</li></a>
+						</ul>
+					</div>
+					<div class='eduDiv' style='margin-top:20px;'>
+						<input type='text' class='input' id="schoolName" ng-focus="placeholderSName={'color':'#0E75A6','font-size':'9px','top':'-5px','left':'5px'}" ng-blur="placeholderSName={}"  ng-model="schoolName">
+						
+						<span class='placeholder textPlaceholder' ng-style="placeholderSName" ng-show="!schoolName" ng-click="placeholderSName={'color':'#0E75A6','font-size':'9px','top':'-5px','left':'5px'}">學校名稱</span>
+
+						<span class='placeholder' style='color: rgb(14, 117, 166); font-size: 9px; top: -5px; left: 5px;' ng-show="schoolName">學校名稱</span>
+					</div>
+					<div class='eduDiv' style='margin-top:12px;'>
+						<input type='text' class='input' id="schoolName" ng-focus="placeholderMName={'color':'#0E75A6','font-size':'9px','top':'-5px','left':'5px'}" ng-blur="placeholderMName={}"  ng-model="majorName">
+						
+						<span class='placeholder textPlaceholder' ng-style="placeholderMName" ng-show="!majorName" ng-click="placeholderMName={'color':'#0E75A6','font-size':'9px','top':'-5px','left':'5px'}">科系所名稱</span>
+
+						<span class='placeholder' style='color: rgb(14, 117, 166); font-size: 9px; top: -5px; left: 5px;' ng-show="majorName">科系所名稱</span>
+					</div>
+				</div>
+
+				<a href="javascript:;" style='color:#36A9E5;'><span class='icon addicon'></span>新增學歷</a>
+			</div>
+			<div class='jobExperience'>
+			</div>
+		</div>
+
+
+	</div>
+</div>
