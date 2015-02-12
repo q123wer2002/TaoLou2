@@ -5,7 +5,7 @@ $(window).scroll(function() {            // Assign scroll event listener
     if (currentScroll >= fixmeTop) { // Make it fixed if you've scrolled to it
         $('.processBarDiv').css({
             position: 'fixed',
-            height:'100px',
+            height:'60px',
             top: '0px',
             left: '0px',
             width:'100%',
@@ -13,6 +13,7 @@ $(window).scroll(function() {            // Assign scroll event listener
             'box-shadow':'0px 2px 10px #000000',
             margin:'auto',
         });
+    	$("#titleHit").css({'display':'none'});
     }
     else{
         $('.processBarDiv').css({
@@ -24,6 +25,7 @@ $(window).scroll(function() {            // Assign scroll event listener
             padding:'50px',
             'box-shadow':'none',
         });
+        $("#titleHit").css({'display':'block'});
     }
 });
 
@@ -54,11 +56,12 @@ TaoLou.controller('TaoLou_skillNext',['$scope','$http',function SkillNext($scope
 		if(loading==297){
 			$scope.SkillToExperience=true;
 			var skillDown=document.getElementById("skill").offsetHeight;
-			jQuery("body").animate({"scrollTop":skillDown},600);
+			jQuery("body").animate({"scrollTop":skillDown+30},600);
 		}
 	}
 	$scope.overSkillDIV=function(){
-		var piece=65/$scope.myskills.length;
+		var skillBar=document.getElementById("skillProcessBar").offsetWidth;
+		var piece=skillBar/$scope.myskills.length;
 		var loading=0;
 		var count=0;
 		for(var i=0;i<$scope.myskills.length;i++){
@@ -112,22 +115,23 @@ TaoLou.controller('TaoLou_skillNext',['$scope','$http',function SkillNext($scope
 	$scope.endEdu="";
 	$scope.schoolName="";
 	$scope.majorName="";
+
 	$scope.surfUl=false;
 
 	$scope.educations=[
-   		{'name':'　博士　'},
-   		{'name':'　碩士　'},
-   		{'name':'　大學　'},
-   		{'name':'　四技　'},
-   		{'name':'　二技　'},
-   		{'name':'　二專　'},
-   		{'name':'　三專　'},
-   		{'name':'　五專　'},
-   		{'name':'　高中　'},
-   		{'name':'　高職　'},
-   		{'name':'　國中　'},
-   		{'name':'　國小　'},
-   		{'name':'　其他　'},
+   		{'name':'博士'},
+   		{'name':'碩士'},
+   		{'name':'大學'},
+   		{'name':'四技'},
+   		{'name':'二技'},
+   		{'name':'二專'},
+   		{'name':'三專'},
+   		{'name':'五專'},
+   		{'name':'高中'},
+   		{'name':'高職'},
+   		{'name':'國中'},
+   		{'name':'國小'},
+   		{'name':'其他'},
 	];
 	$scope.myEducations=[];
 
@@ -160,26 +164,30 @@ TaoLou.controller('TaoLou_skillNext',['$scope','$http',function SkillNext($scope
 		$scope.educationStatus=false;
 	}
 	$scope.startEduFun=function(item){
-		$scope.startEdu="　"+item+"　";
+		$scope.startEdu=item;
 		$scope.eduStartStatus=false;
 	}
 	$scope.endEduFun=function(item){
 		var endyear=item+3;
-		$scope.endEdu="　"+endyear+"　";
+		$scope.endEdu=endyear;
 		$scope.eduEndStatus=false;
 	}
-
 	//save education
 	$scope.newEduFun=function(){
 		if($scope.education!="" && $scope.startEdu!="" && $scope.endEdu!="" && $scope.schoolName!="" && $scope.majorName!=""){
 			$scope.myEducations.push({'education':$scope.education,'start':$scope.startEdu,'end':$scope.endEdu,'school':$scope.schoolName,'marjor':$scope.majorName});
-			
+
 			$scope.education="";
 			$scope.startEdu="";
 			$scope.endEdu="";
 			$scope.schoolName="";
 			$scope.majorName="";
 		}else{console.log("error");}
+	}
+	//delete education
+	$scope.deleteEdu=function(item){
+		var index=$scope.myEducations.indexOf(item);
+    	$scope.myEducations.splice(index,1);
 	}
 }]);
 
