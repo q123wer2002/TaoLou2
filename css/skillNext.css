@@ -54,7 +54,7 @@
 	/* experience */
 	#experience{height: 700px;}
 		.vertical{border:2px solid #54A7F7;width: 0;height: 700px;position: absolute;left: 500px;}
-		.eduExperence{width: 365px;height: 200px;margin-left: 50px;float: left;margin-top: 50px;position: relative;}
+		.eduExperence{width: 365px;height: 300px;margin-left: 50px;float: left;margin-top: 50px;position: relative;}
 			.editListDiv{background-color: #ECEEF1;padding: 10px 10px 30px 10px;}	
 				.eduDiv{margin-top: 30px;text-align: left;position: relative;}
 				.eduDivItem{font-size: 15px;padding: 10px 15px;}
@@ -67,4 +67,11 @@
 					#schoolName{background-color: #ffffff;margin-left: 10px;opacity: 1;}
 					.textPlaceholder{top:8px;}
 					.textPlaceholder:hover{cursor: text;}
+					#addEducationBut{color:#000000;border:2px solid #ffffff;border-radius:2px;box-shadow:none;margin-left:250px;}
+					#addEducationBut:hover{background-color: #54A7F7;color:#ffffff;border-color: #54A7F7;}
+				.showEdu{list-style: none;text-align: left;}
+				.showEdu li{margin-top: 10px;}
+				.showEdu li:hover{background-color: #ECEEF1;}
+				.showEdu .sub{color: #a2a8b3;}
+					.redCrossIcon{position: absolute;right: 10px;}
 		.jobExperience{border:1px solid #000000;width: 365px;height: 200px;margin-left: 565px;margin-top: 50px;}

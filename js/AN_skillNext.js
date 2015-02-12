@@ -117,12 +117,19 @@ TaoLou.controller('TaoLou_skillNext',['$scope','$http',function SkillNext($scope
 	$scope.educations=[
    		{'name':'　博士　'},
    		{'name':'　碩士　'},
-   		{'name':'大專院校'},
+   		{'name':'　大學　'},
+   		{'name':'　四技　'},
+   		{'name':'　二技　'},
+   		{'name':'　二專　'},
+   		{'name':'　三專　'},
+   		{'name':'　五專　'},
    		{'name':'　高中　'},
+   		{'name':'　高職　'},
    		{'name':'　國中　'},
    		{'name':'　國小　'},
    		{'name':'　其他　'},
 	];
+	$scope.myEducations=[];
 
 	//close drop list function
 	$scope.educationFun=function(){
@@ -157,8 +164,22 @@ TaoLou.controller('TaoLou_skillNext',['$scope','$http',function SkillNext($scope
 		$scope.eduStartStatus=false;
 	}
 	$scope.endEduFun=function(item){
-		$scope.endEdu="　"+item+"　";
+		var endyear=item+3;
+		$scope.endEdu="　"+endyear+"　";
 		$scope.eduEndStatus=false;
+	}
+
+	//save education
+	$scope.newEduFun=function(){
+		if($scope.education!="" && $scope.startEdu!="" && $scope.endEdu!="" && $scope.schoolName!="" && $scope.majorName!=""){
+			$scope.myEducations.push({'education':$scope.education,'start':$scope.startEdu,'end':$scope.endEdu,'school':$scope.schoolName,'marjor':$scope.majorName});
+			
+			$scope.education="";
+			$scope.startEdu="";
+			$scope.endEdu="";
+			$scope.schoolName="";
+			$scope.majorName="";
+		}else{console.log("error");}
 	}
 }]);
 
