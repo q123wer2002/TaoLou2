@@ -1,5 +1,5 @@
 // start
-var fixmeTop = '400'; // Get initial position
+var fixmeTop = '230'; // Get initial position
 $(window).scroll(function() {            // Assign scroll event listener
     var currentScroll = $(window).scrollTop(); // Get current position
     if (currentScroll >= fixmeTop) { // Make it fixed if you've scrolled to it
@@ -53,10 +53,14 @@ TaoLou.controller('TaoLou_skillNext',['$scope','$http',function SkillNext($scope
 		do{
 			$scope.hrLoading++;
 		}while($scope.hrLoading<loading);
+
+		var skillDown=document.getElementById("skill").offsetHeight;
+		var experienceDown=document.getElementById("experience").offsetHeight;
 		if(loading==297){
 			$scope.SkillToExperience=true;
-			var skillDown=document.getElementById("skill").offsetHeight;
 			jQuery("body").animate({"scrollTop":skillDown+30},600);
+		}else if(loading==484){
+			jQuery("body").animate({"scrollTop":skillDown+experienceDown+30},600);
 		}
 	}
 	$scope.overSkillDIV=function(){
@@ -107,8 +111,8 @@ TaoLou.controller('TaoLou_skillNext',['$scope','$http',function SkillNext($scope
 		if(item.comment!=""){placeholder="{}";}
 	}*/
 
-	//education
-	//=========================================
+//education
+//=========================================
 	//init
 	$scope.education="";
 	$scope.startEdu="";
@@ -189,6 +193,73 @@ TaoLou.controller('TaoLou_skillNext',['$scope','$http',function SkillNext($scope
 		var index=$scope.myEducations.indexOf(item);
     	$scope.myEducations.splice(index,1);
 	}
+		//======================================
+	//experience
+	//==========
+		//init
+	$scope.itemName="";
+	$scope.itemYear="";
+	$scope.itemPeriod="";
+	$scope.itemCompany="";
+	$scope.itemRole="";
+	$scope.itemDetail="";
+
+	$scope.itemYearStatus=false;
+	$scope.itemPeriodStatus=false;
+
+	$scope.myItemExperience=[];
+
+	$scope.periods=[
+		{"name":"一個月"},
+		{"name":"三個月"},
+		{"name":"半年"},
+		{"name":"一年"},
+		{"name":"一年以上"},
+	];
+	//close drop list function
+	$scope.itemYearFun=function(){
+		if(!$scope.surfUl && $scope.itemYearStatus){$scope.itemYearStatus=false;}
+		else{$scope.itemYearStatus=true;}
+	}
+	$scope.itemPeriodFun=function(){
+		if(!$scope.surfUl && $scope.itemPeriodStatus){$scope.itemPeriodStatus=false;}
+		else{$scope.itemPeriodStatus=true;}
+	}
+	$scope.itemYearClose=function(){
+		if(!$scope.surfUl){$scope.itemYearStatus=false;}
+	}
+	$scope.itemPeriodClose=function(){
+		if(!$scope.surfUl){$scope.itemPeriodStatus=false;}
+	}
+
+	//click to save functino
+	$scope.itemYearSaveFun=function(item){
+		$scope.itemYear=item;
+		$scope.itemYearStatus=false;
+	}
+	$scope.itemPeriodSaveFun=function(item){
+		$scope.itemPeriod=item.name;
+		$scope.itemPeriodStatus=false;
+	}
+	//save education
+	$scope.newItemFun=function(){
+		if($scope.itemName!="" && $scope.itemYear!="" && $scope.itemPeriod!="" && $scope.itemCompany!="" && $scope.itemRole!="" && $scope.itemDetail!=""){
+			$scope.myItemExperience.push({'name':$scope.itemName,'year':$scope.itemYear,'peroid':$scope.itemPeriod,'company':$scope.itemCompany,'role':$scope.itemRole,'detail':$scope.itemDetail});
+
+			$scope.itemName="";
+			$scope.itemYear="";
+			$scope.itemPeriod="";
+			$scope.itemCompany="";
+			$scope.itemRole="";
+			$scope.itemDetail="";
+		}else{console.log("error");}
+	}
+	//delete education
+	$scope.deleteItem=function(item){
+		var index=$scope.myItemExperience.indexOf(item);
+    	$scope.myItemExperience.splice(index,1);
+	}
+
 }]);
 
 TaoLou.filter('range', function() {

@@ -27,12 +27,12 @@
 
 		<div class='processDiv' id='skill'>
 			<h2>請將您的技能選填熟悉度</h2>
-			<p style='margin-top:20px;'>1=>較生疏 , 5=>精熟</p>
+			<div style='text-align:left;margin:auto;width:130px;margin-top:20px;'>1=>不熟悉<br>2=>略懂<br>3=>普通<br>4=>熟練<br>5=>可獨立開發</p></div>
 			<div class='myskillDiv'>
 				<div class='explanation'>
-					<span style='left:0;top:0;'>生疏</span>
+					<span style='left:0;top:0;'>不熟悉</span>
 					<div class='hoz'></div>
-					<span style='right:0;top:0;'>熟練</span>
+					<span style='right:0;top:0;'>精熟</span>
 				</div>
 				<ul class='myskill'>
 					<li ng-repeat="myskill in myskills | orderBy:'rank':false">
@@ -64,11 +64,12 @@
 		<div class='processDiv' id='experience' ng-show="SkillToExperience">
 			<h2>學歷與經歷</h2>
 			<p style='margin-top:20px;'>填寫愈多,配對將會愈準確</p>
+			<a href="javascript:;" class='button' id='contiBut' style='float:right;margin-top:-50px;margin-right:68px;' ng-click="loadingBar(484);">跳過</a>
 			<hr class='vertical'>
 		<!-- 教育經歷 -->
 			<div class="eduExperence">
 				<img src="https://lh6.googleusercontent.com/iuPx08zZirE6caRvYSGVhuIJrNwjUSqZNvEoAq8OoLs=w774-h221-p-no" width="100%">
-				<h3 style='position:absolute;top:10px;left:90px;color:#ffffff;text-shadow:2px 2px 2px #a2a8b3;'>新增學習經歷</h3>
+				<h3 style='position:absolute;top:10px;left:90px;color:#ffffff;text-shadow:2px 2px 2px #a2a8b3;'>新增學習經歷<br><span>(至多兩項,最高與次高學歷)</span></h3>
 				<div class='editListDiv' style='border-top:2px solid #54A7F7;'>
 					<div class='eduDiv'>
 						<a href="javascrit:;" class='dropList eduDivItem' style='width:100px;' ng-click="placeholderEduName={'color':'#0E75A6','font-size':'9px','top':'-15px','left':'10px'};educationFun();" ng-blur="educationClose();placeholderEduName={}">
@@ -126,7 +127,7 @@
 						<span class='placeholder' style='color: rgb(14, 117, 166); font-size: 9px; top: -5px; left: 5px;' ng-show="majorName">科系所名稱</span>
 					</div>
 
-					<a href="javascript:;" class='button' id="addEducationBut" ng-click="newEduFun()">新增學歷</a>
+					<a href="javascript:;" class='button' id="addEducationBut" ng-click="newEduFun()" ng-if="myEducations.length<2">新增學歷</a>
 				</div>
 				<ul class='showEdu' ng-show="myEducations!=''">
 					<li ng-repeat="eduexp in myEducations">
@@ -142,70 +143,71 @@
 					<h3 style='position:absolute;top:10px;left:90px;color:#ffffff;text-shadow:2px 2px 2px #a2a8b3;'>新增項目經歷</h3>
 					<div class='editListDiv' style='border-top:2px solid #54A7F7;'>
 						<div class='eduDiv' style="margin-top:10px;">
-							<input type='text' class='input' id="schoolName" ng-focus="placeholderSName={'color':'#0E75A6','font-size':'9px','top':'-5px','left':'5px'}" ng-blur="placeholderSName={}"  ng-model="schoolName">
+							<input type='text' class='input' id="schoolName" ng-focus="placeholderItemName={'color':'#0E75A6','font-size':'9px','top':'-5px','left':'5px'}" ng-blur="placeholderItemName={}"  ng-model="itemName">
 							
-							<span class='placeholder textPlaceholder' ng-style="placeholderSName" ng-show="!schoolName" ng-click="placeholderSName={'color':'#0E75A6','font-size':'9px','top':'-5px','left':'5px'}">項目名稱</span>
+							<span class='placeholder textPlaceholder' ng-style="placeholderItemName" ng-show="!itemName" ng-click="placeholderItemName={'color':'#0E75A6','font-size':'9px','top':'-5px','left':'5px'}">項目名稱</span>
 
-							<span class='placeholder' style='color: rgb(14, 117, 166); font-size: 9px; top: -5px; left: 5px;' ng-show="schoolName">項目名稱</span>
+							<span class='placeholder' style='color: rgb(14, 117, 166); font-size: 9px; top: -5px; left: 5px;' ng-show="itemName">項目名稱</span>
 						</div>
-						<div class='eduDiv' style="margin-top:15px;">
+						<div class='eduDiv' style="margin-top:20px;">
 							<div style="position:relative;display:inline-table;">
-								<a href="javascrit:;" class='dropList eduDivItem' ng-click="educationStartFun();placeholderEduStart={'color':'#0E75A6','font-size':'9px','top':'-15px','left':'10px'};" ng-blur="educationStartClose();placeholderEduStart={}">
-									<span ng-show="startEdu!=''">{{startEdu}}</span>
-									<span ng-show="startEdu==''">　　　　</span>
-									<span class='placeholder' ng-style="placeholderEduStart" ng-if="startEdu==''">項目年份</span>
-									<span class='placeholder' style='color: rgb(14, 117, 166); font-size: 9px; top: -15px; left: 10px;' ng-if="startEdu!=''">項目年份</span>
+								<a href="javascrit:;" class='dropList eduDivItem' ng-click="itemYearFun();placeholderItemYear={'color':'#0E75A6','font-size':'9px','top':'-15px','left':'10px'};" ng-blur="itemYearClose();placeholderItemYear={}">
+									<span ng-show="itemYear!=''">{{itemYear}}</span>
+									<span ng-show="itemYear==''">　　　　</span>
+									<span class='placeholder' ng-style="placeholderItemYear" ng-if="itemYear==''">項目年份</span>
+									<span class='placeholder' style='color: rgb(14, 117, 166); font-size: 9px; top: -15px; left: 10px;' ng-if="itemYear!=''">項目年份</span>
 									<span class='icon dropListIcon'></span>
 								</a>
-								<ul class='showListUl' id='educationStart' ng-show="eduStartStatus" ng-mouseenter="surfUl=true" ng-mouseleave="surfUl=false">
-									<a href="javascript:;" ng-repeat='n in []| range:50' ng-click='startEduFun(n)'><li>{{n}}</li></a>
+								<ul class='showListUl' id='educationStart' ng-show="itemYearStatus" ng-mouseenter="surfUl=true" ng-mouseleave="surfUl=false">
+									<a href="javascript:;" ng-repeat='n in []| range:50' ng-click='itemYearSaveFun(n)'><li>{{n}}</li></a>
 								</ul>
 							</div>
-							-
+							||
 							<div style="position:relative;display:inline-table;">
-								<a href="javascrit:;" class='dropList eduDivItem' ng-click="educationEndFun();placeholderEduEnd={'color':'#0E75A6','font-size':'9px','top':'-15px','left':'10px'}" ng-blur="educationEndClose();placeholderEduEnd={}">
-									<span ng-show="endEdu!=''">{{endEdu}}</span>
-									<span ng-show="endEdu==''">　　　　</span>
-									<span class='placeholder' id='endText' ng-style="placeholderEduEnd" ng-if="endEdu==''">為期時間</span>
-									<span class='placeholder' style='color: rgb(14, 117, 166); font-size: 9px; top: -15px; left: 10px;' ng-if="endEdu!=''">為期時間</span>
+								<a href="javascrit:;" class='dropList eduDivItem' ng-click="itemPeriodFun();placeholderItemPeriod={'color':'#0E75A6','font-size':'9px','top':'-15px','left':'10px'}" ng-blur="itemPeriodClose();placeholderItemPeriod={}">
+									<span ng-show="itemPeriod!=''">{{itemPeriod}}</span>
+									<span ng-show="itemPeriod==''">　　　　</span>
+									<span class='placeholder' id='endText' ng-style="placeholderItemPeriod" ng-if="itemPeriod==''">為期時間</span>
+									<span class='placeholder' style='color: rgb(14, 117, 166); font-size: 9px; top: -15px; left: 10px;' ng-if="itemPeriod!=''">為期時間</span>
 									<span class='icon dropListIcon'></span>
 								</a>
 
-								<ul class='showListUl' id='educationEnd' ng-show="eduEndStatus" ng-mouseenter="surfUl=true" ng-mouseleave="surfUl=false">
-									<a href="javascript:;" ng-repeat='n in []| range:50' ng-click='endEduFun(n)'><li>{{n+3}}</li></a>
+								<ul class='showListUl' id='educationEnd' ng-show="itemPeriodStatus" ng-mouseenter="surfUl=true" ng-mouseleave="surfUl=false">
+									<a href="javascript:;" ng-repeat='period in periods' ng-click='itemPeriodSaveFun(period)'><li>{{period.name}}</li></a>
 								</ul>
 							</div>
 						</div>
 						<div class='eduDiv' style='margin-top:20px;'>
-							<input type='text' class='input' id="schoolName" ng-focus="placeholderSName={'color':'#0E75A6','font-size':'9px','top':'-5px','left':'5px'}" ng-blur="placeholderSName={}"  ng-model="schoolName">
+							<input type='text' class='input' id="schoolName" ng-focus="placeholderItemCompany={'color':'#0E75A6','font-size':'9px','top':'-5px','left':'5px'}" ng-blur="placeholderItemCompany={}"  ng-model="itemCompany">
 							
-							<span class='placeholder textPlaceholder' ng-style="placeholderSName" ng-show="!schoolName" ng-click="placeholderSName={'color':'#0E75A6','font-size':'9px','top':'-5px','left':'5px'}">所處公司</span>
+							<span class='placeholder textPlaceholder' ng-style="placeholderItemCompany" ng-show="!itemCompany" ng-click="placeholderItemCompany={'color':'#0E75A6','font-size':'9px','top':'-5px','left':'5px'}">所處公司</span>
 
-							<span class='placeholder' style='color: rgb(14, 117, 166); font-size: 9px; top: -5px; left: 5px;' ng-show="schoolName">所處公司</span>
+							<span class='placeholder' style='color: rgb(14, 117, 166); font-size: 9px; top: -5px; left: 5px;' ng-show="itemCompany">所處公司</span>
 						</div>
 						<div class='eduDiv' style='margin-top:12px;'>
-							<input type='text' class='input' id="schoolName" ng-focus="placeholderMName={'color':'#0E75A6','font-size':'9px','top':'-5px','left':'5px'}" ng-blur="placeholderMName={}"  ng-model="majorName">
+							<input type='text' class='input' id="schoolName" ng-focus="placeholderItemRole={'color':'#0E75A6','font-size':'9px','top':'-5px','left':'5px'}" ng-blur="placeholderItemRole={}"  ng-model="itemRole">
 							
-							<span class='placeholder textPlaceholder' ng-style="placeholderMName" ng-show="!majorName" ng-click="placeholderMName={'color':'#0E75A6','font-size':'9px','top':'-5px','left':'5px'}">項目角色</span>
+							<span class='placeholder textPlaceholder' ng-style="placeholderItemRole" ng-show="!itemRole" ng-click="placeholderItemRole={'color':'#0E75A6','font-size':'9px','top':'-5px','left':'5px'}">項目角色</span>
 
-							<span class='placeholder' style='color: rgb(14, 117, 166); font-size: 9px; top: -5px; left: 5px;' ng-show="majorName">項目角色</span>
+							<span class='placeholder' style='color: rgb(14, 117, 166); font-size: 9px; top: -5px; left: 5px;' ng-show="itemRole">項目角色</span>
 						</div>
 						<div class='eduDiv' style='margin-top:12px;margin-bottom:30px;'>
-							<textarea type='text' class='input' id="schoolName" style="height:100px;" ng-focus="placeholderMName={'color':'#0E75A6','font-size':'9px','top':'-5px','left':'5px'}" ng-blur="placeholderMName={}"  ng-model="majorName"></textarea>
+							<textarea type='text' class='input' id="schoolName" style="height:100px;" ng-focus="placeholderItemDetail={'color':'#0E75A6','font-size':'9px','top':'-5px','left':'5px'}" ng-blur="placeholderItemDetail={}"  ng-model="itemDetail"></textarea>
 							
-							<span class='placeholder textPlaceholder' ng-style="placeholderMName" ng-show="!majorName" ng-click="placeholderMName={'color':'#0E75A6','font-size':'9px','top':'-5px','left':'5px'}">項目描述</span>
+							<span class='placeholder textPlaceholder' ng-style="placeholderItemDetail" ng-show="!itemDetail" ng-click="placeholderItemDetail={'color':'#0E75A6','font-size':'9px','top':'-5px','left':'5px'}">項目描述</span>
 
-							<span class='placeholder' style='color: rgb(14, 117, 166); font-size: 9px; top: -5px; left: 5px;' ng-show="majorName">項目描述</span>
+							<span class='placeholder' style='color: rgb(14, 117, 166); font-size: 9px; top: -5px; left: 5px;' ng-show="itemDetail">項目描述</span>
 						</div>
 
 
-						<a href="javascript:;" class='button' id="addEducationBut" ng-click="newEduFun()">新增經歷</a>
+						<a href="javascript:;" class='button' id="addEducationBut" ng-click="newItemFun()">新增經歷</a>
 					</div>
-					<ul class='showEdu' ng-show="myEducations!=''">
-						<li ng-repeat="eduexp in myEducations">
-							<a href="javascript:;" class='icon redCrossIcon' ng-click='deleteEdu(eduexp)'></a>
-							<p>{{eduexp.start}}-{{eduexp.end}} , {{eduexp.school}}</p>
-							<p class='sub'>{{eduexp.education}} , {{eduexp.marjor}}</p>
+					<ul class='showEdu' ng-show="myItemExperience!=''">
+						<li ng-repeat="itemExp in myItemExperience">
+							<a href="javascript:;" class='icon redCrossIcon' ng-click='deleteItem(itemExp)'></a>
+							<p>{{itemExp.name}} | {{itemExp.company}}</p>
+							<p>{{itemExp.role}} {{itemExp.peroid}}</p>
+							<p class='sub'>{{itemExp.detail}}</p>
 						</li>
 					</ul>
 				</div>
