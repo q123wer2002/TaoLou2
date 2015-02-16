@@ -9,8 +9,8 @@
                 <h2>您最好的求職平台</h2><br>
                 <h2 class='bannerSelect'>
                     <span>我</span>
-                    <div class='dropDiv' >
-                        <a href="javascript:;" class='dropList' ng-click='jobStatusShowFun()' ng-blur='jobStatusClose()' id='statusDIv'><span>{{jobstatus}}<span><span class='icon dropListIcon'></span></a>
+                    <div class='dropDiv'>
+                        <a href="javascript:;" class='dropList' ng-click='jobStatusShowFun()' ng-blur='jobStatusClose()' id='statusDIv'><span class='selectSpan'>{{jobstatus}}<span><span class='icon dropListIcon'></span></a>
 
                         <ul class='showListUl' id='jobStatusList' ng-show='Statusjobstatus' ng-style='{width:jobstatusWidth}' ng-mouseenter="surfList=true" ng-mouseleave="surfList=false">
                             <a href="javascript:;" ng-repeat='status in jobStatuses'><li ng-click='jobStatusFun(status)'>{{status.name}}</li></a>

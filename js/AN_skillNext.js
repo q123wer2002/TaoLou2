@@ -31,15 +31,48 @@ $(window).scroll(function() {            // Assign scroll event listener
 
 TaoLou.controller('TaoLou_skillNext',['$scope','$http',function SkillNext($scope,$http){
 	//init
+	var skillDown=document.getElementById("skill").offsetHeight+200;
+	var experienceDown=document.getElementById("experience").offsetHeight+200;
+	var jobTitleDown=document.getElementById("jobTitle").offsetHeight+200;
+	var BGprocess=document.getElementById("BGprocess").offsetWidth;
+		//loading
 	$scope.hrLoading=0;
 	$scope.skillLoading=0;
 	$scope.experienceLoading=0;
 	$scope.jobTitleLoading=0;
 	$scope.salaryLoaLoading=0;
-
+		//next button
 	$scope.degreeOK=false;
-	$scope.SkillToExperience=true;
+	$scope.experienceOK=false;
+	$scope.jobTitleOK=false;
+	$scope.finish=false;
+		//page_show
+	$scope.SkillToExperience=false;
+	$scope.experienceJobTitle=false;
+	$scope.jobTitleSalary=false;
+		//goto function
+	$scope.gotoSkillDiv=function(){
+		jQuery("body").animate({"scrollTop":30},600);
+	}
+	$scope.gotoExperienceDiv=function(){
+		if($scope.SkillToExperience){
+			jQuery("body").animate({"scrollTop":skillDown+120},600);
+		}
+	}
+	$scope.gotoJobTitleDiv=function(){
+		if($scope.experienceJobTitle){
+			jQuery("body").animate({"scrollTop":skillDown+experienceDown+35},600);
+		}
+	}
+	$scope.gotoSalaryDiv=function(){
+		if($scope.jobTitleSalary){
+			jQuery("body").animate({"scrollTop":skillDown+experienceDown+jobTitleDown+30},600);
+		}
+	}
+	
 
+
+	//skill Div
 	$scope.myskills=[
 		{'name':'Angular','degree':0},
 		{'name':'PHP','degree':0},
@@ -54,13 +87,17 @@ TaoLou.controller('TaoLou_skillNext',['$scope','$http',function SkillNext($scope
 			$scope.hrLoading++;
 		}while($scope.hrLoading<loading);
 
-		var skillDown=document.getElementById("skill").offsetHeight;
-		var experienceDown=document.getElementById("experience").offsetHeight;
 		if(loading==297){
 			$scope.SkillToExperience=true;
-			jQuery("body").animate({"scrollTop":skillDown+30},600);
+			jQuery("body").animate({"scrollTop":skillDown+120},600);
 		}else if(loading==484){
-			jQuery("body").animate({"scrollTop":skillDown+experienceDown+30},600);
+			$scope.experienceJobTitle=true;
+			jQuery("body").animate({"scrollTop":skillDown+experienceDown+35},600);
+		}else if(loading==676){
+			$scope.jobTitleSalary=true;
+			jQuery("body").animate({"scrollTop":skillDown+experienceDown+jobTitleDown+30},600);
+		}else if(loading=="finish"){
+			$scope.hrLoading=BGprocess-3;
 		}
 	}
 	$scope.overSkillDIV=function(){
@@ -114,6 +151,7 @@ TaoLou.controller('TaoLou_skillNext',['$scope','$http',function SkillNext($scope
 //education
 //=========================================
 	//init
+	var experienceWidth=document.getElementById("experienceProcessBar").offsetWidth;
 	$scope.education="";
 	$scope.startEdu="";
 	$scope.endEdu="";
@@ -186,12 +224,32 @@ TaoLou.controller('TaoLou_skillNext',['$scope','$http',function SkillNext($scope
 			$scope.endEdu="";
 			$scope.schoolName="";
 			$scope.majorName="";
+
+		//loading bar show
+		if($scope.myEducations!=0){
+			if($scope.myEducations.length==1){
+				$scope.experienceLoading=$scope.experienceLoading+experienceWidth/4;
+			}
+			else{$scope.experienceLoading=$scope.experienceLoading+experienceWidth/2;}
+			//check experienceOK
+			if($scope.experienceLoading>0 && !$scope.experienceOK){
+				$scope.experienceOK=true;
+				$scope.hrLoading=$scope.hrLoading+experienceWidth;
+			}
+		}
+		//=================
+
 		}else{console.log("error");}
 	}
 	//delete education
 	$scope.deleteEdu=function(item){
 		var index=$scope.myEducations.indexOf(item);
     	$scope.myEducations.splice(index,1);
+
+    	if($scope.myEducations.length==0){
+    		$scope.experienceLoading=$scope.experienceLoading-experienceWidth/4;
+    		$scope.hrLoading=$scope.hrLoading-experienceWidth/4;
+    	}
 	}
 		//======================================
 	//experience
@@ -241,7 +299,7 @@ TaoLou.controller('TaoLou_skillNext',['$scope','$http',function SkillNext($scope
 		$scope.itemPeriod=item.name;
 		$scope.itemPeriodStatus=false;
 	}
-	//save education
+	//save item experience
 	$scope.newItemFun=function(){
 		if($scope.itemName!="" && $scope.itemYear!="" && $scope.itemPeriod!="" && $scope.itemCompany!="" && $scope.itemRole!="" && $scope.itemDetail!=""){
 			$scope.myItemExperience.push({'name':$scope.itemName,'year':$scope.itemYear,'peroid':$scope.itemPeriod,'company':$scope.itemCompany,'role':$scope.itemRole,'detail':$scope.itemDetail});
@@ -252,13 +310,119 @@ TaoLou.controller('TaoLou_skillNext',['$scope','$http',function SkillNext($scope
 			$scope.itemCompany="";
 			$scope.itemRole="";
 			$scope.itemDetail="";
+		//loading bar show
+		if($scope.myItemExperience!=0){
+			$scope.experienceLoading=$scope.experienceLoading+experienceWidth/2;
+			//check experienceOK
+			if($scope.experienceLoading>0 && !$scope.experienceOK){
+				$scope.experienceOK=true;
+				$scope.hrLoading=$scope.hrLoading+experienceWidth;
+			}
+		}
+		//=================
 		}else{console.log("error");}
 	}
 	//delete education
 	$scope.deleteItem=function(item){
 		var index=$scope.myItemExperience.indexOf(item);
     	$scope.myItemExperience.splice(index,1);
+
+    	if($scope.myItemExperience.length==0){
+    		$scope.experienceLoading=$scope.experienceLoading-experienceWidth/2;
+    		$scope.hrLoading=$scope.hrLoading-experienceWidth/4;
+    	}
 	}
+
+	//Job Title
+	//init
+	$scope.jobtitles=[
+		{"name":""},
+		{"name":""},
+		{"name":""},
+	];
+
+	$scope.jobtitleCheck=function(){
+		var finishCount=0;
+		for(var i=0;i<$scope.jobtitles.length;i++){
+			if($scope.jobtitles[i].name!=""){finishCount++;}
+		}
+		//loading bar
+		var jobTitleWidth=document.getElementById("jobTitleProcessBar").offsetWidth;
+		$scope.jobTitleLoading=(jobTitleWidth/3)*finishCount;
+
+		//next Step
+		if(finishCount && !$scope.jobTitleOK){
+			$scope.jobTitleOK=true;
+
+			//loading bar
+			$scope.hrLoading=$scope.hrLoading+jobTitleWidth;
+		}
+		if(!finishCount && $scope.jobTitleOK){
+			$scope.jobTitleOK=false;
+			//loading bar
+			$scope.hrLoading=$scope.hrLoading-jobTitleWidth;
+		}
+	}
+
+
+	//salary and location
+	//init
+	var salaryLocWidth=document.getElementById("salaryProcessBar").offsetWidth;
+	var salaryInput=false;
+	var location=false;
+	$scope.locations=[];
+
+	$scope.salaryCheck=function(){
+		if($scope.jobSalary && !salaryInput){
+			salaryInput=true;
+			$scope.salaryLoaLoading=$scope.salaryLoaLoading+salaryLocWidth/4;
+			$scope.hrLoading=$scope.hrLoading+salaryLocWidth/2;
+		}else if(!$scope.jobSalary && salaryInput){
+			salaryInput=false;
+			$scope.salaryLoaLoading=$scope.salaryLoaLoading-salaryLocWidth/4;
+			$scope.hrLoading=$scope.hrLoading-salaryLocWidth/2;
+		}
+		if(salaryInput && location){$scope.finish=true;}
+		else{$scope.finish=false;}
+	}
+
+	//add location
+	$scope.addLocation=function(){
+		//讀取資料
+		var subJobLocation=jQuery('#twzipcode').twzipcode('serialize');
+		//分析資料
+		var Loca=subJobLocation.split("&");
+		var county=Loca[0].split("=");
+		var district=Loca[1].split("=");
+		var zipcode=Loca[2].split("=");
+		//console.log(county[1]);
+		if(county[1]!=""){
+			var index=$scope.locations.indexOf(county[1]);
+			if(index==-1){$scope.locations.push(county[1]);}
+		}
+
+		//locaing bar
+		if($scope.locations.length!=0){
+			if(!location){$scope.hrLoading=$scope.hrLoading+salaryLocWidth/2;location=true;}
+			if($scope.locations.length<4){$scope.salaryLoaLoading=$scope.salaryLoaLoading+salaryLocWidth/8;}
+		}
+		//show next page
+		if(salaryInput && location){$scope.finish=true;}
+	}
+
+	//delete location
+	$scope.deleteLoca=function(item){
+		if($scope.locations.length<4){$scope.salaryLoaLoading=$scope.salaryLoaLoading-salaryLocWidth/8;}
+
+		var index=$scope.locations.indexOf(item);
+		if(index!=-1){$scope.locations.splice(item,1);}
+
+		//locaing bar
+		if($scope.locations.length==0){$scope.hrLoading=$scope.hrLoading-salaryLocWidth/2;location=false;}
+		
+		if(!salaryInput || !location){$scope.finish=false;}
+	}
+
 
 }]);
 
@@ -269,4 +433,21 @@ TaoLou.filter('range', function() {
 	    	input.push(i);
 	    return input;
 	  };
+});
+
+$(document).ready(function(){
+	//地址顯示
+	var countySel = $('#LOCATION_countySel').val();
+	var districtSel = $('#LOCATION_districtSel').val();
+	var css = [
+            'county form-control',
+            'district form-control',
+            'zipcode form-control'
+        ];
+
+	$('#twzipcode').twzipcode({
+		'countySel': countySel,
+		'districtSel': districtSel,
+		'css': css
+	});
 });

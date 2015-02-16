@@ -9,7 +9,7 @@ a{text-decoration: none;}
 .icon{background-image: url(../images/layout/sprite.png);background-repeat: no-repeat;display: inline-block;vertical-align: 0;margin-bottom: -1px;zoom:1;}
 .button{padding: 7px 10px;background: none;color:#ffffff;font-weight: 500;border:1px solid #ffffff;box-shadow: 2px 2px 2px #00A2E8;border-radius: 2px;}
 .button:hover{background-color: #93C7F9;color:#ffffff;}
-.input{padding: 7px 5px;font-size: 17px;border: none;}
+.input{padding: 7px 5px;font-size: 17px;border: none;font-style: "微軟正黑體";}
 .dropList{padding: 17px 15px;border: none;color: #6b7485;background-color: #ffffff;font-size: 20px;border-radius: 2px;margin: 0px 10px;}
 
 .showListUl{position: absolute;width: 186px;text-align: center;z-index: 6;height:250px;overflow: auto;}

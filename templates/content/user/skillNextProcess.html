@@ -9,19 +9,31 @@
 
 			<div style='width:1024px;height:5px;position:relative;margin:auto;margin-top:0px;'>
 				<ul class='process'>
-					<li id='skillProcessBar'>
-						<span ng-if="skillLoading<50">技能</span>
+					<li id='skillProcessBar' ng-click="gotoSkillDiv()">
+						<span ng-show="skillLoading<50">技能</span>
 						<span class='loading' ng-style="{width:skillLoading}"></span>
-						<span ng-style="{color:'#ffffff'}" style='z-index:5;' ng-if="skillLoading>50">技能</span>
+						<span ng-style="{color:'#ffffff'}" style='z-index:5;' ng-show="skillLoading>50">技能</span>
 					</li>
-					<li>學,經歷</li>
-					<li>職位名稱</li>
-					<li>薪水與地點</li>
+					<li id='experienceProcessBar' ng-click="gotoExperienceDiv()">
+						<span ng-show="experienceLoading<50">學經歷</span>
+						<span class='loading' ng-style="{width:experienceLoading}"></span>
+						<span ng-style="{color:'#ffffff'}" style='z-index:5;' ng-show="experienceLoading>50">學經歷</span>
+					</li>
+					<li id='jobTitleProcessBar' ng-click="gotoJobTitleDiv()">
+						<span ng-show="jobTitleLoading<50">職缺名稱</span>
+						<span class='loading' ng-style="{width:jobTitleLoading}"></span>
+						<span ng-style="{color:'#ffffff'}" style='z-index:5;' ng-show="jobTitleLoading>50">職缺名稱</span>
+					</li>
+					<li id='salaryProcessBar' ng-click="gotoSalaryDiv()">
+						<span ng-show="salaryLoaLoading<=60">薪水與地點</span>
+						<span class='loading' ng-style="{width:salaryLoaLoading}"></span>
+						<span ng-style="{color:'#ffffff'}" style='z-index:5;' ng-show="salaryLoaLoading>60">薪水與地點</span>
+					</li>
 				</ul>
 			</div>
 			<div style='width:1024px;height:5px;position:relative;margin:auto;margin-top:65px;'>
 				<div class='bar' id='barProcess' ng-style="{width:hrLoading}" ng-init="loadingBar(120)"></div>
-				<div class='bar'><span id="FinprocessHit">工作配對</span></div>
+				<div class='bar' id="BGprocess"><span id="FinprocessHit">工作配對</span></div>
 			</div>
 		</div>
 
@@ -69,7 +81,7 @@
 		<!-- 教育經歷 -->
 			<div class="eduExperence">
 				<img src="https://lh6.googleusercontent.com/iuPx08zZirE6caRvYSGVhuIJrNwjUSqZNvEoAq8OoLs=w774-h221-p-no" width="100%">
-				<h3 style='position:absolute;top:10px;left:90px;color:#ffffff;text-shadow:2px 2px 2px #a2a8b3;'>新增學習經歷<br><span>(至多兩項,最高與次高學歷)</span></h3>
+				<h3 style='position:absolute;top:10px;left:90px;color:#ffffff;text-shadow:2px 2px 2px #a2a8b3;'>新增學習經歷<br><span>(至多兩項,"最高"與"次高"學歷)</span></h3>
 				<div class='editListDiv' style='border-top:2px solid #54A7F7;'>
 					<div class='eduDiv'>
 						<a href="javascrit:;" class='dropList eduDivItem' style='width:100px;' ng-click="placeholderEduName={'color':'#0E75A6','font-size':'9px','top':'-15px','left':'10px'};educationFun();" ng-blur="educationClose();placeholderEduName={}">
@@ -211,6 +223,64 @@
 						</li>
 					</ul>
 				</div>
+
+				<a href="javascript:;" class='button' id='contiBut' style='margin-right:440px;' ng-click="loadingBar(484);" ng-show="experienceOK">下一步</a>
+			</div>
+			
+			<!-- 職位標題 -->
+			<div class='processDiv' id='jobTitle' ng-show="experienceJobTitle">
+				<h2>期望職位名稱</h2>
+				<p style='margin-top:20px;'>填寫您心目中想要擔任的"職位名稱"<br>ex:UI設計師,軟體工程師</p>
+				<div class="jobtitleDiv">
+					<ul class='jobtitleUl'>
+						<li ng-repeat="jobtitle in jobtitles">
+							<div class='eduDiv' style='margin:auto;padding:7px 5px;background:#ECEEF1;margin-top:10px;'>
+								<input type='text' class='input' style="border-bottom:1px solid #000000;" ng-model="jobtitle.name" ng-focus="placeholderJobTitle={'color':'#54A7F7','font-size':'9px','top':'-5px','left':'5px'}" ng-blur="placeholderJobTitle={}" ng-change="jobtitleCheck()">
+
+								<span class='placeholder jobTitlePlaceholder' ng-style="placeholderJobTitle" ng-show="!jobtitle.name" ng-click="placeholderJobTitle={'color':'#54A7F7','font-size':'9px','top':'-5px','left':'5px'}">職位名稱</span>
+
+								<span class='placeholder' style='color: #54A7F7; font-size: 9px; top: -5px; left: 5px;' ng-show="jobtitle.name">職位名稱</span>
+							</div>
+						</li>
+					</ul>
+				</div>
+				<a href="javascript:;" class='button' id='contiBut' style='margin-right:440px;' ng-click="loadingBar(676);" ng-if="jobTitleOK">最後一個</a>
+			</div>
+
+			<!-- 職位地點 薪水 -->
+			<div class='processDiv' id='salary_location' ng-show="jobTitleSalary">
+				<h2>期望薪水與地點</h2>
+				<p style='margin-top:20px;'>選擇您所期望的薪水(月薪)<br>以及願意的工作地區</p>
+				<!-- 薪水 -->
+				<div class="jobtitleDiv">
+					<h3>薪水</h3>
+					<ul class='jobtitleUl'>
+						<li>
+							<div class='eduDiv' style='margin:auto;padding:7px 5px;background:#ECEEF1;margin-top:10px;'>
+								<input type='number' class='input' style="border-bottom:1px solid #000000;" ng-model="jobSalary" ng-focus="placeholdersalary={'color':'#54A7F7','font-size':'9px','top':'-5px','left':'5px'}" ng-blur="placeholdersalary={}" ng-change="salaryCheck()">
+
+								<span class='placeholder jobTitlePlaceholder' ng-style="placeholdersalary" ng-show="!jobSalary" ng-click="placeholdersalary={'color':'#54A7F7','font-size':'9px','top':'-5px','left':'5px'}">最低薪資(月薪)台幣</span>
+
+								<span class='placeholder' style='color: #54A7F7; font-size: 9px; top: -5px; left: 5px;' ng-show="jobSalary">最低薪資(月薪)台幣</span>
+							</div>
+						</li>
+					</ul>
+				</div>
+				<!-- 地點 -->
+				<script type="text/javascript" src='js/jquery.twzipcode.js'></script>
+				<div class="jobtitleDiv">
+					<h3>工作地點</h3>
+					<p style='margin-top:20px;'>(3個以上為佳)</p>
+					<div class='locationSelect' style='margin-top:20px;'>
+						<div id="twzipcode"></div>
+						<a href="javascript:;" class='button' id='addLocation' ng-click="addLocation()">新增</a>
+					</div>
+					<ul class='showLocaUl' ng-show="locations">
+						<li ng-repeat="loc in locations">{{loc}}　<a href="javascript:;"><span class="icon redCrossIcon" ng-click="deleteLoca(loc)"></span></a></li>
+					</ul>
+				</div>
+				<p class='hit'>小提醒：點擊進度表，可以回去看完整職缺需求</p>
+				<a href="javascript:;" class='button' id='contiBut' style='margin-right:440px;' ng-click="loadingBar('finish');" ng-if="finish">完成並且送出</a>
 			</div>
 		</div>
 

@@ -2,6 +2,7 @@
 	.banner{width:100%;height: 500px;text-align: center;background-color:#54A7F7;}
 		.logo{}
 		.typeDiv{}
+			.selectSpan{font-size: 20px;}
 			h2{color: #ffffff;font-weight: 700;margin-top: 50px;}
 				.dropDiv{display: inline-table;position: relative;}
 				.showListUl{margin-left: 9px;margin-top: 12px;}

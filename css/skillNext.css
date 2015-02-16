@@ -13,9 +13,10 @@
 		#barProcess{z-index:2;border:2px solid #54A7F7;transition:all 1.0s linear;width: 0;}
 		.process{list-style: none;}
 		.process li{border:2px solid #54A7F7;display: inline-table;padding: 10px 15px;margin-left: 0px;margin-right: 100px;z-index: 3;font-weight: 500;position: relative;overflow: hidden;font-size: 15px;}
+		.process li:hover{cursor: pointer;}
 			.loading{position: absolute;width: 0px;height: 100%;background: #54A7F7;left: 0;top: 0;transition:all 1.0s linear;z-index: -2;}
 	/* skill */
-	.processDiv{padding: 10px;text-align: center;background-color: #ffffff;margin-top: 10px;height: auto;padding-bottom: 150px;position: relative;transition:all .5s linear;right: 0;}
+	.processDiv{padding: 10px;text-align: center;background-color: #ffffff;margin-top: 30px;height: auto;padding-bottom: 150px;position: relative;transition:all .5s linear;right: 0;}
 		.myskillDiv{width: 800px;margin: auto;position: relative;}
 			.explanation{position: absolute;left: 420px;top:-50px;width: 350px;}
 			.explanation span{text-shadow:0px 0px 1px #BCC9DC;position: absolute;width: 50px;}
@@ -80,4 +81,25 @@
 				.showEdu .sub{color: #a2a8b3;}
 					.redCrossIcon{position: absolute;right: 10px;top:20px;}
 		.jobExperience{width: 365px;height: auto;margin-left: 565px;margin-top: 50px;position: relative;}
+	/* Job title */
+	#jobTitle{height: auto;}
+		.jobtitleDiv{width: 700px;height: auto;position: relative;margin:auto;margin-top: 50px;}
+			.jobtitleUl{list-style: none;width: 280px;margin-left: 220px;}
+			.jobTitlePlaceholder{top:15px;font-size: 15px;}
+			.jobTitlePlaceholder:hover{cursor: text;}
 
+	/* salary and location */
+	#salary_location{height: auto;}
+		.locationSelect{text-align: left;width: 250px;margin: auto;}
+			.zipcode, .county, .district{border:none;background: #eceef1;width: 120px;height: 50px;border-radius: 3px;padding: 10px 5px;font-size: 16px;line-height: 16px;color: #6b7485;margin-left: 30px;font-family: '微軟正黑體';}
+    		.zipcode {display: none;}
+    		.district{display: none;}
+    		.county:hover{cursor: pointer;}
+    		.county option{text-align: center;background: #707b91;font-weight: 500;font-size: 13px;color: #ffffff;height: 39px;line-height: 39px;}
+    		.district:hover{cursor: pointer;}
+    		.district option{text-align: center;background: #707b91;font-weight: 500;font-size: 13px;color: #ffffff;height: 39px;line-height: 39px;}
+    		#addLocation{float: right;margin-top: -43px;padding:7px 15px;background:#0E75A6;color:#ffffff;font-weight:700;border:none;box-shadow: none;}
+    	.showLocaUl{list-style: none;margin-top: 20px;width: 300px;margin-left: 200px;text-align: left;}
+    	.showLocaUl li{display: inline-block;color: #ffffff;padding: 14px 10px;background-color: #0E75A6;border-radius: 2px;margin-right: 10px;position: relative;margin-top: 10px;}
+    	.redCrossIcon{top:17px;}
+    	.hit{margin-top: 100px;color: #F57778;}
