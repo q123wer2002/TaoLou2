@@ -1,0 +1,26 @@
+<!DOCTYPE>
+<html ng-app='TaoLou'>
+<header>
+	<meta charset="utf-8">
+	<title>職缺搜尋 | 頭路網Taolou</title>
+	<link rel="stylesheet" type="text/css" href="../css/layout.css">
+	<link rel="stylesheet" type="text/css" href="css/jobSearch.css">
+
+	<script type="text/javascript" src="../js/angular.js"></script>
+	<script type="text/javascript" src="../js/ANcontrol.js"></script>
+</header>
+<body>
+
+	<div class="searchBARDiv" ng-controller="TaoLouAngular">
+		<h2>頭路網TaoLou</h2><br>
+		<h1>職缺搜尋</h1>
+		<div class='searchBAR'>
+			<input type="text" ng-model="query">
+			<a ng-href="joblist.php?q={{query}}">搜尋</a>
+		</div>
+	</div>
+	<div class='footer'>
+		資料來源：Indeed
+	</div>
+</body>
+</html>
