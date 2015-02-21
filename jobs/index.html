@@ -17,10 +17,16 @@
 		<div class='searchBAR'>
 			<input type="text" ng-model="query">
 			<a ng-href="joblist.php?q={{query}}">搜尋</a>
+			<br>
+			職位名稱：<input type="text" ng-model="query_job">
+			<a ng-href="joblist.php?q=title:{{query_job}}">搜尋</a>
+			<br>
+			公司名稱：<input type="text" ng-model="query_company">
+			<a ng-href="joblist.php?q=company:{{query_company}}">搜尋</a>
 		</div>
 	</div>
 	<div class='footer'>
-		資料來源：Indeed
+		資料來源：Indeed | wiki維基百科
 	</div>
 </body>
 </html>
