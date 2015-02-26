@@ -6,6 +6,9 @@ $obj_tmp1->jobtable="taolou_job";
 $obj_tmp1->companyTable="taolou_company";
 $obj_tmp1->companySkill='taolou_company_skill';
 
+//check skill or not
+$obj_tmp1->userskill=true;
+
 $obj_tmp1->laout_set=true;
 $obj_tmp1->tmp_order ='order By sort Asc';
 
@@ -13,7 +16,23 @@ $obj_tmp1->tmp_order ='order By sort Asc';
 
 //=============
 
+//把技能拿過來
+if(@$_POST['method']=="saveUser"){
+	$_SESSION['user']['jobNature']=$_POST['jobNature'];
+	$_SESSION['user']['jobstatus']=$_POST['jobstatus'];
+	$_SESSION['user']['skills']=$_POST['skills'];
+	print_r($_SESSION);
+	break;
+}
+
+//確認是否有技能表
+if(empty($_SESSION['user']['skills'])){
+	//無技能
+	$obj_tmp1->userskill=false;
+}else{$obj_tmp1->userskill=true;}
+
 switch($action){
+
 	default:
 
 

@@ -61,6 +61,10 @@ TaoLou.controller('TaoLou_JobWish',['$scope','$http',function JobWish($scope,$ht
 	$scope.skillFun=function(item){
 		$scope.keyword=item.des;
 		this.myskills.push($scope.keyword);
+		//delete skill
+		var index=$scope.skillList.indexOf(item);
+    	$scope.skillList.splice(index,1);
+    	//-----------------
 		$scope.keyword='';
 		$scope.surfList=false;
 	}
@@ -75,6 +79,32 @@ TaoLou.controller('TaoLou_JobWish',['$scope','$http',function JobWish($scope,$ht
 	$scope.removeSkill=function(item){
 		var index = $scope.myskills.indexOf(item);
 		if(index!='-1'){this.myskills.splice(item,1);}
+	}
+
+
+	//next
+	$scope.continue=function(){
+		//save all data
+		//jobNature, jobsta$tus, myskills[]
+		var userObject={"method":"saveUser","jobNature":$scope.jobNature,"jobstatus":$scope.jobstatus,"skills":$scope.myskills};
+		
+		$http({
+			method:'POST',
+			url:'user_skill.php', //沒有存入資料庫，直接導到下一個頁面 //用seesion 儲存
+			data: $.param(userObject),
+			headers: {'Content-type': 'application/x-www-form-urlencoded'},
+		}).
+		success(function(json){
+			//email loading BG
+			//$scope.loading=false;
+			//===============
+			//console.log(json);
+			location.href="user_skill.php";
+		}).
+		error(function(json){
+			console.warn(json);
+			$scope.jobError='發生不可預測的錯誤';
+		});
 	}
 
 }]);

@@ -9,7 +9,7 @@
 		#titleHit{display: block;}
 		#processHit{position: absolute;left: 50px;font-size: 15px;}
 		#FinprocessHit{position: absolute;right: -65px;bottom: -7px;color: #54A7F7;font-size: 15px;font-weight: 700;z-index: 5;}
-		.bar{border:2px solid;position: absolute;width: 90%;z-index: 1;width: 900px;bottom: 15px;margin: auto;}
+		.bar{border:2px solid;position: absolute;z-index: 1;width: 856px;bottom: 15px;margin: auto;}
 		#barProcess{z-index:2;border:2px solid #54A7F7;transition:all 1.0s linear;width: 0;}
 		.process{list-style: none;}
 		.process li{border:2px solid #54A7F7;display: inline-table;padding: 10px 15px;margin-left: 0px;margin-right: 100px;z-index: 3;font-weight: 500;position: relative;overflow: hidden;font-size: 15px;}

@@ -35,6 +35,7 @@ TaoLou.controller('TaoLou_skillNext',['$scope','$http',function SkillNext($scope
 	var experienceDown=document.getElementById("experience").offsetHeight+200;
 	var jobTitleDown=document.getElementById("jobTitle").offsetHeight+200;
 	var BGprocess=document.getElementById("BGprocess").offsetWidth;
+	//console.log(skillDown);
 		//loading
 	$scope.hrLoading=0;
 	$scope.skillLoading=0;
@@ -73,14 +74,13 @@ TaoLou.controller('TaoLou_skillNext',['$scope','$http',function SkillNext($scope
 
 
 	//skill Div
-	$scope.myskills=[
-		{'name':'Angular','degree':0},
-		{'name':'PHP','degree':0},
-		{'name':'MySQL','degree':0},
-		{'name':'JAVASCRIPT','degree':0},
-		{'name':'HTML','degree':0},
-	];
+	$scope.myskills=[];
 
+	//init funcitno
+	$scope.SKILL_INIT=function(){
+		$scope.myskills.push({'name':$scope.SKILL_NAME,'degree':0});
+	}
+	
 	//loading funciton
 	$scope.loadingBar=function(loading){
 		do{
@@ -96,8 +96,6 @@ TaoLou.controller('TaoLou_skillNext',['$scope','$http',function SkillNext($scope
 		}else if(loading==676){
 			$scope.jobTitleSalary=true;
 			jQuery("body").animate({"scrollTop":skillDown+experienceDown+jobTitleDown+30},600);
-		}else if(loading=="finish"){
-			$scope.hrLoading=BGprocess-3;
 		}
 	}
 	$scope.overSkillDIV=function(){
@@ -113,7 +111,7 @@ TaoLou.controller('TaoLou_skillNext',['$scope','$http',function SkillNext($scope
 		}
 		//loading bar
 		$scope.skillLoading=loading;
-		$scope.hrLoading=120+loading;
+		$scope.hrLoading+=piece;
 		//check myskills OK ?
 		if(count==$scope.myskills.length){$scope.degreeOK=true;}
 		//console.log(piece);
@@ -235,6 +233,7 @@ TaoLou.controller('TaoLou_skillNext',['$scope','$http',function SkillNext($scope
 			if($scope.experienceLoading>0 && !$scope.experienceOK){
 				$scope.experienceOK=true;
 				$scope.hrLoading=$scope.hrLoading+experienceWidth;
+				if($scope.hrLoading>(BGprocess-3)){$scope.hrLoading=BGprocess-3;$scope.finish=true;}
 			}
 		}
 		//=================
@@ -317,6 +316,7 @@ TaoLou.controller('TaoLou_skillNext',['$scope','$http',function SkillNext($scope
 			if($scope.experienceLoading>0 && !$scope.experienceOK){
 				$scope.experienceOK=true;
 				$scope.hrLoading=$scope.hrLoading+experienceWidth;
+				if($scope.hrLoading>(BGprocess-3)){$scope.hrLoading=BGprocess-3;$scope.finish=true;}
 			}
 		}
 		//=================
@@ -330,6 +330,7 @@ TaoLou.controller('TaoLou_skillNext',['$scope','$http',function SkillNext($scope
     	if($scope.myItemExperience.length==0){
     		$scope.experienceLoading=$scope.experienceLoading-experienceWidth/2;
     		$scope.hrLoading=$scope.hrLoading-experienceWidth/4;
+    		if($scope.hrLoading<(BGprocess-3)){$scope.finish=false;}
     	}
 	}
 
@@ -356,11 +357,13 @@ TaoLou.controller('TaoLou_skillNext',['$scope','$http',function SkillNext($scope
 
 			//loading bar
 			$scope.hrLoading=$scope.hrLoading+jobTitleWidth;
+			if($scope.hrLoading>(BGprocess-3)){$scope.hrLoading=BGprocess-3;$scope.finish=true;}
 		}
 		if(!finishCount && $scope.jobTitleOK){
 			$scope.jobTitleOK=false;
 			//loading bar
 			$scope.hrLoading=$scope.hrLoading-jobTitleWidth;
+			if($scope.hrLoading<(BGprocess-3)){$scope.finish=false;}
 		}
 	}
 
@@ -377,13 +380,13 @@ TaoLou.controller('TaoLou_skillNext',['$scope','$http',function SkillNext($scope
 			salaryInput=true;
 			$scope.salaryLoaLoading=$scope.salaryLoaLoading+salaryLocWidth/4;
 			$scope.hrLoading=$scope.hrLoading+salaryLocWidth/2;
+			if($scope.hrLoading>(BGprocess-3)){$scope.hrLoading=BGprocess-3;$scope.finish=true;}
 		}else if(!$scope.jobSalary && salaryInput){
 			salaryInput=false;
 			$scope.salaryLoaLoading=$scope.salaryLoaLoading-salaryLocWidth/4;
 			$scope.hrLoading=$scope.hrLoading-salaryLocWidth/2;
+			if($scope.hrLoading<(BGprocess-3)){$scope.finish=false;}
 		}
-		if(salaryInput && location){$scope.finish=true;}
-		else{$scope.finish=false;}
 	}
 
 	//add location
@@ -403,11 +406,14 @@ TaoLou.controller('TaoLou_skillNext',['$scope','$http',function SkillNext($scope
 
 		//locaing bar
 		if($scope.locations.length!=0){
-			if(!location){$scope.hrLoading=$scope.hrLoading+salaryLocWidth/2;location=true;}
+			if(!location){
+				$scope.hrLoading=$scope.hrLoading+salaryLocWidth/2;
+				if($scope.hrLoading>(BGprocess-3)){$scope.hrLoading=BGprocess-3;$scope.finish=true;}
+				location=true;
+			}
 			if($scope.locations.length<4){$scope.salaryLoaLoading=$scope.salaryLoaLoading+salaryLocWidth/8;}
 		}
 		//show next page
-		if(salaryInput && location){$scope.finish=true;}
 	}
 
 	//delete location
@@ -418,7 +424,11 @@ TaoLou.controller('TaoLou_skillNext',['$scope','$http',function SkillNext($scope
 		if(index!=-1){$scope.locations.splice(item,1);}
 
 		//locaing bar
-		if($scope.locations.length==0){$scope.hrLoading=$scope.hrLoading-salaryLocWidth/2;location=false;}
+		if($scope.locations.length==0){
+			$scope.hrLoading=$scope.hrLoading-salaryLocWidth/2;
+			if($scope.hrLoading<(BGprocess-3)){$scope.finish=false;}
+			location=false;
+		}
 		
 		if(!salaryInput || !location){$scope.finish=false;}
 	}

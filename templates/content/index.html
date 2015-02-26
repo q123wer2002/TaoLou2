@@ -83,7 +83,7 @@
                         <li ng-repeat='myskill in myskills'>{{myskill}}<a href="javascript:;" style='float:right;' ng-click='removeSkill(myskill)'><span class='icon redCrossIcon' style='margin-top:6px;'></span></a></li>
                     </ul>
                 </div>
-                <a href="javascript:;" class='button' id='contiBut' ng-if="myskills.length>4">繼續</a>
+                <a href="javascript:;" class='button' id='contiBut' ng-if="myskills.length>4" ng-click="continue()">繼續</a>
 
             </div>
         </div>

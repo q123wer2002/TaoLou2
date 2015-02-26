@@ -10,23 +10,24 @@
 	<script type="text/javascript" src="../js/ANcontrol.js"></script>
 </header>
 <body>
-
-	<div class="searchBARDiv" ng-controller="TaoLouAngular">
-		<h2>頭路網TaoLou</h2><br>
-		<h1>職缺搜尋</h1>
-		<div class='searchBAR'>
-			<input type="text" ng-model="query">
-			<a ng-href="joblist.php?q={{query}}">搜尋</a>
-			<br>
-			職位名稱：<input type="text" ng-model="query_job">
-			<a ng-href="joblist.php?q=title:{{query_job}}">搜尋</a>
-			<br>
-			公司名稱：<input type="text" ng-model="query_company">
-			<a ng-href="joblist.php?q=company:{{query_company}}">搜尋</a>
+	<a href="../" id="gotoJobMatch"><img src="http://cacposting.com/img/ServicesIcon.png" width="25px">趕緊去<strong>求職配對</strong>！</a>
+	<style type="text/css">
+	.content{height: 80%;margin-top: 5%;margin-bottom: 5%;}
+	</style>
+	<div ng-controller="TaoLouAngular">
+		<div class='content'>
+			<div class='searchBARDiv'>
+				<h2>頭路網TaoLou</h2><br>
+				<h1>職缺搜尋</h1><br>
+				<div class='searchBAR' ng-style="{'border-color':searchButBGColor}">
+					<input type="text" ng-model="query" ng-change="checkQuery()" ng-enter="search()" placeholder="請輸入關鍵字">
+					<a id="searchBut" href="javascript:;" ng-style="{'background-color':searchButBGColor,'color':searchButColor}" ng-click="search()">搜尋</a>
+				</div>
+			</div>
+			<div class='footer'>
+				資料來源：Indeed | wiki維基百科 
+			</div>
 		</div>
-	</div>
-	<div class='footer'>
-		資料來源：Indeed | wiki維基百科
 	</div>
 </body>
 </html>

@@ -1,6 +1,7 @@
 <link rel="stylesheet" type="text/css" href="css/skillNext.css">
 <script type="text/javascript" src='js/AN_skillNext.js'></script>
 
+<?php if($this->userskill){ ?>
 <div class='skillNextDiv' ng-controller="TaoLou_skillNext">
 	<div class='content'>
 		<div class='processBarDiv'>
@@ -34,10 +35,19 @@
 			<div style='width:1024px;height:5px;position:relative;margin:auto;margin-top:65px;'>
 				<div class='bar' id='barProcess' ng-style="{width:hrLoading}" ng-init="loadingBar(120)"></div>
 				<div class='bar' id="BGprocess"><span id="FinprocessHit">工作配對</span></div>
+				<a href="javascript:$('body').animate({'scrollTop':document.body.offsetHeight},600);" style='position:absolute;right:130px;top:-60px;color:#6b7485;' ng-show="finish"><span style='font-size:15x;font-weight:700;'>趕緊送出</span><span class='icon pageDown'></span></a>
 			</div>
+
 		</div>
 
 		<div class='processDiv' id='skill'>
+			<!-- init skills -->
+			<?php if(!empty($_SESSION['user']['skills'])){
+					foreach ($_SESSION['user']['skills'] as $key => $value) { ?>
+			<input type='hidden' ng-init="SKILL_NAME='<?php echo $value; ?>'">
+			<input type='hidden' ng-init="SKILL_INIT()">
+			<?php }} ?>
+			<!-- end init -->
 			<h2>請將您的技能選填熟悉度</h2>
 			<div style='text-align:left;margin:auto;width:130px;margin-top:20px;'>1=>不熟悉<br>2=>略懂<br>3=>普通<br>4=>熟練<br>5=>可獨立開發</p></div>
 			<div class='myskillDiv'>
@@ -279,11 +289,16 @@
 						<li ng-repeat="loc in locations">{{loc}}　<a href="javascript:;"><span class="icon redCrossIcon" ng-click="deleteLoca(loc)"></span></a></li>
 					</ul>
 				</div>
-				<p class='hit'>小提醒：點擊進度表，可以回去看完整職缺需求</p>
-				<a href="javascript:;" class='button' id='contiBut' style='margin-right:440px;' ng-click="loadingBar('finish');" ng-if="finish">完成並且送出</a>
+				<p class='hit'>小提醒：點擊進度表，可以回去看完整職缺需求<br><br>當上面<span style="color:#54A7F7;">〝藍色進度表〞</span>滿才能進行配對喔！</p>
+				<a href="javascript:;" class='button' id='contiBut' style='margin-right:440px;' ng-click="saveAll()" ng-if="finish">完成並且送出</a>
 			</div>
 		</div>
-
-
 	</div>
 </div>
+<?php }else{ ?>
+<div class='content' style="height:70%;text-align:center;margin-top:50px;">
+	<h2>尚未填寫技能</h2>
+	<p style='margin-top:20px;'>請先填寫完技能，才能繼續配對喔！</p>
+	<a href="index.php" class='button' id='contiBut' style='margin-left:0;'><span class='icon whitenice'></span>填寫技能</a>
+</div>
+<?php } ?>

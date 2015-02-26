@@ -2,6 +2,16 @@ var TaoLou = angular.module('TaoLou',[]);
 
 TaoLou.controller('TaoLouAngular',['$scope','$http',function TaoLou($scope,$http){
 
+
+
+    //serch job use it
+    $scope.checkQuery=function(){
+        if($scope.query!=""){$scope.searchButBGColor="#54A7F7";$scope.searchButColor="white";}
+        if($scope.query==""){$scope.searchButBGColor="";$scope.searchButColor="";}
+    }
+    $scope.search=function(){
+        if($scope.query!=""){location.href="joblist.php?q="+$scope.query;}
+    }
 }]);
 
 TaoLou.directive('ngRightClick', function($parse) {
