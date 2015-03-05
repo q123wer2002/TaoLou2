@@ -12,7 +12,7 @@ function onLinkedInAuth() {
 //IN.API.Connections("me")
 //IN.API.Profile("me")
     IN.API.Profile("me")
-      .fields("id","headline","firstName", "lastName", "positions:(is-current,company:(name,type,size,industry,ticker),title,start-date,end-date)", "picture-url", "email-address", "educations", "skills", "languages")
+      .fields("id","headline","firstName", "lastName", "positions", "picture-url", "email-address", "educations", "skills", "languages")
       .result(saveUserProfile)
       .error(displayConnectionErrors);
 }
@@ -20,11 +20,11 @@ function onLinkedInAuth() {
 // 2. Runs when the Profile() API call returns successfully
 function saveUserProfile(profiles) {
   var member = profiles.values[0];
-  console.log(member);
+  //console.log(member);
 
   if(!openyet){
     openyet=true;
-    console.log(member);
+    //console.log(member);
 
     var name=member['firstName']+" "+member['lastName'];
     var userLinkedInObject={"method":"checkINuser","IN_id":member['id'],"IN_headline":member['headline'],"IN_name":name,"IN_email":member['emailAddress'],"IN_photo":member['pictureUrl'],"IN_educations":member['educations'],"IN_postions":member['positions'],"skills":member['skills']};
@@ -36,8 +36,8 @@ function saveUserProfile(profiles) {
         async: true,
         error: function (xhr,error){console.warn(xhr);},
         success: function (json) {
-          console.log(json);
-          location.href='index.php';
+          //console.log(json);
+          location.href=json;
         }
       });
   }else{}

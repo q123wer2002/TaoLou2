@@ -70,7 +70,7 @@
 					#educationEnd{left: 10px;width: 120px;}
 					#editEducaSelect li,#educationStart li,#educationEnd li{height: 35px;line-height: 35px;}
 					#schoolName{background-color: #ffffff;margin-left: 10px;opacity: 1;}
-					.textPlaceholder{top:8px;font-size: 13px;}
+					.textPlaceholder{top:8px;font-size: 13px;pointer-events:none;}
 					.textPlaceholder:hover{cursor: text;}
 					#addEducationBut{color:#000000;border:2px solid #ffffff;border-radius:2px;box-shadow:none;margin-left:200px;font-size: 15px;}
 					#addEducationBut:hover{background-color: #54A7F7;color:#ffffff;border-color: #54A7F7;}
@@ -85,7 +85,7 @@
 	#jobTitle{height: auto;}
 		.jobtitleDiv{width: 700px;height: auto;position: relative;margin:auto;margin-top: 50px;}
 			.jobtitleUl{list-style: none;width: 280px;margin-left: 220px;}
-			.jobTitlePlaceholder{top:15px;font-size: 15px;}
+			.jobTitlePlaceholder{top:15px;font-size: 15px;pointer-events:none;}
 			.jobTitlePlaceholder:hover{cursor: text;}
 
 	/* salary and location */

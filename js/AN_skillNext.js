@@ -1,5 +1,5 @@
 // start
-var fixmeTop = '230'; // Get initial position
+var fixmeTop = '170'; // Get initial position
 $(window).scroll(function() {            // Assign scroll event listener
     var currentScroll = $(window).scrollTop(); // Get current position
     if (currentScroll >= fixmeTop) { // Make it fixed if you've scrolled to it
@@ -78,7 +78,7 @@ TaoLou.controller('TaoLou_skillNext',['$scope','$http',function SkillNext($scope
 
 	//init funcitno
 	$scope.SKILL_INIT=function(){
-		$scope.myskills.push({'name':$scope.SKILL_NAME,'degree':0});
+		$scope.myskills.push({'name':$scope.SKILL_NAME,'degree':$scope.SKILL_DEGREE});
 	}
 	
 	//loading funciton
@@ -175,6 +175,11 @@ TaoLou.controller('TaoLou_skillNext',['$scope','$http',function SkillNext($scope
 	];
 	$scope.myEducations=[];
 
+	//init function
+	$scope.EDU_INIT=function(){
+		$scope.myEducations.push({'education':$scope.EDU_TITLE,'start':$scope.EDU_START,'end':$scope.EDU_END,'school':$scope.EDU_SCHOOL,'marjor':$scope.EDU_MAJOR});
+	}
+
 	//close drop list function
 	$scope.educationFun=function(){
 		if(!$scope.surfUl && $scope.educationStatus){$scope.educationStatus=false;}
@@ -222,7 +227,7 @@ TaoLou.controller('TaoLou_skillNext',['$scope','$http',function SkillNext($scope
 			$scope.endEdu="";
 			$scope.schoolName="";
 			$scope.majorName="";
-
+		}else{console.log("error");}
 		//loading bar show
 		if($scope.myEducations!=0){
 			if($scope.myEducations.length==1){
@@ -237,8 +242,6 @@ TaoLou.controller('TaoLou_skillNext',['$scope','$http',function SkillNext($scope
 			}
 		}
 		//=================
-
-		}else{console.log("error");}
 	}
 	//delete education
 	$scope.deleteEdu=function(item){
@@ -265,6 +268,11 @@ TaoLou.controller('TaoLou_skillNext',['$scope','$http',function SkillNext($scope
 	$scope.itemPeriodStatus=false;
 
 	$scope.myItemExperience=[];
+	
+	//init function
+	$scope.JOB_INIT=function(){
+		$scope.myItemExperience.push({'name':$scope.JOB_TITLE,'year':$scope.JOB_START,'peroid':$scope.JOB_PEROID,'company':$scope.JOB_COMPANY,'role':$scope.JOB_ROLE,'detail':$scope.JOB_DETAIL});
+	}
 
 	$scope.periods=[
 		{"name":"一個月"},
@@ -309,6 +317,7 @@ TaoLou.controller('TaoLou_skillNext',['$scope','$http',function SkillNext($scope
 			$scope.itemCompany="";
 			$scope.itemRole="";
 			$scope.itemDetail="";
+		}else{console.log("error");}
 		//loading bar show
 		if($scope.myItemExperience!=0){
 			$scope.experienceLoading=$scope.experienceLoading+experienceWidth/2;
@@ -318,9 +327,8 @@ TaoLou.controller('TaoLou_skillNext',['$scope','$http',function SkillNext($scope
 				$scope.hrLoading=$scope.hrLoading+experienceWidth;
 				if($scope.hrLoading>(BGprocess-3)){$scope.hrLoading=BGprocess-3;$scope.finish=true;}
 			}
-		}
 		//=================
-		}else{console.log("error");}
+		}
 	}
 	//delete education
 	$scope.deleteItem=function(item){
@@ -374,6 +382,7 @@ TaoLou.controller('TaoLou_skillNext',['$scope','$http',function SkillNext($scope
 	var salaryInput=false;
 	var location=false;
 	$scope.locations=[];
+	$scope.allLocations=[{"des":"基隆市"},{"des":"台北市"},{"des":"新北市"},{"des":"宜蘭縣"},{"des":"新竹市"},{"des":"新竹縣"},{"des":"桃園市"},{"des":"苗栗縣"},{"des":"台中市"},{"des":"彰化縣"},{"des":"南投縣"},{"des":"嘉義市"},{"des":"嘉義縣"},{"des":"台南市"},{"des":"高雄市"},{"des":"屏東縣"},{"des":"台東縣"},{"des":"花蓮縣"},{"des":"金門縣"},{"des":"連江縣"},{"des":"澎湖縣"},{"des":"南海諸島"},{"des":"海外"},];
 
 	$scope.salaryCheck=function(){
 		if($scope.jobSalary && !salaryInput){
@@ -391,6 +400,7 @@ TaoLou.controller('TaoLou_skillNext',['$scope','$http',function SkillNext($scope
 
 	//add location
 	$scope.addLocation=function(){
+		/*
 		//讀取資料
 		var subJobLocation=jQuery('#twzipcode').twzipcode('serialize');
 		//分析資料
@@ -399,11 +409,19 @@ TaoLou.controller('TaoLou_skillNext',['$scope','$http',function SkillNext($scope
 		var district=Loca[1].split("=");
 		var zipcode=Loca[2].split("=");
 		//console.log(county[1]);
-		if(county[1]!=""){
-			var index=$scope.locations.indexOf(county[1]);
-			if(index==-1){$scope.locations.push(county[1]);}
+		*/
+		if($scope.thislocation!=""){
+			var index=$scope.locations.indexOf($scope.thislocation);
+			var All_index=$scope.allLocations.indexOf($scope.thislocation);
+			if(index==-1){
+				if(All_index!=-1){
+					//insert locations
+					$scope.locations.push($scope.thislocation);
+					//delete location from alllocation
+					$scope.allLocations.splice(All_index,1);
+				}
+			}
 		}
-
 		//locaing bar
 		if($scope.locations.length!=0){
 			if(!location){
@@ -445,6 +463,7 @@ TaoLou.filter('range', function() {
 	  };
 });
 
+/*
 $(document).ready(function(){
 	//地址顯示
 	var countySel = $('#LOCATION_countySel').val();
@@ -456,8 +475,8 @@ $(document).ready(function(){
         ];
 
 	$('#twzipcode').twzipcode({
-		'countySel': countySel,
-		'districtSel': districtSel,
-		'css': css
+		'css': css,
+		'detect': true, // 預設為 false
 	});
 });
+*/

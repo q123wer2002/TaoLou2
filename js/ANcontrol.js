@@ -37,3 +37,39 @@ TaoLou.directive('ngEnter', function() {
         });
     };
 });
+TaoLou.directive('ngTop', function() {
+    return function(scope, element, attrs) {
+        element.bind("keydown keypress", function(event) {
+            if(event.which === 38) {
+                scope.$apply(function(){
+                        scope.$eval(attrs.ngEnter);
+                });
+                event.preventDefault();
+            }
+        });
+    };
+});
+TaoLou.directive('ngDown', function() {
+    return function(scope, element, attrs) {
+        element.bind("keydown keypress", function(event) {
+            if(event.which === 40) {
+                scope.$apply(function(){
+                        scope.$eval(attrs.ngEnter);
+                });
+                event.preventDefault();
+            }
+        });
+    };
+});
+TaoLou.directive('ngF12', function() {
+    return function(scope, element, attrs) {
+        element.bind("keydown keypress", function(event) {
+            if(event.which === 123) {
+                scope.$apply(function(){
+                        scope.$eval(attrs.ngEnter);
+                });
+                event.preventDefault();
+            }
+        });
+    };
+});

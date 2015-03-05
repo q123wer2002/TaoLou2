@@ -42,9 +42,10 @@
 
 		<div class='processDiv' id='skill'>
 			<!-- init skills -->
-			<?php if(!empty($_SESSION['user']['skills'])){
-					foreach ($_SESSION['user']['skills'] as $key => $value) { ?>
-			<input type='hidden' ng-init="SKILL_NAME='<?php echo $value; ?>'">
+			<?php if(!empty($this->laout_arr['skill'])){
+					foreach ($this->laout_arr['skill'] as $key => $value) { ?>
+			<input type='hidden' ng-init="SKILL_NAME='<?php echo $value['name']; ?>'">
+			<input type='hidden' ng-init="SKILL_DEGREE='<?php echo $value['level']; ?>'">
 			<input type='hidden' ng-init="SKILL_INIT()">
 			<?php }} ?>
 			<!-- end init -->
@@ -80,10 +81,31 @@
 					</li>
 				</ul>
 			</div>
+			<input type="hidden" ng-init="overSkillDIV()">
 			<a href="javascript:;" class='button' id='contiBut' ng-if="degreeOK" ng-click="loadingBar(297);">下一步</a>
 		</div>
 
 		<div class='processDiv' id='experience' ng-show="SkillToExperience">
+			<!-- init start -->
+			<?php if(!empty($this->laout_arr['experience'])){
+					foreach ($this->laout_arr['experience'] as $key => $value) {
+						if($value['type']=='education'){//education ?>
+			<input type='hidden' ng-init="EDU_TITLE='<?php echo $value['title']; ?>'">
+			<input type='hidden' ng-init="EDU_START='<?php echo $value['start']; ?>'">
+			<input type='hidden' ng-init="EDU_END='<?php echo $value['end']; ?>'">
+			<input type='hidden' ng-init="EDU_SCHOOL='<?php echo $value['name']; ?>'">
+			<input type='hidden' ng-init="EDU_MAJOR='<?php echo $value['major']; ?>'">
+			<input type='hidden' ng-init="EDU_INIT()">
+			<?php }else if($value['type']=='job'){//job experience ?>
+			<input type='hidden' ng-init="JOB_TITLE='<?php echo $value['title']; ?>'">
+			<input type='hidden' ng-init="JOB_START='<?php echo $value['start']; ?>'">
+			<input type='hidden' ng-init="JOB_PEROID='<?php echo $value['end']; ?>'">
+			<input type='hidden' ng-init="JOB_COMPANY='<?php echo $value['name']; ?>'">
+			<input type='hidden' ng-init="JOB_ROLE='<?php echo $value['major']; ?>'">
+			<input type='hidden' ng-init="JOB_DETAIL='<?php echo $value['detail']; ?>'">
+			<input type='hidden' ng-init="JOB_INIT()">
+			<?php }}} ?>
+			<!-- init end -->
 			<h2>學歷與經歷</h2>
 			<p style='margin-top:20px;'>填寫愈多,配對將會愈準確</p>
 			<a href="javascript:;" class='button' id='contiBut' style='float:right;margin-top:-50px;margin-right:68px;' ng-click="loadingBar(484);">跳過</a>
@@ -227,13 +249,15 @@
 					<ul class='showEdu' ng-show="myItemExperience!=''">
 						<li ng-repeat="itemExp in myItemExperience">
 							<a href="javascript:;" class='icon redCrossIcon' ng-click='deleteItem(itemExp)'></a>
-							<p>{{itemExp.name}} | {{itemExp.company}}</p>
-							<p>{{itemExp.role}} {{itemExp.peroid}}</p>
+							<p>{{itemExp.year}}-{{itemExp.peroid}}</p>
+							<p>{{itemExp.name}}</p>
+							<p>{{itemExp.company}} [ {{itemExp.role}} ] </p>
 							<p class='sub'>{{itemExp.detail}}</p>
 						</li>
 					</ul>
 				</div>
-
+				<input type="hidden" ng-init="newEduFun()">
+				<input type="hidden" ng-init="newItemFun()">
 				<a href="javascript:;" class='button' id='contiBut' style='margin-right:440px;' ng-click="loadingBar(484);" ng-show="experienceOK">下一步</a>
 			</div>
 			
@@ -245,7 +269,7 @@
 					<ul class='jobtitleUl'>
 						<li ng-repeat="jobtitle in jobtitles">
 							<div class='eduDiv' style='margin:auto;padding:7px 5px;background:#ECEEF1;margin-top:10px;'>
-								<input type='text' class='input' style="border-bottom:1px solid #000000;" ng-model="jobtitle.name" ng-focus="placeholderJobTitle={'color':'#54A7F7','font-size':'9px','top':'-5px','left':'5px'}" ng-blur="placeholderJobTitle={}" ng-change="jobtitleCheck()">
+								<input type='text' class='input' style="border-bottom:1px solid #000000;" ng-model="jobtitle.name" ng-focus="placeholderJobTitle={'color':'#54A7F7','font-size':'9px','top':'-5px','left':'5px'}" ng-blur="placeholderJobTitle={}" ng-change="jobtitleCheck()" ng-enter="loadingBar(676);">
 
 								<span class='placeholder jobTitlePlaceholder' ng-style="placeholderJobTitle" ng-show="!jobtitle.name" ng-click="placeholderJobTitle={'color':'#54A7F7','font-size':'9px','top':'-5px','left':'5px'}">職位名稱</span>
 
@@ -277,16 +301,23 @@
 					</ul>
 				</div>
 				<!-- 地點 -->
-				<script type="text/javascript" src='js/jquery.twzipcode.js'></script>
+				<!-- <script type="text/javascript" src='js/jquery.twzipcode.js'></script> -->
 				<div class="jobtitleDiv">
 					<h3>工作地點</h3>
 					<p style='margin-top:20px;'>(3個以上為佳)</p>
 					<div class='locationSelect' style='margin-top:20px;'>
-						<div id="twzipcode"></div>
-						<a href="javascript:;" class='button' id='addLocation' ng-click="addLocation()">新增</a>
+						<!-- start -->
+						<!-- <div id="twzipcode"></div> -->
+						<!-- end -->
+						<div id="twzipcode" style="margin-left:40px;">
+							<select class='county' ng-options="loca.des for loca in allLocations" ng-model="thislocation" ng-change="addLocation()">
+								<option value="">選擇地點</option>
+							</select>
+						</div>
+						<!-- <a href="javascript:;" class='button' id='addLocation' ng-click="addLocation()">新增</a> -->
 					</div>
 					<ul class='showLocaUl' ng-show="locations">
-						<li ng-repeat="loc in locations">{{loc}}　<a href="javascript:;"><span class="icon redCrossIcon" ng-click="deleteLoca(loc)"></span></a></li>
+						<li ng-repeat="loc in locations">{{loc.des}}　<a href="javascript:;"><span class="icon redCrossIcon" ng-click="deleteLoca(loc)"></span></a></li>
 					</ul>
 				</div>
 				<p class='hit'>小提醒：點擊進度表，可以回去看完整職缺需求<br><br>當上面<span style="color:#54A7F7;">〝藍色進度表〞</span>滿才能進行配對喔！</p>
