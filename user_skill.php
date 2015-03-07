@@ -25,20 +25,40 @@ if(@$_SESSION['user']['id']!=""){
 }
 //==========================
 
+//前置作業
 //把技能拿過來
-if(@$_POST['method']=="saveUser"){
-	$obj_tmp1->laout_arr['jobNature']=$_POST['jobNature'];
-	$obj_tmp1->laout_arr['jobstatus']=$_POST['jobstatus'];
-	$obj_tmp1->laout_arr['skill']=$_POST['skills'];
-	//print_r($_SESSION);
-	break;
+if(@$_POST['method']=="savePreWork"){
+	$_SESSION['user']['jobNature']=$_POST['jobNature'];
+	$_SESSION['user']['jobstatus']=$_POST['jobstatus'];
+	echo "next step to select skills";
+	exit;
 }
+else if(@$_POST['method']=="saveUserSkill"){
+	$_SESSION['user']['skill']=array();
+
+	for($i=0;$i<sizeof($_POST['skills']);$i++){
+		$_SESSION['user']['skill'][$i]['name']=$_POST['skills'][$i];
+		$_SESSION['user']['skill'][$i]['level']="";
+	}
+	//print_r($_SESSION);
+	exit;
+}// end post
+//========================
+
+//import skill
+if(@$_SESSION['user']['skill']){
+	//$_SESSION['user']['jobNature'];
+	//$_SESSION['user']['jobstatus'];
+	$obj_tmp1->laout_arr['skill']=$_SESSION['user']['skill'];
+	//print_r($_SESSION['user']);
+}
+
 
 switch($action){
 
 	default:
 
-	if($memberID!=""){
+	if(@$memberID!=""){
 		//讀取使用者 所有資訊
 
 		//技能列表
@@ -84,7 +104,10 @@ switch($action){
 			//echo $sql_location;
 			//print_r($obj_tmp1->laout_arr['location']);
 		//===========================
-	}
+
+		//是member, 檢視願望單
+		$obj_tmp1->isMember=true;
+	}else{$obj_tmp1->isMember=false;}
 
 	//確認是否有技能表
 	if(empty($obj_tmp1->laout_arr['skill'])){

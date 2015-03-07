@@ -2,6 +2,7 @@
 <script type="text/javascript" src='js/AN_skillNext.js'></script>
 
 <?php if($this->userskill){ ?>
+<input type='hidden' ng-init="isMember=<?php if($this->isMember){echo "true";}else{echo "fasle";} ?>">
 <div class='skillNextDiv' ng-controller="TaoLou_skillNext">
 	<div class='content'>
 		<div class='processBarDiv'>
@@ -90,7 +91,7 @@
 			<?php if(!empty($this->laout_arr['experience'])){
 					foreach ($this->laout_arr['experience'] as $key => $value) {
 						if($value['type']=='education'){//education ?>
-			<input type='hidden' ng-init="EDU_TITLE='<?php echo $value['title']; ?>'">
+			<input type='hidden' ng-init="EDU_TITLE='<?php echo laout_check($value['title']); ?>'">
 			<input type='hidden' ng-init="EDU_START='<?php echo $value['start']; ?>'">
 			<input type='hidden' ng-init="EDU_END='<?php echo $value['end']; ?>'">
 			<input type='hidden' ng-init="EDU_SCHOOL='<?php echo $value['name']; ?>'">
@@ -321,10 +322,65 @@
 					</ul>
 				</div>
 				<p class='hit'>小提醒：點擊進度表，可以回去看完整職缺需求<br><br>當上面<span style="color:#54A7F7;">〝藍色進度表〞</span>滿才能進行配對喔！</p>
-				<a href="javascript:;" class='button' id='contiBut' style='margin-right:440px;' ng-click="saveAll()" ng-if="finish">完成並且送出</a>
+				<a href="javascript:;" class='button' id='contiBut' style='margin-right:440px;' ng-click="checkUser()" ng-if="finish">完成並且送出</a>
 			</div>
 		</div>
-	</div>
+		<div class='BG' ng-show="personalProfile"></div>
+		<div class='personalProfileDiv' ng-show="personalProfile">
+			<div class='personal'>
+				<h2>請填入您的資訊<br>將會用信箱寄送您的配對結果</h2>
+				<div class="profile">
+					<div class='eduDiv' style='margin:auto;padding:7px 5px;background:#ECEEF1;margin-top:10px;width:280px;'
+					ng-style="{'border':emailAlertStyle}">
+						<input type='text' class='input' style="border-bottom:1px solid #000000;" ng-model="email" ng-focus="placeholderEmail={'color':'#54A7F7','font-size':'9px','top':'-5px','left':'5px'}" ng-blur="placeholderEmail={}" ng-change="emailCheck()">
+
+						<span class='placeholder jobTitlePlaceholder' ng-style="placeholderEmail" ng-show="!email" ng-click="placeholderEmail={'color':'#54A7F7','font-size':'9px','top':'-5px','left':'5px'}">常用信箱Email</span>
+
+						<span class='placeholder' style='color: #54A7F7; font-size: 9px; top: -5px; left: 5px;' ng-show="email">常用信箱Email</span>
+
+						<span class='redAlertIcon alertshow' ng-show="emailAlertIcon"></span>
+						<span class="alertMesshow" ng-show="emailAlertIcon">{{emailMes}}</span>
+					</div>
+					<div class='eduDiv' style='margin:auto;padding:7px 5px;background:#ECEEF1;margin-top:10px;width:280px;'
+					ng-style="{'border':PWAlertStyle}">
+						<input type='password' class='input' style="border-bottom:1px solid #000000;" ng-model="password" ng-focus="placeholderPassword={'color':'#54A7F7','font-size':'9px','top':'-5px','left':'5px'}" ng-blur="placeholderPassword={}" ng-change="passwordCheck()">
+
+						<span class='placeholder jobTitlePlaceholder' ng-style="placeholderPassword" ng-show="!password" ng-click="placeholderPassword={'color':'#54A7F7','font-size':'9px','top':'-5px','left':'5px'}">密碼</span>
+
+						<span class='placeholder' style='color: #54A7F7; font-size: 9px; top: -5px; left: 5px;' ng-show="password">密碼</span>
+
+						<span class='redAlertIcon alertshow' ng-show="PWAlertIcon"></span>
+					</div>
+					<div class='eduDiv' style='margin:auto;padding:7px 5px;background:#ECEEF1;margin-top:10px;width:280px;'
+					ng-style="{'border':rePWAlertStyle}">
+						<input type='password' class='input' style="border-bottom:1px solid #000000;" ng-model="rePassword" ng-focus="placeholderRepassword={'color':'#54A7F7','font-size':'9px','top':'-5px','left':'5px'}" ng-blur="placeholderRepassword={}" ng-change="rePasswordCheck()">
+
+						<span class='placeholder jobTitlePlaceholder' ng-style="placeholderRepassword" ng-show="!rePassword" ng-click="placeholderRepassword={'color':'#54A7F7','font-size':'9px','top':'-5px','left':'5px'}">確認密碼</span>
+
+						<span class='placeholder' style='color: #54A7F7; font-size: 9px; top: -5px; left: 5px;' ng-show="rePassword">確認密碼</span>
+
+						<span class='redAlertIcon alertshow' ng-show="rePWAlertIcon"></span>
+						<span class="alertMesshow" ng-show="rePWAlertIcon">密碼不一致</span>
+					</div>
+					<p class='hit' style="margin:50px;font-size:12px;color:#54A7F7">可以登入查詢您的配對</p>
+				</div>
+
+				<!-- loading  -->
+				<div class='button' id='contiBut' style='position:relative;margin:auto;float:none;margin-top:50px;width:300px;height:24px;overflow:hidden;'
+				ng-style="{'background':loadingView}"
+				ng-show="email && password && rePassword && !emailAlertIcon && !PWAlertIcon && !rePWAlertIcon"
+				ng-click="saveAll();loadingTime=true;">
+					<span class='loadingDiv' ng-show="loadingTime" ng-style="{'width':loadingTimeWidth}"></span>
+					<span style="z-index:10;position:absolute;width:150px;left:100px;color:#ffffff;">
+						<span class='icon whitenice'></span>
+						<span style="font-weight:700;">確認並送出</span>
+					</span>
+				</div>
+				<!-- loading hit  -->
+				<span class='hit' style="margin:50px;font-size:13px;color:#D5AA17;maegin-top:5px;color:#F1C017;font-weight:700;" ng-show="loadingTime">{{loadingText}}</span>
+
+			</div>
+		</div>
 </div>
 <?php }else{ ?>
 <div class='content' style="height:70%;text-align:center;margin-top:50px;">

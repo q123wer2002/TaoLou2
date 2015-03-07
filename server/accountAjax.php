@@ -411,7 +411,7 @@ else if(@$_POST['method'] == "checkINuser"){
 		$memberID=$obj_tmp1->laout_arr['checkIN'][0]['id'];
 		$_SESSION['user']=array();
 			//ID
-		$_SESSION['user']['id']=$userId;
+		$_SESSION['user']['id']=$memberID;
 			//PHOTO
 		$_SESSION['user']['userPicture']=$obj_tmp1->laout_arr['checkIN'][0]['photo'];
 

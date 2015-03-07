@@ -80,13 +80,35 @@ TaoLou.controller('TaoLou_JobWish',['$scope','$http',function JobWish($scope,$ht
 		var index = $scope.myskills.indexOf(item);
 		if(index!='-1'){this.myskills.splice(item,1);}
 	}
+	$scope.savePreWork=function(){
+		var userObject={"method":"savePreWork","jobNature":$scope.jobNature,"jobstatus":$scope.jobstatus};
+		
+		$http({
+			method:'POST',
+			url:'user_skill.php', //沒有存入資料庫，直接導到下一個頁面 //用seesion 儲存
+			data: $.param(userObject),
+			headers: {'Content-type': 'application/x-www-form-urlencoded'},
+		}).
+		success(function(json){
+			//email loading BG
+			//$scope.loading=false;
+			//===============
+			console.log(json);
+			$scope.selectSkill=true;
+			//location.href="user_skill.php";
+		}).
+		error(function(json){
+			console.warn(json);
+			$scope.jobError='發生不可預測的錯誤';
+		});
+	}
 
 
 	//next
 	$scope.continue=function(){
 		//save all data
 		//jobNature, jobsta$tus, myskills[]
-		var userObject={"method":"saveUser","jobNature":$scope.jobNature,"jobstatus":$scope.jobstatus,"skills":$scope.myskills};
+		var userObject={"method":"saveUserSkill","skills":$scope.myskills};
 		
 		$http({
 			method:'POST',

@@ -29,7 +29,7 @@ $(window).scroll(function() {            // Assign scroll event listener
     }
 });
 
-TaoLou.controller('TaoLou_skillNext',['$scope','$http',function SkillNext($scope,$http){
+TaoLou.controller('TaoLou_skillNext',['$scope','$http','$location',function SkillNext($scope,$http,$location){
 	//init
 	var skillDown=document.getElementById("skill").offsetHeight+200;
 	var experienceDown=document.getElementById("experience").offsetHeight+200;
@@ -51,6 +51,8 @@ TaoLou.controller('TaoLou_skillNext',['$scope','$http',function SkillNext($scope
 	$scope.SkillToExperience=false;
 	$scope.experienceJobTitle=false;
 	$scope.jobTitleSalary=false;
+	$scope.personalProfile=false;
+
 		//goto function
 	$scope.gotoSkillDiv=function(){
 		jQuery("body").animate({"scrollTop":30},600);
@@ -439,7 +441,7 @@ TaoLou.controller('TaoLou_skillNext',['$scope','$http',function SkillNext($scope
 		if($scope.locations.length<4){$scope.salaryLoaLoading=$scope.salaryLoaLoading-salaryLocWidth/8;}
 
 		var index=$scope.locations.indexOf(item);
-		if(index!=-1){$scope.locations.splice(item,1);}
+		if(index!=-1){$scope.locations.splice(index,1);}
 
 		//locaing bar
 		if($scope.locations.length==0){
@@ -449,6 +451,202 @@ TaoLou.controller('TaoLou_skillNext',['$scope','$http',function SkillNext($scope
 		}
 		
 		if(!salaryInput || !location){$scope.finish=false;}
+	}
+	//check user
+	$scope.checkUser=function(){
+		if($scope.isMember){$scope.saveAll();}
+		else{
+			$scope.personalProfile=true;
+		}
+	}
+	//personal profile
+	$scope.emailCheck=function(){
+		var index=$scope.email.indexOf('@');
+		if(index!=-1){
+
+			//確認是否有這個使用者
+			var checkEmail={"method":"checkUserEmail","email":$scope.email,};
+			$http({
+				method:'POST',
+				url:'server/jobwishList.php',
+				data: $.param(checkEmail),
+				headers: {'Content-type': 'application/x-www-form-urlencoded'},
+			}).
+			success(function(json){
+				//console.log(json);
+				if(json.status=="OK"){
+					$scope.emailAlertStyle='';
+					$scope.emailAlertIcon=false;
+				}else{
+					$scope.emailAlertStyle='1px solid #EB6A64';
+					$scope.emailAlertIcon=true;
+					$scope.emailMes=json.mes;
+				}
+			}).
+			error(function(json){
+				console.warn(json);
+				$scope.jobError='發生不可預測的錯誤';
+			});
+		}
+		else{
+			$scope.emailMes="格式不正確"
+			$scope.emailAlertStyle='1px solid #EB6A64';
+			$scope.emailAlertIcon=true;
+		}
+	}
+	$scope.passwordCheck=function(){
+		if($scope.password!=""){
+			$scope.PWAlertStyle='';
+			$scope.PWAlertIcon=false;
+		}
+		else{
+			$scope.PWAlertStyle='1px solid #EB6A64';
+			$scope.PWAlertIcon=true;
+		}
+	}
+	$scope.rePasswordCheck=function(){
+		if($scope.password!=""){
+			if($scope.password==$scope.rePassword){
+				$scope.rePWAlertStyle='';
+				$scope.rePWAlertIcon=false;
+			}
+			else{
+				$scope.rePWAlertStyle='1px solid #EB6A64';
+				$scope.rePWAlertIcon=true;
+			}
+		}else{
+			$scope.rePWAlertStyle='1px solid #EB6A64';
+			$scope.rePWAlertIcon=true;
+		}
+	}
+
+
+//over all
+	$scope.saveUser=function(){
+		var userObject={"method":"saveUser","email":$scope.email,"password":$scope.password,"salary":$scope.jobSalary};
+		$http({
+			method:'POST',
+			url:'server/jobwishList.php',
+			data: $.param(userObject),
+			headers: {'Content-type': 'application/x-www-form-urlencoded'},
+		}).
+		success(function(json){
+			$scope.loadingText="儲存求職者...";
+			$scope.loadingTimeWidth="50px";
+			$scope.saveSkill();
+		}).
+		error(function(json){
+			console.warn(json);
+			$scope.jobError='發生不可預測的錯誤';
+		});
+	}
+	$scope.saveSkill=function(){
+		var SkillObject={"method":"saveSkill","skill":$scope.myskills};
+		$http({
+			method:'POST',
+			url:'server/jobwishList.php',
+			data: $.param(SkillObject),
+			headers: {'Content-type': 'application/x-www-form-urlencoded'},
+		}).
+		success(function(json){
+			$scope.loadingText="儲存技能列表...";
+			$scope.loadingTimeWidth="100px";
+			$scope.saveEducation();
+		}).
+		error(function(json){
+			console.warn(json);
+			$scope.jobError='發生不可預測的錯誤';
+		});
+	}
+	$scope.saveEducation=function(){
+		var EduObject={"method":"saveEducation","education":$scope.myEducations};
+		$http({
+			method:'POST',
+			url:'server/jobwishList.php',
+			data: $.param(EduObject),
+			headers: {'Content-type': 'application/x-www-form-urlencoded'},
+		}).
+		success(function(json){
+			$scope.loadingText="儲存教育經歷...";
+			$scope.loadingTimeWidth="150px";
+			$scope.saveExperience();
+		}).
+		error(function(json){
+			console.warn(json);
+			$scope.jobError='發生不可預測的錯誤';
+		});
+	}
+	$scope.saveExperience=function(){
+		var ExpObject={"method":"saveExperience","experience":$scope.myItemExperience};
+		$http({
+			method:'POST',
+			url:'server/jobwishList.php',
+			data: $.param(ExpObject),
+			headers: {'Content-type': 'application/x-www-form-urlencoded'},
+		}).
+		success(function(json){
+			$scope.loadingText="儲存工作經驗...";
+			$scope.loadingTimeWidth="200px";
+			$scope.saveJobTitle();
+		}).
+		error(function(json){
+			console.warn(json);
+			$scope.jobError='發生不可預測的錯誤';
+		});
+	}
+	$scope.saveJobTitle=function(){
+		var JobObject={"method":"saveJobTitle","JobTitle":$scope.jobtitles};
+		$http({
+			method:'POST',
+			url:'server/jobwishList.php',
+			data: $.param(JobObject),
+			headers: {'Content-type': 'application/x-www-form-urlencoded'},
+		}).
+		success(function(json){
+			$scope.loadingText="儲存許願工作...";
+			$scope.loadingTimeWidth="250px";
+			$scope.saveLocation();
+		}).
+		error(function(json){
+			console.warn(json);
+			$scope.jobError='發生不可預測的錯誤';
+		});
+	}
+	$scope.saveLocation=function(){
+		var LocObject={"method":"saveLocation","location":$scope.locations};
+		$http({
+			method:'POST',
+			url:'server/jobwishList.php',
+			data: $.param(LocObject),
+			headers: {'Content-type': 'application/x-www-form-urlencoded'},
+		}).
+		success(function(json){
+			$scope.loadingText="儲存工作地點...";
+			$scope.loadingTimeWidth="300px";
+			$scope.overGoToIndex();
+		}).
+		error(function(json){
+			console.warn(json);
+			$scope.jobError='發生不可預測的錯誤';
+		});
+	}
+	$scope.overGoToIndex=function(){
+		$scope.loadingText="即將完成....";
+		$scope.loadingTimeWidth="400px";
+		window.location = "index.php";
+	}
+
+//================================================================
+//================================================================
+//================================================================
+
+	$scope.saveAll=function(){
+		$scope.loadingView="#F7D86C";
+		$scope.loadingText="處理中....";
+		$scope.loadingTimeWidth="0px";
+		$scope.finishAll=false;
+
+		$scope.saveUser();
 	}
 
 

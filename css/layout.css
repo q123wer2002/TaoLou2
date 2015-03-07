@@ -28,6 +28,7 @@ a{text-decoration: none;}
 .folder{background-position: -43px -164px;width: 14px;height: 11px;}
 .pencialicon{background-position: -173px -35px;width: 14px;height: 15px;}
 .alertIcon{background-position: -101px -76px;width: 16px;height: 17px;}
+.redAlertIcon{background-image: url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/yC/r/l6el_tG7uTG.png);background-repeat: no-repeat;display: inline-block;vertical-align: 0;width: 21px;height: 21px;background-position: -195px -494px;}
 .redCrossIcon{background-position: -171px -113px;width: 14px;height: 14px;}
 .blackCrossIcon{background-position: -20px -80px;width: 17px;height: 17px;}
 .checkIcon{background-position: -137px -59px;width: 16px;height: 16px;}
@@ -40,6 +41,7 @@ a{text-decoration: none;}
 .paperclip{background-position: -102px -59px;width: 16px;height: 16px;}
 .whitenice{background-position:-83px -60px;width: 18px;height: 16px;}
 .pageDown{background-position: -174px -142px;width: 16px;height: 16px;}
+
 
 .showUs{width: 100%;position:relative;height: 700px;}
 	@media screen and (min-width: 1600px) {
