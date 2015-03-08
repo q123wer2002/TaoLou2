@@ -7,10 +7,7 @@ $obj_tmp1->laout_set=true;
 $obj_tmp1->tmp_order ='order By sort Asc';
 
 //分頁顯示設定
-if(@$_SESSION['user']['id']!=""){
-	header('Location: userIndex.php');
-	exit;
-}
+
 //=============
 
 switch($action){

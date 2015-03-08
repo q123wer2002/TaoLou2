@@ -26,9 +26,9 @@ if(@$_POST['method']=='login')
 	$password=md5(laout_check($_POST['password']));
 
 	//確認是否有此使用者
-	$sql_checkUser="SELECT ".$obj_tmp1->account.".*
-					FROM ".$obj_tmp1->account."
-					WHERE ".$obj_tmp1->account.".email='".$account."'
+	$sql_checkUser="SELECT ".$table_account.".*
+					FROM ".$table_account."
+					WHERE ".$table_account.".email='".$account."'
 					LIMIT 0,1";
 	$obj_tmp1->laout_arr['checkUser']=array();
 	$obj_tmp1->basic_select('laout_arr','checkUser',$sql_checkUser);
@@ -40,9 +40,9 @@ if(@$_POST['method']=='login')
 	if(@$id != NULL){
 		if(@$obj_tmp1->laout_arr['checkUser'][0]['password'] == $password){
 			//讀取使用者資訊
-			$sql_loadUser="SELECT ".$obj_tmp1->member.".*
-						   FROM ".$obj_tmp1->member."
-						   WHERE ".$obj_tmp1->member.".id='".$obj_tmp1->laout_arr['checkUser'][0]['memberId']."'";
+			$sql_loadUser="SELECT ".$table_member.".*
+						   FROM ".$table_member."
+						   WHERE ".$table_member.".id='".$obj_tmp1->laout_arr['checkUser'][0]['memberId']."'";
 			$obj_tmp1->laout_arr['loadUser']=array();
 			$obj_tmp1->basic_select('laout_arr','loadUser',$sql_loadUser);
 			//=======================
@@ -57,36 +57,7 @@ if(@$_POST['method']=='login')
 			else{
 				$_SESSION['user']['userPicture']=$obj_tmp1->laout_arr['loadUser'][0]['photo'];
 			}
-				//USERTYPE
-			if($obj_tmp1->laout_arr['loadUser'][0]['companyHr'] == 'y'){
-				$_SESSION['user']['userType']="2";
-				$_SESSION['user']['company']=$obj_tmp1->laout_arr['loadUser'][0]['companyId'];
-				$_SESSION['user']['companyValid']=$obj_tmp1->laout_arr['loadUser'][0]['companyValid'];
-				//check notification
-				$sql_notification="SELECT COUNT(".$obj_tmp1->hrNotification.".id) as NotiS
-								   FROM ".$obj_tmp1->hrNotification."
-								   WHERE ".$obj_tmp1->hrNotification.".status='y'
-								   AND ".$obj_tmp1->hrNotification.".memberId='".$userId."'";
-				$obj_tmp1->laout_arr['notification']=array();
-				$obj_tmp1->basic_select('laout_arr','notification',$sql_notification);
-				//======================
-
-			}else if($obj_tmp1->laout_arr['loadUser'][0]['companyHr'] == 'n'){
-				$_SESSION['user']['userType']="1";
-				//check notification
-				$sql_notification="SELECT COUNT(".$obj_tmp1->userNotification.".id) as NotiS 
-								   FROM ".$obj_tmp1->userNotification."
-								   WHERE ".$obj_tmp1->userNotification.".status='y'
-								   AND ".$obj_tmp1->userNotification.".memberId='".$userId."'";
-				$obj_tmp1->laout_arr['notification']=array();
-				$obj_tmp1->basic_select('laout_arr','notification',$sql_notification);
-				//======================
-			}
-				//mail valid
-			$_SESSION['user']['mailValid']=$obj_tmp1->laout_arr['checkUser'][0]['mailValid'];
-				//notifiacitons
-			$_SESSION['user']['notification']=$obj_tmp1->laout_arr['notification'][0]['NotiS'];
-
+			
 			$message=array('first'=>"success",'url'=>"index.php","actions"=>'login');
 			//=======================
 		}else{$message=array('first'=>"帳號密碼不正確",'url'=>"X","actions"=>'login');}
