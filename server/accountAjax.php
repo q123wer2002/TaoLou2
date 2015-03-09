@@ -50,9 +50,10 @@ if(@$_POST['method']=='login')
 			//將使用者資訊存入SESSION
 			$userId=$obj_tmp1->laout_arr['loadUser'][0]['id'];
 			$_SESSION['user']=array();
-				//ID
+				//ID&Name
 			$_SESSION['user']['id']=$userId;
-				//PHOTO
+			$_SESSION['user']['name']=$obj_tmp1->laout_arr['loadUser'][0]['name'];
+
 			if($obj_tmp1->laout_arr['loadUser'][0]['photo']==""){$_SESSION['user']['userPicture']="images/layout/user-default.jpg";}
 			else{
 				$_SESSION['user']['userPicture']=$obj_tmp1->laout_arr['loadUser'][0]['photo'];

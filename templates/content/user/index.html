@@ -20,6 +20,8 @@
 			<hr>
 			<div class='matchDiv'>
 				<span>您的配對工作，將會在這呈現</span>
+
+				<!--
 				<div class="waitYourJob">
 					<img ng-src='https://lh3.googleusercontent.com/ctbluCUBvvQETju8bk7e6csUsQlIB08lB1HyGzCn4qk=w193-h207-p-no'>
 					<br><br>
@@ -27,6 +29,25 @@
 					<p>先喝杯咖啡吧！</p>
 					<p>配對結果馬上就會出現</p>
 				</div>
+				-->
+				<a class='jobitem' href="index.php" ng-repeat="i in [0,1,2,3,4,5,6,7,8,9,10,11,12,13]">
+		            <div class='jobInfo'>
+		                <figure>
+		                    <img src="">
+		                </figure>
+		                <div class='author'>
+		                    <b class="name">COMPANY</b>
+		                    <b class="job-creator-type">-</b>
+		                    <b class="job-title">JOBNAME</b>
+		                </div>
+		                <div class='job-meta'>
+		                    <span class="meta-item location"><span class='icon locationicon'></span><b>LOCATION</b></span>
+		               		<span class="meta-item location" style='float:right;margin-right:0px;width:200px;'>來源：<b>SOURCE</b></span>
+		                </div>
+		            </div>
+		        </a>
+		        
+
 			</div>
 			<!--
 			-->
@@ -35,14 +56,26 @@
 		<div class='showJOBs' ng-show="matchData">
 			<h1>配對資料</h1>
 			<hr>
-			<div class='matchDiv' style="height:400px;">
-				<span>可以改變您的配對資料，愈詳細配對將會愈準確</span>
-				<div class="waitYourJob">
-					
-					<br><br>
-					<p>恭喜您完成資料</p>
-					<p>先喝杯咖啡吧！</p>
-					<p>配對結果馬上就會出現</p>
+			<div class='DataDiv'>
+				<span>您的資料愈詳細配對將會愈準確</span>
+				<div class="waitYourJob" style="width:100%;text-align:left;margin-top:50px;">
+					<div class="factorDiv">
+						<h3>您的技能</h3>
+						<hr>
+						<a href="javascript:;" id="skillBtn">技能</a>
+					</div>
+					<div class="factorDiv">
+						<h3>學歷與經驗</h3>
+						<hr>
+					</div>
+					<div class="factorDiv">
+						<h3>工作名稱</h3>
+						<hr>
+					</div>
+					<div class="factorDiv">
+						<h3>工作地點與薪水</h3>
+						<hr>
+					</div>
 				</div>
 			</div>
 			<!--

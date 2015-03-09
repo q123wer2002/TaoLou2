@@ -28,16 +28,25 @@
   </script>
 
 	<?php if($this->showad){@include_once $this->showad_html;}  ?>
-	<div class='header'>
+	<div class='header' ng-controller="TaolouAccount">
+    <script type="text/javascript" src="js/AN_account.js"></script>
 		<div class='headDiv'>
 			<div class='alert_login'>
         <?php if(@$_SESSION['user']['id']==""){ ?>
 				<span>已經有帳號？</span>
 				<a href="account.php" class='button'>登入</a>
         <?php }else{ ?>
-        <a href="javascript:;" class='button'>
-          <span class='menuIcon'></span>
-        </a>
+
+        <div style="min-width:200px">
+          <span alt="暱稱"><?php echo $_SESSION['user']['name']; ?></span>
+          <span class="menuIcon" alt="menu"></span>
+          <ul class='MenuUl'>
+            <a href="" alt="配對結果"><li>我的配對</li></a>
+            <a href="" alt="設定"><li>設定</li></a>
+            <a href="javascript:;" alt="登出" ng-click="logout()"><li>登出</li></a>
+          </ul>
+        </div>
+        
         <?php } ?>
 			</div>
 		</div>
