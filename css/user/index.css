@@ -1,0 +1,10 @@
+body{background-color: #54A7F7;background-image: none;}
+.showDiv{width: 100%;padding-bottom: 150px;background-color: #54A7F7;padding-top: 0px;}
+	.MenuBar{width:200px;display: inline-block;background-color: #F3F5F9;float:left;margin: 0;padding: 0;margin-top: 70px;}
+		.myMenuUl{list-style: none;font-size: 20px;margin: 0;padding: 0;background-color: }
+		.myMenuUl a{color:#6b7485;}
+		.myMenuUl li{padding: 5px 30px;background-color: #DFDFDF;text-align: center;}
+
+	.showJOBs{width: 700px;background-color: #F3F5F9;margin-left: 200px;padding: 20px 30px;}
+		.matchDiv{width: 680px;padding: 10px 10px;height:600px;}
+			.waitYourJob{width: 500px;margin: auto;text-align: center;margin-top: 100px;}

@@ -31,8 +31,14 @@
 	<div class='header'>
 		<div class='headDiv'>
 			<div class='alert_login'>
+        <?php if(@$_SESSION['user']['id']==""){ ?>
 				<span>已經有帳號？</span>
 				<a href="account.php" class='button'>登入</a>
+        <?php }else{ ?>
+        <a href="javascript:;" class='button'>
+          <span class='menuIcon'></span>
+        </a>
+        <?php } ?>
 			</div>
 		</div>
 	</div>

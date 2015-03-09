@@ -41,6 +41,7 @@ a{text-decoration: none;}
 .paperclip{background-position: -102px -59px;width: 16px;height: 16px;}
 .whitenice{background-position:-83px -60px;width: 18px;height: 16px;}
 .pageDown{background-position: -174px -142px;width: 16px;height: 16px;}
+.menuIcon{background-image: url(https://www.beansprock.com/img/name.svg);background-repeat: no-repeat;display: inline-block;vertical-align: 0;width: 20px;}
 
 
 .showUs{width: 100%;position:relative;height: 700px;}

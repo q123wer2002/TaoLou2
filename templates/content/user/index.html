@@ -1,0 +1,52 @@
+<link rel="stylesheet" type="text/css" href="css/user/index.css">
+<script type="text/javascript" src="js/AN_userIndex.js"></script>
+
+
+<div class='showDiv' ng-controller="Taolou_UserIndex">
+	<div class='content'>
+		<div class='MenuBar'>
+			<ul class="myMenuUl">
+				<a href="javascript:;" ng-click="matchData=false;firstSelect='#F3F5F9';secondSelect='#DFDFDF';">
+					<li ng-style="{'background-color':firstSelect}" style="background-color:#F3F5F9"><span class='icon jobtypeicon'></span>配對工作</li>
+				</a>
+				<a href="javascript:;" ng-click="matchData=true;firstSelect='#DFDFDF';secondSelect='#F3F5F9';">
+					<li ng-style="{'background-color':secondSelect}"><span class='icon recommend'></span>配對資料</li>
+				</a>
+			</ul>
+		</div>
+		
+		<div class='showJOBs' ng-show="!matchData">
+			<h1>配對工作</h1>
+			<hr>
+			<div class='matchDiv'>
+				<span>您的配對工作，將會在這呈現</span>
+				<div class="waitYourJob">
+					<img ng-src='https://lh3.googleusercontent.com/ctbluCUBvvQETju8bk7e6csUsQlIB08lB1HyGzCn4qk=w193-h207-p-no'>
+					<br><br>
+					<p>恭喜您完成資料</p>
+					<p>先喝杯咖啡吧！</p>
+					<p>配對結果馬上就會出現</p>
+				</div>
+			</div>
+			<!--
+			-->
+		</div>
+
+		<div class='showJOBs' ng-show="matchData">
+			<h1>配對資料</h1>
+			<hr>
+			<div class='matchDiv' style="height:400px;">
+				<span>可以改變您的配對資料，愈詳細配對將會愈準確</span>
+				<div class="waitYourJob">
+					
+					<br><br>
+					<p>恭喜您完成資料</p>
+					<p>先喝杯咖啡吧！</p>
+					<p>配對結果馬上就會出現</p>
+				</div>
+			</div>
+			<!--
+			-->
+		</div>
+	</div>
+</div>
