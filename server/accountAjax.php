@@ -384,6 +384,7 @@ else if(@$_POST['method'] == "checkINuser"){
 		$_SESSION['user']=array();
 			//ID
 		$_SESSION['user']['id']=$memberID;
+		$_SESSION['user']['name']=$obj_tmp1->laout_arr['checkIN'][0]['name'];
 			//PHOTO
 		$_SESSION['user']['userPicture']=$obj_tmp1->laout_arr['checkIN'][0]['photo'];
 
@@ -394,9 +395,17 @@ else if(@$_POST['method'] == "checkINuser"){
 		}
 
 	}else{
-		$sql_insertIN="INSERT INTO ".$table_member." VALUES(NULL,'LinkedIn','".$_POST['IN_id']."','".$_POST['IN_email']."','".$_POST['IN_name']."','".$_POST['IN_photo']."','','','','',CURRENT_TIMESTAMP)";
+		if($_SESSION['user']['jobNature']=="全職"){$jobNature=1;}
+		else if($_SESSION['user']['jobNature']=="兼職"){$jobNature=2;}
+		else if($_SESSION['user']['jobNature']=="實習"){$jobNature=3;}
+
+		if($_SESSION['user']['jobstatus']=="正在找工作"){$jobStatus=1;}
+		else if($_SESSION['user']['jobstatus']=="觀望中，好工作可考慮"){$jobStatus=2;}
+		else if($_SESSION['user']['jobstatus']=="目前不想換工作"){$jobStatus=3;}
+
+		$sql_insertIN="INSERT INTO ".$table_member." VALUES(NULL,'LinkedIn','".$_POST['IN_id']."','".$_POST['IN_email']."','".$_POST['IN_name']."','".$_POST['IN_photo']."','','','".$jobStatus."','".$jobNature."','1',CURRENT_TIMESTAMP)";
 		mysql_query($sql_insertIN);
-		
+
 		//check IN user
 		$sql_checkIN="SELECT ".$table_member.".*
 					  FROM ".$table_member."
@@ -407,10 +416,9 @@ else if(@$_POST['method'] == "checkINuser"){
 		//=======================
 		
 		//使用者ID
-		$memberID=$obj_tmp1->laout_arr['loaduserIN'][0]['id'];
+		@$memberID=$obj_tmp1->laout_arr['loaduserIN'][0]['id'];
 
 		$sql_addUser="INSERT INTO ".$table_account." VALUES(NULL,'".$memberID."','".$_POST['IN_email']."','',CURRENT_TIMESTAMP)";
-		echo $sql_addUser;
 		mysql_query($sql_addUser);
 
 		//print_r($sql_addUser);
@@ -420,6 +428,7 @@ else if(@$_POST['method'] == "checkINuser"){
 			$_SESSION['user']=array();
 				//ID
 			$_SESSION['user']['id']=$memberID;
+			$_SESSION['user']['name']=$_POST['IN_name'];
 				//PHOTO
 			$_SESSION['user']['userPicture']=$obj_tmp1->laout_arr['loaduserIN'][0]['photo'];
 
@@ -427,14 +436,14 @@ else if(@$_POST['method'] == "checkINuser"){
 
 		//IN's educations
 		foreach ($_POST['IN_educations']['values'] as $key => $value) {
-			$degree=laout_check($value['degree']);
-			$sql_insertINsEdu="INSERT INTO ".$table_memberExperience." VALUES(NULL,'".$memberID."','education','".$degree."','".$value['startDate']['year']."','".$value['endDate']['year']."','".$value['schoolName']."','".$value['fieldOfStudy']."','".$value['notes']."',CURRENT_TIMESTAMP)";
+			@$degree=laout_check($value['degree']);
+			@$sql_insertINsEdu="INSERT INTO ".$table_memberExperience." VALUES(NULL,'".$memberID."','education','".$degree."','".$value['startDate']['year']."','".$value['endDate']['year']."','".$value['schoolName']."','".$value['fieldOfStudy']."','".$value['notes']."',CURRENT_TIMESTAMP)";
 			mysql_query($sql_insertINsEdu);
 			//echo $sql_insertINsEdu;
 		}
 		//IN's positions
 		foreach ($_POST['IN_postions']['values'] as $key => $value) {
-			$sql_insertINsExp="INSERT INTO ".$table_memberExperience." VALUES(NULL,'".$memberID."','job','job experience','".$value['startDate']['year']."','".$value['endDate']['year']."','".$value['company']['name']."','".$value['title']."','".$value['summary']."',CURRENT_TIMESTAMP)";
+			@$sql_insertINsExp="INSERT INTO ".$table_memberExperience." VALUES(NULL,'".$memberID."','work_experience','job experience','".$value['startDate']['year']."','".$value['endDate']['year']."','".$value['company']['name']."','".$value['title']."','".$value['summary']."',CURRENT_TIMESTAMP)";
 			mysql_query($sql_insertINsExp);
 		}
 		//IN's skills

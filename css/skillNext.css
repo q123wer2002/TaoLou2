@@ -35,12 +35,12 @@
 			/*.myskill li .skillShow:hover{background-color: #4A92B4;}*/
 				.skillDegree,.inputDiv{position: absolute;left: 300px;top: 0px;background-color: #ECEEF1;padding: 0px 3px;height: 40px;width: 270px;}
 					.input{background-color: #ECEEF1;width: 260px;margin-top: 2px;opacity: 0.7;z-index: 3;font-size: 15px;font-style: '微軟正黑體';}
-					.placeholder{position: absolute;text-align: left;left: 20px;width: auto;top:10px;transition:all .2s linear;z-index: 2;}
+					.placeholder{position: absolute;text-align: left;left: 20px;width: auto;top:10px;transition:all .2s linear;z-index: 2;color: #AFB3BC;}
 				
 				.skillDegree{background: none;height: auto;}
 					.degree{list-style: none;margin-top: 5px;}
 					.degree div{margin-left: 18px;display: inline-block;border:1px solid #54A7F7;width:30px;height:30px;border-radius: 16px;transition:all .1s linear;}
-					.degree a{color: #6b7485;}
+					.degree a{color: #6b7485;transition:none;}
 					.degree li{margin-top: 4px;}
 					.degree div:hover a{color: #ffffff;}
 					.degree_1.degree_choose1{background-color: #E0D845;border-color: #E0D845;}

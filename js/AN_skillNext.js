@@ -47,10 +47,21 @@ TaoLou.controller('TaoLou_skillNext',['$scope','$http','$location',function Skil
 	$scope.experienceOK=false;
 	$scope.jobTitleOK=false;
 	$scope.finish=false;
-		//page_show
-	$scope.SkillToExperience=false;
-	$scope.experienceJobTitle=false;
-	$scope.jobTitleSalary=false;
+
+	$scope.memberShow=function(){
+		if($scope.isMember){
+				//page_show
+			$scope.SkillToExperience=true;
+			$scope.experienceJobTitle=true;
+			$scope.jobTitleSalary=true;
+			$scope.finish=true;
+		}else{
+				//page_show
+			$scope.SkillToExperience=false;
+			$scope.experienceJobTitle=false;
+			$scope.jobTitleSalary=false;
+		}
+	}
 	$scope.personalProfile=false;
 
 		//goto function
@@ -72,6 +83,7 @@ TaoLou.controller('TaoLou_skillNext',['$scope','$http','$location',function Skil
 			jQuery("body").animate({"scrollTop":skillDown+experienceDown+jobTitleDown+30},600);
 		}
 	}
+
 	
 
 
@@ -385,6 +397,10 @@ TaoLou.controller('TaoLou_skillNext',['$scope','$http','$location',function Skil
 	var location=false;
 	$scope.locations=[];
 	$scope.allLocations=[{"des":"基隆市"},{"des":"台北市"},{"des":"新北市"},{"des":"宜蘭縣"},{"des":"新竹市"},{"des":"新竹縣"},{"des":"桃園市"},{"des":"苗栗縣"},{"des":"台中市"},{"des":"彰化縣"},{"des":"南投縣"},{"des":"嘉義市"},{"des":"嘉義縣"},{"des":"台南市"},{"des":"高雄市"},{"des":"屏東縣"},{"des":"台東縣"},{"des":"花蓮縣"},{"des":"金門縣"},{"des":"連江縣"},{"des":"澎湖縣"},{"des":"南海諸島"},{"des":"海外"},];
+
+	$scope.LOCATION_INIT=function(){
+		$scope.locations.push({"des":$scope.LOCATION});
+	}
 
 	$scope.salaryCheck=function(){
 		if($scope.jobSalary && !salaryInput){

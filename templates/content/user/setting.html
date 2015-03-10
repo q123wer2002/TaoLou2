@@ -1,0 +1,116 @@
+<link rel="stylesheet" type="text/css" href="css/user/index.css">
+<script type="text/javascript" src="js/AN_userIndex.js"></script>
+
+<style type="text/css">
+	.waitYourJob{margin-top: 30px;margin-left: 50px;}
+	.factorDiv{width: 230px;min-height:220px;margin-top: 0;margin-right: 50px;}
+
+	.checkDiv{margin-top: 20px;}
+	.selectDiv{margin-top: 20px;text-align: left;margin-left: 30px;}
+	.checkDiv:hover{cursor: pointer;}
+	.selectDiv:hover{cursor: pointer;}
+		.checkBox{width: 15px;height: 15px;border:1px solid #6b7485;display: inline-block;border-radius: 2px}
+		.SelectCircle{width: 15px;height: 15px;border:1px solid #6b7485;border-radius: 9px;display: inline-block;}
+		.checkName{display: inline-block;margin-top: 0px;font-size: 17px;font-style: 500;}
+	.eduDiv{margin-top: 30px;text-align: left;position: relative;margin:auto;padding:7px 5px;margin-top:10px;width:230px;}
+		.alertshow{position: absolute;left:-28px;top:15px;}
+		.placeholder{position: absolute;text-align: left;left: 20px;width: auto;top:10px;transition:all .2s linear;z-index: 2;color: #AFB3BC;}
+		.jobTitlePlaceholder{top:13px;font-size: 17px;pointer-events:none;}
+		.jobTitlePlaceholder:hover{cursor: text;}
+	#changePW{color: #54A7F7;background:none;padding: 10px 7px;border-radius: 2px;float: right;margin-top: 50px;}
+	#changePW:hover{background-color: #54A7F7;color: #ffffff;}
+	#changeSAVE{padding:14px 30px;background:#f1c017;color:#ffffff;font-weight:700;border:none;margin-left: 120px;position: absolute;bottom:50px;right: 200px;border-radius: 2px;}
+	#changeSAVE:hover{background-color: #F7D86C;}
+	#savelog{margin-left: 15px;position: absolute;bottom:30px;right: 200px;border-radius: 2px;color: #f1c017;font-weight: 800;font-size: 12px;}
+</style>
+
+<div class='showDiv' ng-controller="Taolou_UserIndex">
+	<?php if(!empty($this->laout_arr['profile'])){
+			foreach ($this->laout_arr['profile'] as $key => $value) { ?>
+		<?php foreach ($this->jobNature as $N => $n) { ?>
+	<input type="hidden" ng-init="<?php echo "jobNatures[".$n."-1].check=true"; ?>">
+		<?php } ?>
+	<input type="hidden" ng-init="<?php echo "matchFres[".$value['matchFrequency']."-1].select=true"; ?>">
+	<input type="hidden" ng-init="userName='<?php echo $value['name']; ?>'">
+	<input type="hidden" ng-init="Email='<?php echo $value['email']; ?>'">
+	<input type="hidden" ng-init="phone='<?php echo $value['phone']; ?>'">
+	<?php }} ?>
+	<div class='content'>
+		<div class='showJOBs' ng-show="!matchData">
+			<h1>設定</h1>
+			<hr>
+
+			<div class='matchDiv' style="min-height:570px;">
+				<span>可以直接更改您的資訊</span>
+
+				<div class="waitYourJob">
+
+					<div class='factorDiv'>
+						<h3>尋找的工作性質</h3>
+						<hr>
+
+						<div class="checkDiv" ng-repeat="jobNatures in jobNatures" ng-click="checkJobNature(jobNatures)">
+							<div class="checkBox" ng-if="!jobNatures.check"></div>
+							<div class="icon checkBoxIcon" ng-if="jobNatures.check"></div>
+							<div class="checkName">{{jobNatures.name}}</div>
+						</div>
+					</div>
+
+					<div class='factorDiv' style="float:right;margin-right:-30px;">
+						<h3>配對頻率</h3>
+						<hr>
+
+						<div class="selectDiv" ng-repeat="matchFre in matchFres" ng-click="selectFre(matchFre)">
+							<div class="SelectCircle" ng-if="!matchFre.select"></div>
+							<div class="icon selectBoxIcon" ng-if="matchFre.select"></div>
+							<div class="checkName">{{matchFre.name}}</div>
+						</div>
+
+					</div>
+					
+					<div class='factorDiv'>
+						<h3>設定您的帳號</h3>
+						<hr>
+
+						<div class='eduDiv'>
+							<input type='text' class='input' style="border-bottom:1px solid #000000;" ng-model="userName" ng-focus="placeholderName={'color':'#54A7F7','font-size':'9px','top':'-5px','left':'5px'}" ng-blur="placeholderName={}">
+
+							<span class='placeholder jobTitlePlaceholder' ng-style="placeholderName" ng-show="!userName" ng-click="placeholderName={'color':'#54A7F7','font-size':'9px','top':'-5px','left':'5px'}">姓名</span>
+
+							<span class='placeholder' style='color: #54A7F7; font-size: 9px; top: -5px; left: 5px;' ng-show="userName">姓名</span>
+						</div>
+
+						<div class='eduDiv' ng-style="{'border':emailAlertStyle}">
+							<input type='text' class='input' style="border-bottom:1px solid #000000;" ng-model="Email" ng-focus="placeholderEmail={'color':'#54A7F7','font-size':'9px','top':'-5px','left':'5px'}" ng-blur="placeholderEmail={}" ng-change="emailCheck()">
+
+							<span class='placeholder jobTitlePlaceholder' ng-style="placeholderEmail" ng-show="!Email" ng-click="placeholderEmail={'color':'#54A7F7','font-size':'9px','top':'-5px','left':'5px'}">信箱Email</span>
+
+							<span class='placeholder' style='color: #54A7F7; font-size: 9px; top: -5px; left: 5px;' ng-show="Email">信箱Email</span>
+
+							<span class='redAlertIcon alertshow' ng-show="emailAlertIcon"></span>
+
+						</div>
+
+						<div class='eduDiv' ng-style="{'border':phoneAlertStyle}">
+							<input type='text' class='input' style="border-bottom:1px solid #000000;" ng-model="phone" ng-focus="placeholderPhone={'color':'#54A7F7','font-size':'9px','top':'-5px','left':'5px'}" ng-blur="placeholderPhone={}" ng-change="phoneCheck()">
+
+							<span class='placeholder jobTitlePlaceholder' ng-style="placeholderPhone" ng-show="!phone" ng-click="placeholderPhone={'color':'#54A7F7','font-size':'9px','top':'-5px','left':'5px'}">手機(0912-345-678)</span>
+
+							<span class='placeholder' style='color: #54A7F7; font-size: 9px; top: -5px; left: 5px;' ng-show="phone">手機</span>
+
+							<span class='redAlertIcon alertshow' ng-show="phoneAlertIcon"></span>
+						</div>
+
+					</div>
+					<!-- 暫時不提供更改密碼
+					<a href="javascript:;" id="changePW">更改密碼</a> -->
+				</div>
+				<a href="javascript:;" id="changeSAVE" ng-click="saveProfile()" ng-if="!emailAlertIcon && !phoneAlertIcon" ng-style="{'background':saveOKStyle}">儲存變更</a>
+				<span id="savelog" ng-show="saveFinish">儲存成功</span>
+			</div>
+			<!--
+			-->
+		</div>
+	</div>
+
+</div>

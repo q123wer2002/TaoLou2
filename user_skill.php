@@ -60,6 +60,14 @@ switch($action){
 
 	if(@$memberID!=""){
 		//讀取使用者 所有資訊
+		$sql_profile="SELECT ".$table_member.".* 
+					  FROM ".$table_member."
+					  WHERE ".$table_member.".id='".$memberID."'";
+		$obj_tmp1->laout_arr['profile']=array();
+		$obj_tmp1->basic_select('laout_arr','profile',$sql_profile);
+			//echo $sql_profile;
+			//print_r($obj_tmp1->laout_arr['profile']);		
+		//===========================
 
 		//技能列表
 		$sql_skill="SELECT ".$table_systemSkill.".name, ".$table_memberSkill.".level 

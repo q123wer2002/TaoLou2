@@ -78,7 +78,7 @@ TaoLou.controller('TaoLou_JobWish',['$scope','$http',function JobWish($scope,$ht
 	}
 	$scope.removeSkill=function(item){
 		var index = $scope.myskills.indexOf(item);
-		if(index!='-1'){this.myskills.splice(item,1);}
+		if(index!='-1'){this.myskills.splice(index,1);}
 	}
 	$scope.savePreWork=function(){
 		var userObject={"method":"savePreWork","jobNature":$scope.jobNature,"jobstatus":$scope.jobstatus};

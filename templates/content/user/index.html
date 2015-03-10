@@ -3,6 +3,7 @@
 
 
 <div class='showDiv' ng-controller="Taolou_UserIndex">
+	<input type="hidden" ng-init="matchData=false;">
 	<div class='content'>
 		<div class='MenuBar'>
 			<ul class="myMenuUl">
@@ -21,7 +22,6 @@
 			<div class='matchDiv'>
 				<span>您的配對工作，將會在這呈現</span>
 
-				<!--
 				<div class="waitYourJob">
 					<img ng-src='https://lh3.googleusercontent.com/ctbluCUBvvQETju8bk7e6csUsQlIB08lB1HyGzCn4qk=w193-h207-p-no'>
 					<br><br>
@@ -29,7 +29,8 @@
 					<p>先喝杯咖啡吧！</p>
 					<p>配對結果馬上就會出現</p>
 				</div>
-				-->
+				
+				<!--
 				<a class='jobitem' href="index.php" ng-repeat="i in [0,1,2,3,4,5,6,7,8,9,10,11,12,13]">
 		            <div class='jobInfo'>
 		                <figure>
@@ -46,7 +47,7 @@
 		                </div>
 		            </div>
 		        </a>
-		        
+		        -->
 
 			</div>
 			<!--
@@ -62,21 +63,69 @@
 					<div class="factorDiv">
 						<h3>您的技能</h3>
 						<hr>
-						<a href="javascript:;" id="skillBtn">技能</a>
+						<a href="userIndex.php?action=addskill" id="skillBtn">技能列表</a>
 					</div>
 					<div class="factorDiv">
 						<h3>學歷與經驗</h3>
 						<hr>
+						<h4 class="subtitle">學歷</h4><br><br>
+						<?php if(!empty($this->laout_arr['edu'])){ ?>
+						<ul class='jobNameUl'>
+							<?php foreach($this->laout_arr['edu'] as $key => $value){ ?>
+							<li>
+								<span class="title"><?php echo $value['title'] ?></span>-
+								<span class='serverName'><?php echo $value['name'] ?></span>
+							</li>
+							<?php } ?>
+						</ul>
+						<?php }else{echo "無";} ?>
+						<br><h4 class="subtitle">經驗</h4><br><br>
+						<?php if(!empty($this->laout_arr['exper'])){ ?>
+						<ul class='jobNameUl'>
+							<?php foreach($this->laout_arr['exper'] as $key => $value){ ?>
+							<li>
+								<span class="title"><?php echo $value['title'] ?></span>-
+								<span class='serverName'><?php echo $value['name'] ?></span>
+							</li>
+							<?php } ?>
+						</ul>
+						<?php }else{echo "無";} ?>
 					</div>
 					<div class="factorDiv">
 						<h3>工作名稱</h3>
 						<hr>
+						<?php if(!empty($this->laout_arr['jobName'])){ ?>
+						<ul class='jobNameUl'>
+							<?php foreach($this->laout_arr['jobName'] as $key => $value){ ?>
+							<li>
+								<span class="title"><?php echo $value['jobName'] ?></span>
+							</li>
+							<?php } ?>
+						</ul>
+						<?php }else{echo "尚未填寫";} ?>
 					</div>
 					<div class="factorDiv">
 						<h3>工作地點與薪水</h3>
 						<hr>
+						<h4 class="subtitle">薪水</h4><br>
+						<p>
+						<?php if(!empty($this->laout_arr['profile'])){ 
+							echo $this->laout_arr['profile'][0]['salary'];
+						 }else{echo "尚未填寫";} ?>
+						</p>
+						<br><h4 class="subtitle">地點</h4><br><br>
+						<?php if(!empty($this->laout_arr['location'])){ ?>
+						<ul class='jobNameUl'>
+							<?php foreach($this->laout_arr['location'] as $key => $value){ ?>
+							<li>
+								<span class="title"><?php echo $value['country'] ?></span>
+							</li>
+							<?php } ?>
+						</ul>
+						<?php }else{echo "尚未填寫";} ?>
 					</div>
 				</div>
+				<a href="user_skill.php" id="changeSAVE">更改配對資訊</a>
 			</div>
 			<!--
 			-->

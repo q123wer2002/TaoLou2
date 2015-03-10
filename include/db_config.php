@@ -1,7 +1,7 @@
 <?php
 $dbHost = "localhost";
 $dbUser = "root";
-$dbPass = "1234";
+$dbPass = "135792468xcudy";
 $dbData = "newtaolou";
 
 /*$dbHost = "203.69.42.12";

@@ -42,6 +42,8 @@ a{text-decoration: none;}
 .whitenice{background-position:-83px -60px;width: 18px;height: 16px;}
 .pageDown{background-position: -174px -142px;width: 16px;height: 16px;}
 .menuIcon{background-image: url(https://cdn2.iconfinder.com/data/icons/flat-ui-icons-24-px/24/menu-24-512.png);background-repeat: no-repeat;display: inline-block;vertical-align: 0;width:25px;height: 25px;background-size: cover;margin-right: 7px;float: left;margin-top: 10px;}
+.checkBoxIcon{background-position: -137px -59px;width: 17px;height: 17px;}
+.selectBoxIcon{background-position: -135 -164px;width: 17px;height: 17px;}
 
 
 .showUs{width: 100%;position:relative;height: 700px;}
@@ -56,7 +58,7 @@ a{text-decoration: none;}
 		.slogn span{font-size: 30px;font-family: "proxima-nova";}
 		.slogn a{font-size: 30px;font-family: "proxima-nova";color: #ffffff;font-size: 20px;border-bottom:1px solid #c4c663;}
 		.slogn a:hover{color: #c4c663;}
-.header{background-color: #54A7F7;width: 100%;height: 100px;z-index: 15;}
+.header{background-color: #54A7F7;width: 100%;height: 100px;}
 	.headDiv{width: 1024px;margin: auto;padding: 15px;}
 		.alert_login{float: right;margin-right: 50px;color: #ffffff;margin-top: 30px;}
 

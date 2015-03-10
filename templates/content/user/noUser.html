@@ -1,0 +1,44 @@
+<style type="text/css">
+	body{background-image: none;background-color: #51A6F9;}
+	.mailValid{border: 2px solid #51A6F9;text-align: center;width: 1024px;padding: 80px 30px;background-color: #51A6F9;height:700px;overflow: hidden;width: 800px;margin: auto;text-align: center;}
+	#login{color: blue;}
+	#login:hover{text-decoration: underline;}
+	.mailValid p{font-size: 20px;}
+	.mailValid span{font-size: 20px;}
+	.mailValid a{font-size: 20px;}
+</style>
+
+
+
+
+<div class='mailValid' ng-controller='TaoLou_mailValid'>
+	<div class="content" style="background:#ffffff;width:800px;padding:50px 30px;">
+		<h1>抱歉，找不到您的資料</h1><br>
+		<p>可以重新使用頭路網配對職缺，或重新登入</p><br>
+		<a href="account.php" id="login">登入頭路往</a><br><br>
+		<span><span id='second'></span>秒將會自動到  配對中心...</span>
+		
+		<script type="text/javascript">
+		//設定倒數秒數
+		var t = 10;
+
+		//顯示倒數秒收
+		function showTime()
+		{
+		    t -= 1;
+		    document.getElementById('second').innerHTML= t;
+		    
+		    if(t==0)
+		    {
+		        location.href='index.php';
+		    }
+		    
+		    //每秒執行一次,showTime()
+		    setTimeout("showTime()",1000);
+		}
+
+		//執行showTime()
+		showTime();
+		</script>
+	</div>
+</div>
