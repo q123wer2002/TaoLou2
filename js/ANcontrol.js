@@ -1,3 +1,14 @@
+function showTime(t)
+{
+    t -= 1;
+    document.getElementById('second').innerHTML= t;
+    if(t==0){location.href="index.php";}
+    //每秒執行一次,showTime()
+    setTimeout("showTime("+t+")",1000);
+}
+//執行showTime()
+
+
 var TaoLou = angular.module('TaoLou',[]);
 
 TaoLou.controller('TaoLouAngular',['$scope','$http',function TaoLou($scope,$http){

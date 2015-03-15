@@ -20,25 +20,8 @@
 		
 		<script type="text/javascript">
 		//設定倒數秒數
-		var t = 10;
-
 		//顯示倒數秒收
-		function showTime()
-		{
-		    t -= 1;
-		    document.getElementById('second').innerHTML= t;
-		    
-		    if(t==0)
-		    {
-		        location.href='index.php';
-		    }
-		    
-		    //每秒執行一次,showTime()
-		    setTimeout("showTime()",1000);
-		}
-
-		//執行showTime()
-		showTime();
+		showTime(10);
 		</script>
 	</div>
 </div>

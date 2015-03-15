@@ -2,6 +2,11 @@
 <link rel="stylesheet" type="text/css" href="css/user/addskill.css">
 <script type="text/javascript" src="js/AN_userIndex.js"></script>
 
+<style type="text/css">
+	#changeSAVE{width: 500px;margin-left: 90px;}
+	#savelog{color: #CBAD42;font-size: 12px;position: absolute;bottom: 25px;left:565px;}
+</style>
+
 <div class='showDiv' ng-controller="Taolou_UserIndex">
 	<?php if(!empty($this->laout_arr['profile'])){
 			foreach ($this->laout_arr['profile'] as $key => $value) { ?>
@@ -26,13 +31,20 @@
 				<input type='hidden' ng-init="SKILL_INIT()">
 				<?php }} ?>
 				<div class="waitYourJob">
+					 <!-- insert skill -->
+	                <?php if(!empty($this->laout_arr['insertSKill'])){
+	                        foreach ($this->laout_arr['insertSKill'] as $key => $value) { ?>
+	                <input type="hidden" ng-init="SKILL='<?php echo $value['name']; ?>'">
+	                <input type="hidden" ng-init="SKILLLIST_INIT()">
+	                <?php }} ?>
+	                <!-- end skill insert -->
 					<h3 class='fontWhite'>輸入技能(最少五項)</h3>
 	                <div class='inputDiv'>
 	                    <input type='text' class='input' placeholder="請輸入技能" ng-model='keyword' ng-change='surfList=true;' ng-enter="insertMySkill()">
 	                    <a href="javascript:;" class='button' id='inputtype' ng-click='insertMySkill()'>輸入</a>
 
 	                    <ul class='showListUl' id='inputhit' ng-show="keyword!='' && surfList">
-	                        <a href="javascript:;" ng-repeat="skill in skillList | filter:keyword"><li ng-click='skillFun(skill)'>{{skill}}</li></a>
+	                        <a href="javascript:;" ng-repeat="skill in skillList | filter:keyword | orderBy:reverse"><li ng-click='skillFun(skill)'>{{skill}}</li></a>
 	                    </ul>
 	                </div>
 	                <div class='skillListDiv'>
@@ -67,7 +79,7 @@
 	                </div>
 				</div>
 				<a href="javascript:;" id="changeSAVE" ng-if="myskills.length>4 && !degreeNotYet" ng-click="saveSkill()" ng-style="{'background':saveOKStyle}">儲存變更</a>
-				<span id="savelog" ng-show="saveFinish">儲存成功</span>
+				<span id="savelog" ng-show="saveFinish">儲存成功<span id='second'></span></span>
 			</div>
 			<!--
 			-->

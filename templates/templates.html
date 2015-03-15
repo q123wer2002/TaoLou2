@@ -29,9 +29,11 @@
 
 	<?php if($this->showad){@include_once $this->showad_html;}  ?>
 	<div class='header' ng-controller="TaolouAccount">
+
     <script type="text/javascript" src="js/AN_account.js"></script>
 		<div class='headDiv'>
-			<div class='alert_login'>
+			<a href="index.php"><img src="images/logo.png" width="270px;"></a>
+      <div class='alert_login'>
         <?php if(@$_SESSION['user']['id']==""){ ?>
 				<span>已經有帳號？</span>
 				<a href="account.php" class='button'>登入</a>

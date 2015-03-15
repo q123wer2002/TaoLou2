@@ -17,7 +17,8 @@ $obj_tmp1->tmp_order ='order By sort Asc';
 
 //分頁顯示設定
 if(@$_SESSION['user']['id']==""){
-	@$action="noUser";
+	header('Location: index.php');
+	exit;
 }else{@$memberID=$_SESSION['user']['id'];}
 
 //action
@@ -43,6 +44,16 @@ switch($action){
 	case "addskill":
 
 	if(@$memberID!=""){
+		//load database skill
+		$sql_insertSKill="SELECT ".$table_systemSkill.".*
+						  FROM ".$table_systemSkill."
+						  WHERE ".$table_systemSkill.".status='y'";
+		$obj_tmp1->laout_arr['insertSKill']=array();
+		$obj_tmp1->basic_select('laout_arr','insertSKill',$sql_insertSKill);
+			//echo $sql_insertSKill;
+			//print_r($obj_tmp1->laout_arr['insertSKill']);
+		//========================================================
+
 		//inport skills into user
 		//技能列表
 		$sql_skill="SELECT ".$table_systemSkill.".name, ".$table_memberSkill.".level 
@@ -53,6 +64,7 @@ switch($action){
 		$obj_tmp1->basic_select('laout_arr','skill',$sql_skill);
 			//echo $sql_skill;
 			//print_r($obj_tmp1->laout_arr['skill']);
+		//========================================================
 	}
 
 	$obj_tmp1->showad=false;

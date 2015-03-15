@@ -2,7 +2,7 @@
 var openyet=false;
 // 2. Runs when the JavaScript framework is loaded
 function onLinkedInLoad() {
-  $('a[id*=li_ui_li_gen_]').html("<div class='linkInBtn'><img src='https://lh3.googleusercontent.com/vQ_IQqpxetiyk7pA2Vk52E-VCJnOFgotMGJerQpKsK8=s207-p-no' height='43' style='position:absolute;top:13px;'><span style='margin-left:60px;'>由 LinkedIn 匯入</span></div>");
+  $('a[id*=li_ui_li_gen_]').html("<div class='linkInBtn'><img src='https://lh3.googleusercontent.com/vQ_IQqpxetiyk7pA2Vk52E-VCJnOFgotMGJerQpKsK8=s207-p-no' height='43' style='position:absolute;top:13px;'><span style='margin-left:60px;'>由 LinkedIn 登入</span></div>");
   $('#LinkedInLogin').css({display:'block'});
   IN.Event.on(IN, "auth", onLinkedInAuth);
 }

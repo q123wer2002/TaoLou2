@@ -2,6 +2,7 @@
 include_once 'share.php';
 
 //page default
+$table_systemSkill="taolou2_system_skill";
 
 $obj_tmp1->laout_set=true;
 $obj_tmp1->tmp_order ='order By sort Asc';
@@ -15,6 +16,15 @@ if(@$_SESSION['user']['id']!=""){
 
 switch($action){
 	default:
+
+	//load database skill
+	$sql_insertSKill="SELECT ".$table_systemSkill.".*
+					  FROM ".$table_systemSkill."
+					  WHERE ".$table_systemSkill.".status='y'";
+	$obj_tmp1->laout_arr['insertSKill']=array();
+	$obj_tmp1->basic_select('laout_arr','insertSKill',$sql_insertSKill);
+		//echo $sql_insertSKill;
+		//print_r($obj_tmp1->laout_arr['insertSKill']);
 
 
 	$obj_tmp1->showad=false;

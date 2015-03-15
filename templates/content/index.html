@@ -70,22 +70,33 @@
             </div>
             
             <div class='selectSkillDiv'>
-                <h2 class='fontWhite'>輸入技能(最少五項)</h2>
+                <!-- insert skill -->
+                <?php if(!empty($this->laout_arr['insertSKill'])){
+                        foreach ($this->laout_arr['insertSKill'] as $key => $value) { ?>
+                <input type="hidden" ng-init="SKILL='<?php echo $value['name']; ?>'">
+                <input type="hidden" ng-init="SKILL_INIT()">
+                <?php }} ?>
+                <!-- end skill insert -->
+                <h2 class='fontWhite'>輸入技能(五項技能)</h2>
+                <span>不限定格式， ex: 邏輯能力</span>
                 <div class='inputDiv'>
                     <input type='text' class='input' placeholder="請輸入技能" ng-model='keyword' ng-change='surfList=true;' ng-enter="insertMySkill()">
                     <a href="javascript:;" class='button' id='inputtype' ng-click='insertMySkill()'>輸入</a>
-
                     <ul class='showListUl' id='inputhit' ng-show="keyword!='' && surfList">
-                        <a href="javascript:;" ng-repeat="skill in skillList | filter:keyword"><li ng-click='skillFun(skill)'>{{skill.des}}</li></a>
+                        <a href="javascript:;" ng-repeat="skill in skillList | filter:keyword | orderBy:reverse"><li ng-click='skillFun(skill)'>{{skill}}</li></a>
                     </ul>
                 </div>
+
+                <a href="javascript:;" class='button' id='contiBut' ng-if="myskills.length>4" ng-click="continue()">繼續</a>
+                <p ng-if="myskills.length<5" style="color:#ffffff;font-weight:500;">
+                    <span>還差{{5-myskills.length}}項技能</span>
+                </p>
+
                 <div class='mySkillDiv'>
                     <ul id='myskill' ng-show="myskills!=''">
                         <li ng-repeat='myskill in myskills'>{{myskill}}<a href="javascript:;" style='float:right;' ng-click='removeSkill(myskill)'><span class='icon redCrossIcon' style='margin-top:6px;'></span></a></li>
                     </ul>
                 </div>
-                <a href="javascript:;" class='button' id='contiBut' ng-if="myskills.length>4" ng-click="continue()">繼續</a>
-
             </div>
         </div>
     </div>

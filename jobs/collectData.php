@@ -7,7 +7,7 @@
 	require_once('../share.php');
 
 	$start=0;
-	$query=['android','app','social','unix','ajax','web','develop'];
+	//$query=['android','app','social','unix','ajax','web','develop'];
 	//for($i=0;$i<count($query);$i++){echo $query[$i];}
 	//'Python','ruby','angular','jQuery','linux','php','c','design','.NET','SEO','software','mobile','hardware','JSP'
 

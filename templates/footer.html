@@ -1,6 +1,11 @@
 <div class='ourInfo'>
 	<style type="text/css">
 	#gotoSearchJob{background-color: #ffffff;}
+	.sourceUl{list-style: none;display: none;background-color: #707b91;color: #ffffff;width:90px;font-size: 15px;text-align: center;border-radius: 2px;position: absolute;right: 180px;top: -90px;font-weight: 700;padding: 7px 5px;}
+	.sourceUl a{color: #ffffff;}
+	.sourceUl a:hover{text-decoration: underline;}
+	#dataSource:focus+.sourceUl{display: block;}
+	.sourceUl:hover{display: block;}
 	</style>
 	<div class='socialActivity'>
 		<div class='fbLIKE'>
@@ -13,10 +18,15 @@
 	</div>
 	<div class='AboutUs'>
 		<span>© 2015 TaoLou・頭路網</span>
-    	<a href="">關於我們</a>
-    	<a href="">用戶協定</a>
-    	<a href="">資料來源</a>
-    	<a href="">意見反饋</a>
-    	<a href="jobs/" style="color:#54A7F7;font-weight:700;" id="gotoSearchJob">職缺搜尋</a>
+    	<a href="javascript:;" class='footerA'>關於我們</a>
+    	<a href="javascript:;" class='footerA'>用戶協定</a>
+    	<a href="javascript:;" id="dataSource" class='footerA'>資料來源</a>
+    	<ul class="sourceUl">
+    		<a href="http://tw.indeed.com/" target="_new"><li>indeed</li></a>
+    		<a href="http://www.careerjet.tw/" target="_new"><li>careerjet</li></a>
+    		<a href="http://zh.wikipedia.org/wiki/Wikipedia:%E9%A6%96%E9%A1%B5" target="_new"><li>wiki</li></a>
+    	</ul>
+    	<a href="https://docs.google.com/forms/d/1f5INtvSifo9q8tHeYU0uUeqS-Y1W0A4jVXcmaztLPIw/viewform" class='footerA'>意見反饋</a>
+    	<a href="jobs/" style="color:#54A7F7;font-weight:700;" id="gotoSearchJob" class='footerA'>職缺搜尋</a>
     </div>
 </div>
