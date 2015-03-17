@@ -1,20 +1,20 @@
 body{background-color: #54A7F7;background-image: none;}
 .showDiv{width: 100%;padding-bottom: 150px;background-color: #54A7F7;padding-top: 0px;}
-	.MenuBar{width:200px;display: inline-block;background-color: #F3F5F9;float:left;margin: 0;padding: 0;margin-top: 70px;}
+	.MenuBar{width:200px;display: inline-block;background-color: #F3F5F9;float:left;margin: 0;padding: 0;margin-top: 70px;margin-left: 30px;}
 		.myMenuUl{list-style: none;font-size: 20px;margin: 0;padding: 0;background-color: }
 		.myMenuUl a{color:#6b7485;}
 		.myMenuUl li{padding: 5px 30px;background-color: #DFDFDF;text-align: center;}
 
-	.showJOBs{width: 700px;background-color: #F3F5F9;margin-left: 200px;padding: 20px 30px;}
+	.showJOBs{width: 700px;background-color: #F3F5F9;margin-left: 230px;padding: 20px 30px;}
 		.matchDiv{width: 680px;min-height: 500px;padding: 10px 10px;margin-bottom: 50px;}
 		.DataDiv{width: 680px;height:380px;padding: 10px 10px;margin-bottom: 50px;}
 			.waitYourJob{width: 500px;margin: auto;text-align: center;margin-top: 100px;}
 			
 			.jobitem{text-decoration: none;color: #9097a4;position: relative;}
 			.jobInfo:hover{background: #eceef1;}
-				.jobInfo{width: 620px;height: 52px;padding: 14px 20px 14px 20px;position: relative;border:1px solid #eceef1;margin-top: 10px;}
-				.jobInfo img{width: 50px;height: 50px;}
-					.author{position:absolute;width: 610px;height: 28px;top: 18px;left: 94px;}
+				.jobInfo{width: 620px;height: 52px;padding: 14px 20px 14px 20px;position: relative;border-bottom:1px solid #54A7F7;margin-top: 10px;background-color: #ffffff;}
+				.jobInfo img{max-width: 100px;max-height: 60px;}
+					.author{position:absolute;width: 610px;height: 28px;top: 18px;left: 150px;}
 					.author b{margin-right: 10px;}
 					.job-meta{position:absolute;width: 610px;height: 24px;bottom: 18px;left: 94px;}
 						.meta-item{text-overflow: ellipsis;width: 10px;}
@@ -31,5 +31,8 @@ body{background-color: #54A7F7;background-image: none;}
 				.jobNameUl{width: 150px;border-bottom: 1px solid #6b7485;}
 				.jobNameUl li{list-style: none;font-size: 15px;}
 
-			#changeSAVE{padding:14px 30px;background:#f1c017;color:#ffffff;font-weight:700;border:none;margin-left: 15px;position: absolute;bottom:50px;left: 220px;border-radius: 2px;text-align: center;}
+			#changeSAVE{padding:14px 30px;background:#f1c017;color:#ffffff;font-weight:700;border:none;margin-left: 15px;position: absolute;bottom:50px;left: 250px;border-radius: 2px;text-align: center;}
 			#changeSAVE:hover{background-color: #F7D86C;}
+			#feedback{color: blue;}
+			#feedback:hover{text-decoration: underline;}
+			.FBLIKEBTN{position: absolute;left: 500px;top:100px;}

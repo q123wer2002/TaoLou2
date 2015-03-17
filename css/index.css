@@ -1,5 +1,5 @@
 .indexDiv{}
-	.banner{width:100%;height: 500px;text-align: center;background-color:#54A7F7;}
+	.banner{min-width:1200px;width:100%;height: 500px;text-align: center;background-color:#54A7F7;}
 		.logo{}
 		.typeDiv{}
 			.selectSpan{font-size: 20px;}
@@ -17,7 +17,7 @@
 		.feature p{margin-top: 15px;}
 
 
-	.SkillDiv{width:100%;height: 900px;text-align: center;background-color:#54A7F7;}
+	.SkillDiv{min-width:1200px;width:100%;height: 900px;text-align: center;background-color:#54A7F7;}
 		.fontWhite{color: #ffffff;}
 		.vertical{border:1px solid #B8DAFB;width: 0px;height:680px;position: absolute;left: 512px;}
 		.LinkedInDiv{float: left;width: 400px;height: 200px;margin-top: 100px;margin-left: 50px;}

@@ -1,15 +1,15 @@
 <?php
 header("Content-Type:text/html; charset=utf-8");
 include_once '../share.php';
-require_once('../jobs/simple_html_dom.php');
+include_once('../jobs/simple_html_dom.php');
 	
 	//user profile
-	$sql_member="SELECT taolou2_member_detail.id, taolou2_member_detail.email, taolou2_member_detail.salary FROM taolou2_member_detail WHERE taolou2_member_detail.id='2' Limit 0,1";
+	$sql_member="SELECT taolou2_member_detail.id, taolou2_member_detail.email, taolou2_member_detail.salary FROM taolou2_member_detail WHERE taolou2_member_detail.id='13' Limit 0,1";
 	$obj_tmp1->laout_arr['member']=array();
 	$obj_tmp1->basic_select('laout_arr','member',$sql_member);
 		//echo $sql_member;
-		//print_r($obj_tmp1->laout_arr['member']);
-	
+		print_r($obj_tmp1->laout_arr['member']);
+		echo "<br>";
 	//foreach user do
 
 		//user job names
@@ -17,7 +17,8 @@ require_once('../jobs/simple_html_dom.php');
 		$obj_tmp1->laout_arr['jobName']=array();
 		$obj_tmp1->basic_select('laout_arr','jobName',$sql_jobName);
 			//echo $sql_jobName;
-			//print_r($obj_tmp1->laout_arr['jobName']);
+			print_r($obj_tmp1->laout_arr['jobName']);
+			echo "<br>";
 		
 		$replace = array( 
 			" " => '%20', 
@@ -32,25 +33,35 @@ require_once('../jobs/simple_html_dom.php');
 		$obj_tmp1->laout_arr['skill']=array();
 		$obj_tmp1->basic_select('laout_arr','skill',$sql_skill);
 			//echo $sql_skill;
-			//print_r($obj_tmp1->laout_arr['skill']);
-		
+			print_r($obj_tmp1->laout_arr['skill']);
+			echo "<br>";
+			
 		//location
 		$sql_location="SELECT taolou2_member_location.country FROM taolou2_member_location WHERE taolou2_member_location.memberId='".$obj_tmp1->laout_arr['member'][0]['id']."'";
 		$obj_tmp1->laout_arr['location']=array();
 		$obj_tmp1->basic_select('laout_arr','location',$sql_location);
 			//echo $sql_location;
-			//print_r($obj_tmp1->laout_arr['location']);
+			print_r($obj_tmp1->laout_arr['location']);
+			echo "<br>";
+
+		//experience
+		$sql_experience="SELECT taolou2_member_experience.title,taolou2_member_experience.name,taolou2_member_experience.major FROM taolou2_member_experience WHERE taolou2_member_experience.memberId='".$obj_tmp1->laout_arr['member'][0]['id']."'";
+		$obj_tmp1->laout_arr['experience']=array();
+		$obj_tmp1->basic_select('laout_arr','experience',$sql_experience);
+			//echo $sql_experience;
+			print_r($obj_tmp1->laout_arr['experience']);
+			echo "<br>";
 
 //============================================ indeed
 		//job Array
-		$jobArray=array();
+		$jobArray['indeed']=array();
 		//foreach job name and location
 		$start=0;
 		$jobName=strReplaceAssoc($replace,$obj_tmp1->laout_arr['jobName'][0]['jobName']);
-		$location=$obj_tmp1->laout_arr['location'][1]['country'];
+		$location=$obj_tmp1->laout_arr['location'][2]['country'];
 		
 		//indeed
-		$url="http://tw.indeed.com/jobs?q=".$jobName."&start=".$start."&limit=100";
+		$url="http://tw.indeed.com/jobs?q=".$jobName."&start=".$start."&l=".$location."&limit=100";
 		echo $url."<br>";
 		$indeedHTML= file_get_html($url);
 		$jobdiv=0;
@@ -66,30 +77,37 @@ require_once('../jobs/simple_html_dom.php');
 				@$jobContentRaw=file_get_html($jobHref)->plaintext;
 				$jobContent=laout_check($jobContentRaw);
 				//echo $jobContent."<hr>";
-				echo "<a href=".$jobHref." target='_new'>".$jobName."</a><br>";
+				//echo "<a href=".$jobHref." target='_new'>".$jobName."</a><br>";
 				//calculate any skill, count skill
 				$skillCount=0;
 				foreach($obj_tmp1->laout_arr['skill'] as $skillKey => $skillValue){
 					if((sizeof(explode($skillValue['name'], $jobContent))-1)!=0){
 					$matchSkill=sizeof(explode($skillValue['name'], $jobContent))-1;
 					$skillCount+=$matchSkill;
-					echo " have ".$matchSkill." items of ".$skillValue['name'];
-					echo "<br>";
+					//echo " have ".$matchSkill." items of ".$skillValue['name'];
+					//echo "<br>";
 					//select top 10 jobs and source, in order to recommend  to user
 					//end select
 				}}
-				$jobArray['indeed'][$$jobdiv]['name']=$jobName;
-				$jobArray['indeed'][$$jobdiv]['skillCount']=$skillCount;
-				$jobArray['indeed'][$$jobdiv]['link']=$jobHref;
-				echo "total match ".$skillCount;
-				echo "<hr>";
+				$job['skillCount']=$skillCount;
+				$job['url']=$jobHref;
+				array_push($jobArray['indeed'], $job);
+				//echo "total match ".$skillCount;
+				//echo "<hr>";
 				//end calculate
 			//end search
 			}
 			$jobdiv++;
 		//end foreach
 		}
-		print_r(asort($jobArray['indeed']));
+		arsort($jobArray['indeed']);
+		//print_r($jobArray['indeed']);
+		$i=0;
+		foreach ($jobArray['indeed'] as $key => $value) {
+			echo "<a href='".$value['url']."''>共符合".$value['skillCount']."項技能</a><br>";
+			$i++;
+			if($i>10){break;}
+		}
 	//end foreach============================
 	
 //============================================== end indeed

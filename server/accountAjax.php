@@ -1,6 +1,6 @@
 <?php
 include_once '../share.php';
-require('../include/sendMail.php');
+include('../include/sendMail.php');
 header("Content-Type:text/html; charset=utf-8");
 
 $table_account="taolou2_account";

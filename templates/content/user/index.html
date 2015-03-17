@@ -20,6 +20,7 @@
 			<h1>配對工作</h1>
 			<hr>
 			<div class='matchDiv'>
+				<?php if(empty($this->laout_arr['jobMatch'])){ ?>
 				<span>目前尚未有配對結果</span><br><br><br>
 				<h2 style="font-weight:700;margin-left:220px;">恭喜您完成資料</h2>
 				<div class="waitYourJob">
@@ -28,25 +29,37 @@
 					<p>先喝杯咖啡吧！</p>
 					<p>配對結果馬上就會出現</p>
 				</div>
+
+				<?php }else{ ?>
+				<p style="position:relative;">
+					滿意您的配對嗎？
+					<a href="https://docs.google.com/forms/d/1f5INtvSifo9q8tHeYU0uUeqS-Y1W0A4jVXcmaztLPIw/viewform" id="feedback">意見反饋</a>
+					<br>
+					給我們<span style="color:blue;">讚或分享</span>是很大的鼓勵
+					<div class='FBLIKEBTN'>
+						<div class="fb-like" data-href="http://taoloutw.tk" data-layout="button" data-action="like" data-show-faces="false" data-share="true"></div>
+					</div>
+				</p><br>
 				
-				<!--
-				<a class='jobitem' href="index.php" ng-repeat="i in [0,1,2,3,4,5,6,7,8,9,10,11,12,13]">
+					
+
+				<?php foreach ($this->laout_arr['jobMatch'] as $key => $value) { ?>
+				<a class='jobitem' href="<?php echo $value['jobURL']; ?>" target="_new">
 		            <div class='jobInfo'>
 		                <figure>
-		                    <img src="">
+		                    <img src="<?php echo $value['image']; ?>" width="100px">
 		                </figure>
 		                <div class='author'>
-		                    <b class="name">COMPANY</b>
+		                    <b class="name"><?php echo $value['name']; ?></b>
 		                    <b class="job-creator-type">-</b>
-		                    <b class="job-title">JOBNAME</b>
+		                    <b class="job-title"><?php echo $value['jobName']; ?></b>
 		                </div>
 		                <div class='job-meta'>
-		                    <span class="meta-item location"><span class='icon locationicon'></span><b>LOCATION</b></span>
-		               		<span class="meta-item location" style='float:right;margin-right:0px;width:200px;'>來源：<b>SOURCE</b></span>
+		               		<span class="meta-item" style='float:right;margin-right:0px;width:150px;'><?php $time=explode(" ",$value['createDate']); echo $time[0]; ?></span>
 		                </div>
 		            </div>
 		        </a>
-		        -->
+		        <?php }} ?>
 
 			</div>
 			<!--

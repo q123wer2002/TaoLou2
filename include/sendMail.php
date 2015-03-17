@@ -7,13 +7,13 @@ $mail->IsSMTP();
 $mail->SMTPAuth = true; // turn on SMTP authentication
 //這幾行是必須的
 
-$mail->Username = "q123wer2002@gmail.com";
-$mail->Password = "135792468xcudy";
+$mail->Username = "service.taolou@gmail.com";
+$mail->Password = "!@QWas1234";
 //這邊是你的gmail帳號和密碼
 
-$mail->FromName = "TaoLou_System";
+$mail->FromName = "TaoLou";
 // 寄件者名稱(你自己要顯示的名稱)
-$webmaster_email = "q123wer2002@gmail.com"; 
+$webmaster_email = "service.taolou@gmail.com"; 
 //回覆信件至此信箱
 
 $mail->From = $webmaster_email;

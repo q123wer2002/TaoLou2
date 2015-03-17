@@ -47,6 +47,8 @@ if(@$_POST['method']=='userProfile'){
 	exit;
 }else if(@$_POST['method']=="saveSKill"){
 	//print_r($_POST);
+	$sql_delete="DELETE FROM ".$table_memberSkill." WHERE ".$table_memberSkill.".memberId='".$userId."'";
+	mysql_query($sql_delete);
 
 	foreach ($_POST['skill'] as $key => $value) {
 		$skillName=laout_check($value['name']);

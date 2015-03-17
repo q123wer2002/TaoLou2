@@ -58,7 +58,7 @@ a{text-decoration: none;}
 		.slogn span{font-size: 30px;font-family: "proxima-nova";}
 		.slogn a{font-size: 30px;font-family: "proxima-nova";color: #ffffff;font-size: 20px;border-bottom:1px solid #c4c663;}
 		.slogn a:hover{color: #c4c663;}
-.header{background-color: #54A7F7;width: 100%;height: 100px;}
+.header{background-color: #54A7F7;width: 100%;height: 100px;min-width: 1200px;}
 	.headDiv{width: 1024px;margin: auto;padding: 15px;}
 		.alert_login{float: right;margin-right: 50px;color: #ffffff;margin-top: 30px;}
 

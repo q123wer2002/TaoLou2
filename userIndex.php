@@ -11,6 +11,9 @@ $table_memberJobName="taolou2_member_jobname";
 $table_memberLocation="taolou2_member_location";
 
 $table_systemSkill="taolou2_system_skill";
+
+$table_jobMatch="taolou2_jobmatch";
+$table_company="taolou2_company";
 $action="";
 $obj_tmp1->laout_set=true;
 $obj_tmp1->tmp_order ='order By sort Asc';
@@ -82,6 +85,17 @@ switch($action){
 	//有User,要讀取資訊
 	if(@$memberID!=""){
 		//配對到的工作
+		$sql_jobMatch="SELECT ".$table_jobMatch.".*, ".$table_company.".*
+					   FROM ".$table_jobMatch."
+					   LEFT JOIN ".$table_company." ON ".$table_company.".id=".$table_jobMatch.".companyId
+					   WHERE ".$table_jobMatch.".memberId='".$memberID."'
+					   ORDER BY ".$table_jobMatch.".createDate DESC";
+		$obj_tmp1->laout_arr['jobMatch']=array();
+		$obj_tmp1->basic_select('laout_arr','jobMatch',$sql_jobMatch);
+			//echo $sql_jobMatch;
+			//print_r($obj_tmp1->laout_arr['jobMatch']);		
+		//===========================
+
 		$sql_profile="SELECT ".$table_member.".* 
 					  FROM ".$table_member."
 					  WHERE ".$table_member.".id='".$memberID."'";
