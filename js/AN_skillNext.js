@@ -289,10 +289,10 @@ TaoLou.controller('TaoLou_skillNext',['$scope','$http','$location',function Skil
 	}
 
 	$scope.periods=[
-		{"name":"一個月"},
-		{"name":"三個月"},
-		{"name":"半年"},
-		{"name":"一年"},
+		{"name":"一個月內"},
+		{"name":"三個月內"},
+		{"name":"半年內"},
+		{"name":"一年內"},
 		{"name":"一年以上"},
 	];
 	//close drop list function
@@ -447,7 +447,10 @@ TaoLou.controller('TaoLou_skillNext',['$scope','$http','$location',function Skil
 				if($scope.hrLoading>(BGprocess-3)){$scope.hrLoading=BGprocess-3;$scope.finish=true;}
 				location=true;
 			}
-			if($scope.locations.length<4){$scope.salaryLoaLoading=$scope.salaryLoaLoading+salaryLocWidth/8;}
+			if($scope.locations.length<4){
+				$scope.salaryLoaLoading=$scope.salaryLoaLoading+salaryLocWidth/8;
+				if($scope.salaryLoaLoading>salaryLocWidth){$scope.salaryLoaLoading=salaryLocWidth;}
+			}
 		}
 		//show next page
 	}
@@ -457,7 +460,10 @@ TaoLou.controller('TaoLou_skillNext',['$scope','$http','$location',function Skil
 		if($scope.locations.length<4){$scope.salaryLoaLoading=$scope.salaryLoaLoading-salaryLocWidth/8;}
 
 		var index=$scope.locations.indexOf(item);
-		if(index!=-1){$scope.locations.splice(index,1);}
+		if(index!=-1){
+			$scope.locations.splice(index,1);
+			$scope.allLocations.push({"des":item});
+		}
 
 		//locaing bar
 		if($scope.locations.length==0){

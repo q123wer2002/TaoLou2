@@ -37,7 +37,12 @@
 			<div style='width:1024px;height:5px;position:relative;margin:auto;margin-top:65px;'>
 				<div class='bar' id='barProcess' ng-style="{width:hrLoading}" ng-init="loadingBar(120)"></div>
 				<div class='bar' id="BGprocess"><span id="FinprocessHit">工作配對</span></div>
-				<a href="javascript:$('body').animate({'scrollTop':document.body.offsetHeight},600);" style='position:absolute;right:130px;top:-60px;color:#6b7485;' ng-show="finish"><span style='font-size:15x;font-weight:700;'>趕緊送出</span><span class='icon pageDown'></span></a>
+				<a href="javascript:;" style='position:absolute;right:130px;top:-60px;color:#6b7485;' ng-show="finish"><span style='font-size:15x;font-weight:700;' id='seeProcess'>趕緊送出</span><span class='icon pageDown'></span></a>
+				<script type="text/javascript">
+                $('#seeProcess').click(function(){
+                	$('body').animate({'scrollTop':"5700px"},600);
+                });
+                </script>
 			</div>
 
 		</div>

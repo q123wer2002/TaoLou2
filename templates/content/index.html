@@ -27,23 +27,28 @@
                     <span><a href="javascript:;" class='button' id='contiBut' ng-click='savePreWork();'>繼續</a></span>
                 </h2>
                 <h2>顛覆求職印象，只配對屬於您的工作</h2>
-                <a href="javascript:$('body').animate({'scrollTop':document.body.offsetHeight},600);" class='button' style="position:absolute;bottom:-90px;left:500px;">使用流程</a>
+                <a href="javascript:;" class='button' style="position:absolute;bottom:-90px;left:500px;" id="seeProcess">使用流程</a>
+                <script type="text/javascript">
+                $('#seeProcess').click(function(){
+                    $("body").animate({"scrollTop":"700px"},600);
+                });
+                </script>
             </div>
         </div>
     </div>
     <div class='featureDiv antimate' ng-hide='selectSkill'>
         <div class='feature'>
-            <img ng-src='https://lh6.googleusercontent.com/gJy7fjgFZvwuBPgaN88kG3m0n4QmyYSIK4s69h9F19s=w193-h207-p-no'>
+            <img ng-src='https://lh4.googleusercontent.com/-2qIwQvNe5H8/VNbcPBr6EvI/AAAAAAAAATg/GfeOxomU6KI/w174-h187-no/write_skill.png'>
             <h3>填寫技能</h3>
             <p>選填您最擅長的技能及相關學經歷</p>
         </div>
         <div class='feature'>
-            <img ng-src='https://lh3.googleusercontent.com/ctbluCUBvvQETju8bk7e6csUsQlIB08lB1HyGzCn4qk=w193-h207-p-no'>
+            <img ng-src='https://lh4.googleusercontent.com/-F6ve4lS4ZlA/VNbcOmEGAMI/AAAAAAAAATs/wSmBMt3mrng/w174-h187-no/wait_relax.png'>
             <h3>喝杯咖啡等配對</h3>
             <p>頭路網將會針對您的資料幫您分析，找到屬於您的工作</p>
         </div>
         <div class='feature'>
-            <img ng-src='https://lh5.googleusercontent.com/zDwS9GjPhAM5TJBE4vXyFkG4Xy4PAEMtAB9Kzyt3ayI=w193-h207-p-no'>
+            <img ng-src='https://lh4.googleusercontent.com/-4QEC5_BsLfo/VNbcOhE2pZI/AAAAAAAAATY/cX9wzS96V2M/w174-h187-no/report.png'>
             <h3>挑選配對工作</h3>
             <p>從這些配對工作中，挑選一個您最喜歡的工作吧！</p>
         </div>

@@ -1,0 +1,98 @@
+/*
+	Strata by Pixelarity
+	pixelarity.com @pixelarity
+	License: pixelarity.com/license
+*/
+
+/* Basic */
+
+	h1 {
+		font-size: 1.5em;
+	}
+
+	h2 {
+		font-size: 1.2em;
+	}
+
+	h3 {
+		font-size: 1em;
+	}
+
+/* Section/Article */
+
+	section.special, article.special {
+		text-align: center;
+	}
+
+	header.major h2 {
+		font-size: 1.35em;
+	}
+
+/* List */
+
+	ul.labeled-icons li {
+		padding-left: 2em;
+	}
+
+		ul.labeled-icons li h3 {
+			line-height: 1.75em;
+		}
+
+/* Header */
+
+	#header {
+		padding: 2.25em 1.5em;
+	}
+
+		#header h1 {
+			font-size: 1.35em;
+			margin: 0px;
+		}
+	#header {
+		background-attachment: scroll;
+		background-image: url(../images/wood.jpg);
+		background-position: top left,	center center;
+		background-size: cover;
+		left: auto;
+		padding: 6em 4em;
+		position: relative;
+		text-align: center;
+		top: auto;
+		width: 100%;
+	}
+	.hidden{
+		display: inline-block
+	}
+/* Footer */
+
+	#footer {
+		padding: 2.25em 1.5em;
+	}
+	#footer .copyright{
+		color: rgba(255,255,255,1);
+	}
+
+/* Main */
+
+	#main {
+		padding: 2.25em 1.5em 0.25em 1.5em;
+	}
+
+		#main > section {
+			margin: 2.25em 0 0 0;
+			padding: 2.25em 0 0 0;
+		}
+
+/* Poptrox */
+
+	.poptrox-popup {
+		border-radius: 0;
+	}
+
+		.poptrox-popup .nav-next:before,
+		.poptrox-popup .nav-previous:before {
+			margin-top: -1em;
+		}
+	#bigscreen-hidden{
+		margin-left: 0px;
+	}

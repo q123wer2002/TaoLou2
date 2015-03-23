@@ -4,7 +4,7 @@ include_once '../share.php';
 include_once('../jobs/simple_html_dom.php');
 	
 	//user profile
-	$sql_member="SELECT taolou2_member_detail.id, taolou2_member_detail.email, taolou2_member_detail.salary FROM taolou2_member_detail WHERE taolou2_member_detail.id='13' Limit 0,1";
+	$sql_member="SELECT taolou2_member_detail.id, taolou2_member_detail.email, taolou2_member_detail.salary FROM taolou2_member_detail WHERE taolou2_member_detail.id='15' Limit 0,1";
 	$obj_tmp1->laout_arr['member']=array();
 	$obj_tmp1->basic_select('laout_arr','member',$sql_member);
 		//echo $sql_member;
@@ -53,12 +53,13 @@ include_once('../jobs/simple_html_dom.php');
 			echo "<br>";
 
 //============================================ indeed
+		echo "<br><br>";
 		//job Array
 		$jobArray['indeed']=array();
 		//foreach job name and location
 		$start=0;
 		$jobName=strReplaceAssoc($replace,$obj_tmp1->laout_arr['jobName'][0]['jobName']);
-		$location=$obj_tmp1->laout_arr['location'][2]['country'];
+		$location=$obj_tmp1->laout_arr['location'][0]['country'];
 		
 		//indeed
 		$url="http://tw.indeed.com/jobs?q=".$jobName."&start=".$start."&l=".$location."&limit=100";
@@ -72,7 +73,6 @@ include_once('../jobs/simple_html_dom.php');
 			//search every jobs and get contents
 
 			if(@$jobDivs->find('h2[class=jobtitle]',0)->plaintext != ""){
-				$jobName=$jobDivs->find('h2[class=jobtitle]',0)->find('a',0)->plaintext;
 				$jobHref="http://tw.indeed.com".$jobDivs->find('h2[class=jobtitle]',0)->find('a',0)->href;
 				@$jobContentRaw=file_get_html($jobHref)->plaintext;
 				$jobContent=laout_check($jobContentRaw);
@@ -108,16 +108,17 @@ include_once('../jobs/simple_html_dom.php');
 			$i++;
 			if($i>10){break;}
 		}
+		echo "<br><br>";
 	//end foreach============================
 	
 //============================================== end indeed
 
 //============================================== career jet
 	//career jet
-		/*
+	$jobArray['careerJet']=array();
 	$jobNature="f";
 	//($obj_tmp1->laout_arr['member'][0]['jobNature']==1)?$jobNature="f":$jobNature="p";
-	$jet_url="http://www.careerjet.tw/wsearch/gongzuo?s=".$jobName.".&l=".$location.".&cp=".$jobNature;
+	$jet_url="http://www.careerjet.tw/wsearch/gongzuo?s=".$jobName."&l=".$location;
 	$jetHTML= file_get_html($jet_url);
 	$result=explode("&nbsp;", $jetHTML->find('span[class=h1_title]',0));
 	echo $jet_url."<br>";
@@ -126,10 +127,9 @@ include_once('../jobs/simple_html_dom.php');
 		$jobPoint=0;
 		while(!empty($jetHTML->find('div[class=job]',$jobPoint))){
 			$job=$jetHTML->find('div[class=job]',$jobPoint);
-			$jobName=$job->find('a[class=title_compact]',0)->plaintext;
 			$jobURL="http://www.careerjet.tw".$job->find('a[class=title_compact]',0)->href;
-			echo "<a href='".$jobURL."'>".$jobName."</a>";
-			echo "<br>";
+			//echo "<a href='".$jobURL."'>".$jobName."</a>";
+			//echo "<br>";
 
 			@$jobContent=file_get_html($jobURL)->plaintext;
 			$jobContent=laout_check($jobContent);
@@ -138,15 +138,26 @@ include_once('../jobs/simple_html_dom.php');
 				if((sizeof(explode($skillValue['name'], $jobContent))-1)!=0){
 				$matchSkill=sizeof(explode($skillValue['name'], $jobContent))-1;
 				$skillCount+=$matchSkill;
-				echo " have ".$matchSkill." items of ".$skillValue['name'];
-				echo "<br>";
+				//echo " have ".$matchSkill." items of ".$skillValue['name'];
+				//echo "<br>";
 				//select top 10 jobs and source, in order to recommend  to user
 				//end select
 			}}
-			echo "total match ".$skillCount;
-			echo "<hr>";
+			//echo "total match ".$skillCount;
+			//echo "<hr>";
+			$jobAry['skillCounts']=$skillCount;
+			$jobAry['url']=$jobURL;
+			array_push($jobArray['careerJet'], $jobAry);
 			$jobPoint++;
 		}
-	}else{echo "找不到職缺";}*/
+	}else{echo "找不到職缺";}
+	arsort($jobArray['careerJet']);
+	//print_r($jobArray['indeed']);
+	$i=0;
+	foreach ($jobArray['careerJet'] as $key => $value) {
+		echo "<a href='".$value['url']."''>共符合".$value['skillCounts']."項技能</a><br>";
+		$i++;
+		if($i>10){break;}
+	}
 //============================================== end career jet
 ?>
