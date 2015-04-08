@@ -54,7 +54,7 @@
 		background-position: top left,	center center;
 		background-size: cover;
 		left: auto;
-		padding: 6em 4em;
+		padding: 1em 4em;
 		position: relative;
 		text-align: center;
 		top: auto;
@@ -95,4 +95,15 @@
 		}
 	#bigscreen-hidden{
 		margin-left: 0px;
+	}
+	.more{
+		display: block;}
+	.title{
+		display: none;
+	}
+	.intro{
+		margin-top: 10px;
+	}
+	#interest{
+		width: 100% !important;
 	}

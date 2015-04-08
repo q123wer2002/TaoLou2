@@ -108,7 +108,7 @@
 
 			// Lightbox gallery.
 				$('#two').poptrox({
-					caption: function($a) { return $a.next('h3').next().next().html(); },
+					caption: function($a) { return $a.next('h3').next().next().next().html(); },
 					overlayColor: '#2c2c2c',
 					overlayOpacity: 0.85,
 					popupCloserText: '',

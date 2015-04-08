@@ -4,7 +4,7 @@ include_once '../share.php';
 include_once('../jobs/simple_html_dom.php');
 	
 	//user profile
-	$sql_member="SELECT taolou2_member_detail.id, taolou2_member_detail.email, taolou2_member_detail.salary FROM taolou2_member_detail WHERE taolou2_member_detail.id='15' Limit 0,1";
+	$sql_member="SELECT taolou2_member_detail.id, taolou2_member_detail.email, taolou2_member_detail.salary FROM taolou2_member_detail WHERE taolou2_member_detail.id='9' Limit 0,1";
 	$obj_tmp1->laout_arr['member']=array();
 	$obj_tmp1->basic_select('laout_arr','member',$sql_member);
 		//echo $sql_member;
@@ -59,7 +59,7 @@ include_once('../jobs/simple_html_dom.php');
 		//foreach job name and location
 		$start=0;
 		$jobName=strReplaceAssoc($replace,$obj_tmp1->laout_arr['jobName'][0]['jobName']);
-		$location=$obj_tmp1->laout_arr['location'][0]['country'];
+		//$location=$obj_tmp1->laout_arr['location'][0]['country'];
 		
 		//indeed
 		$url="http://tw.indeed.com/jobs?q=".$jobName."&start=".$start."&l=".$location."&limit=100";

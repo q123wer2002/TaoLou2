@@ -7,13 +7,17 @@
 	<link rel="stylesheet" href="style.css">
 </head>
 <body>
-<?php
+	<?php
 $to ="tony507yu@gmail.com";
 $subject="Someone visit my website";
 $name=$_POST["name"];
 $email=$_POST['email'];
 $msg=$_POST['message'];
-mail($to ,$subject, $msg, 'From:' . $email);
+mail($to ,$subject, $msg, 'From:'.$email);
+
+
+
+
 ?>
 <div class="thanks">Thanks for your mailing. <br>I will reply it as soon as possible!</div>
 <div class="center"><a class="button" href="index.html">Return</a></div>

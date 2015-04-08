@@ -157,6 +157,7 @@
 			line-height: 1.75em;
 			padding: 1em 1.5em;
 			overflow-x: auto;
+			-webkit-overflow-scrolling: touch;
 		}
 
 	.align-left {
@@ -406,9 +407,9 @@
 
 	.box {
 		border-radius: 0.35em;
-		border: solid 2px #efefef;
-		margin-bottom: 2em;
-		padding: 1.5em;
+		
+		
+		padding: 0.5em;
 	}
 
 		.box > :last-child,
@@ -555,6 +556,7 @@
 			.image.avatar img {
 				border-radius: 100%;
 				width: 150px;
+				margin-top: 20px
 			}
 		.hidden{
 			display: none
@@ -625,8 +627,9 @@
 
 			ul.actions li {
 				display: inline-block;
-				padding: 0 1em 0 0;
+				padding: 0 1em 1em 0;
 				vertical-align: middle;
+
 			}
 
 				ul.actions li:last-child {
@@ -936,13 +939,12 @@
 
 	#header {
 		background-color: #1f1815;
-		background-attachment: scroll,								fixed;
+		background-attachment: scroll;
 		background-image: url("../images/homelty2.jpg");
-/*		background-size: cover;
-*/		background-position: top left;
+		background-position: top -100px !important;
 		background-repeat: no-repeat;
-/*		background-size: auto,								auto 100%;
-*/		color: rgba(255, 255, 255, 0.5);
+		background-size: auto 1100px;
+		color: rgba(255, 255, 255, 0.5);
 		height: 100%;
 		left: 0;
 		padding: 8em 4em 0 0;
@@ -964,7 +966,7 @@
 			color: rgba(255, 255, 255, 0.5);
 			font-size: 1.35em;
 			line-height: 1.75em;
-			margin: 0;
+			margin-top: 20px;
 		}
 
 		#header .image.avatar {
@@ -1028,8 +1030,8 @@
 
 		#main > section {
 			border-top: solid 2px #efefef;
-			margin: 4em 0 0 0;
-			padding: 4em 0 0 0;
+			margin: 2em 0 0 0;
+			padding: 2em 0 0 0;
 		}
 
 			#main > section:first-child {
@@ -1051,12 +1053,13 @@
 		-o-box-sizing: content-box;
 		-ms-box-sizing: content-box;
 		box-sizing: content-box;
+		
 		-webkit-tap-highlight-color: rgba(255, 255, 255, 0);
 		background: #fff;
 		border-radius: 0.35em;
 		box-shadow: 0 0.1em 0.15em 0 rgba(0, 0, 0, 0.15);
 		overflow: hidden;
-		padding-bottom: 12em;
+		padding-bottom: 20em;
 	}
 
 		.poptrox-popup .loader {
@@ -1094,17 +1097,24 @@
 			bottom: 0;
 			cursor: default;
 			font-size: 0.9em;
-			height: 13em;
+			height: 21em;
 			left: 0;
 			line-height: 1.5em;
 			position: absolute;
 			text-align: left;
 			width: 100%;
-			z-index: 1;
-			overflow: auto;
-			padding: 0 10px
+			z-index: 20;
+			overflow-y: scroll; 
+			-webkit-overflow-scrolling: touch;
+			padding: 0 10px;
 		}
 
+		.scroll{
+			overflow-y: scroll; 
+			-webkit-overflow-scrolling: touch;
+			width: 300px;
+			height: 500px;
+		}
 		.poptrox-popup .nav-next,
 		.poptrox-popup .nav-previous {
 			text-decoration: none;
@@ -1253,6 +1263,7 @@
 	}
 	.intro{
 		display: none;
+		
 	}
 	#bigscreen-hidden  a{
 		color: #fff;
@@ -1268,4 +1279,19 @@
 
 	.caption p {
 		margin: 0 0 1em 0;
+	}
+	.namesize{
+		font-size: 1.5em;
+	}
+	.more{
+		width: 100%;
+		margin-top: 10px;
+		display: none;
+	}
+	.self{
+		margin: 0;
+	}
+	.center{
+		text-align: center;
+		margin: 0.5em 0; 
 	}
